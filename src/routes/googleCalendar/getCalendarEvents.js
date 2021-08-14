@@ -27,7 +27,6 @@ export async function get() {
   let calendar = google.calendar('v3')
   let resp = await calendar.events.list({
     auth: jwtClient,
-    // calendarId: process.env['CALENDAR_ID']
     calendarId: GOOGLE_CALENDAR_ID
   }).then(res => {
     if (res.data) {
