@@ -29,7 +29,7 @@
 <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
-<!-- {#each calendar as cal}
+{#each calendar as cal}
   <h2>{cal.summary}</h2>
   <h3>{new Date(
       Date.parse(cal.start.dateTime)
@@ -48,7 +48,7 @@
   {#if cal.description}
     <p>{@html cal.description}</p>
   {/if}
-{/each} -->
+{/each}
 
 
 
