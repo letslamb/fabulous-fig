@@ -45,7 +45,6 @@ export async function get() {
           .split(',')[1]
           .replace(':00', '')
 
-
           let endTime = new Date(
             Date.parse(calendarEntry.end.dateTime)
           ).toLocaleString()
