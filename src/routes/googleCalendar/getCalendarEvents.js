@@ -52,7 +52,7 @@ export async function get() {
           .replace(':00', '')
 
           // return only the event data that's needed on the client
-          data = {
+          let data = {
             summary: calendarEntry.summary,
             date: date,
             startTime: startTime,
