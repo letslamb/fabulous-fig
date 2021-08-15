@@ -1,7 +1,6 @@
 <script>
 
   import { getContext } from 'svelte'
-  import { browser } from '$app/env'
 
   /**
    * @type {string}
