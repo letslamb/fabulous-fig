@@ -1,6 +1,6 @@
 <script>
 
-  import Sprite from '$static/diet-icons/icons.svg'
+  import Sprite from '$static/svg/icons.svg'
 
   /**
    * @type {string}
@@ -11,19 +11,15 @@
 
   /**
    * @type {string}
-   * the text you want to accompany the icon. Should be descriptive & contextualize the icon
-  */
-  export let iconText
-
-  /**
-   * @type {string}
    * the ID attribute (including '#') of the icon you want to pull from the sprite
   */
   export let iconId
 
   /**
-   * @type {boolean}
-   * 
+   * @type {string}
+   * including this prop will represent the enclosing span as an image with role="img" and aria-label={label}.
+   * this prop is used when there is no accompanying visible label text slotted into the component, 
+   * in order to ensure that it has an accessible name.
   */
   export let label
 
@@ -42,19 +38,12 @@ role={label ? 'img' : null}
   {#if !label}
     <slot />
   {/if}
-  <!-- <slot /> -->
-  <!-- {iconText} -->
 </span>
 
 <style>
   /* Exposed as CSS variables:
       --space
   */
-
-  /* :global(svg) {
-    width: 0.75em;
-    height: 0.75em;
-  } */
 
   .icon {
     width: 0.75em;
@@ -72,7 +61,4 @@ role={label ? 'img' : null}
     margin-inline-end: var(--space, 1rem);
   }
 
-  /* :global(.with-icon svg) {
-    margin-inline-end: var(--space, 1rem);
-  } */
 </style>
