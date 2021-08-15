@@ -40,17 +40,4 @@
 
 </script>
 
-<!-- <noscript>
-  {@html `
-    <h${level} 
-      id="h-${Math.floor((new Date() * Math.random()))}"
-      ${wrapperClass ? `class=${wrapperClass}` : ''}
-    >
-      ${message}
-    </h${level}>
-  `}
-</noscript> -->
-
-<!-- {#if browser} -->
-  {@html render()}
-<!-- {/if} -->
+{@html render()}
