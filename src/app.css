@@ -172,11 +172,15 @@ button {
 }
 
 h1 {
-  font-size: 4rem;
+  font-size: 400%;
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 300%;
+}
+
+h3 {
+  font-size: 200%;
 }
 
 .flex {
