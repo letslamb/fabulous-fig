@@ -18,7 +18,6 @@ jwtClient.authorize(function (err, tokens) {
     return
   } else {
     console.log('Successfully connected!')
-    console.log(privateKey)
   }
 })
 
@@ -27,11 +26,45 @@ export async function get() {
   let calendar = google.calendar('v3')
   let resp = await calendar.events.list({
     auth: jwtClient,
-    // calendarId: process.env['CALENDAR_ID']
     calendarId: GOOGLE_CALENDAR_ID
   }).then(res => {
     if (res.data) {
-      return res.data.items
+      let clientCalendarEntryData =
+        res.data.items.map((calendarEntry) => {
+
+          // Process the event date, start & end times into the human-friendly formats we want
+          let date = new Date(
+            Date.parse(calendarEntry.start.dateTime)
+          )
+          .toLocaleString()
+          .split(',')[0]
+
+          let startTime = new Date(
+            Date.parse(calendarEntry.start.dateTime)
+          ).toLocaleString()
+          .split(',')[1]
+          .replace(':00', '')
+
+          let endTime = new Date(
+            Date.parse(calendarEntry.end.dateTime)
+          ).toLocaleString()
+          .split(',')[1]
+          .replace(':00', '')
+
+          // return only the event data that's needed on the client
+          let data = {
+            summary: calendarEntry.summary,
+            date: date,
+            startTime: startTime,
+            endTime: endTime,
+            description: calendarEntry.description
+          }
+
+          return data
+
+        })
+
+      return clientCalendarEntryData
     } else {
       console.log(res)
     }

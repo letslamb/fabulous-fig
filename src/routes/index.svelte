@@ -29,26 +29,14 @@
 <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
-<!-- {#each calendar as cal}
+{#each calendar as cal}
   <h2>{cal.summary}</h2>
-  <h3>{new Date(
-      Date.parse(cal.start.dateTime)
-    ).toLocaleString()
-    .split(',')[0]}
-  </h3>
-  <h4>{new Date(
-      Date.parse(cal.start.dateTime)
-    ).toLocaleString()
-    .split(',')[1]} - 
-      {new Date(
-        Date.parse(cal.end.dateTime)
-      ).toLocaleString()
-      .split(',')[1]}
-  </h4>
+  <h3>{cal.date}</h3>
+  <h4>{cal.startTime} - {cal.endTime}</h4>
   {#if cal.description}
     <p>{@html cal.description}</p>
   {/if}
-{/each} -->
+{/each}
 
 
 
