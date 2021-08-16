@@ -1,6 +1,10 @@
+<!-- <script context="module">
+
+</script> -->
+
 <script>
 
-  import { getContext } from 'svelte'
+  import { setContext, getContext } from 'svelte'
 
   /**
    * @type {string}
@@ -24,6 +28,7 @@
   } else {
     level = 1
   }
+
 
   const render = () => {
     id = `h-${Math.floor((new Date() * Math.random()))}`
