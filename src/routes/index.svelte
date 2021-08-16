@@ -19,24 +19,39 @@
 </script>
 
 <script>
+  import Icon from '$lib/components/layout/Icon.svelte'
+  import Section from '$lib/components/utils/Section.svelte'
+  import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
   export let calendar
 
   $: console.log(calendar)
 
 </script>
 
+<!-- <Section>
+  {#each calendar as cal}
+    <HeadingTag message={cal.summary} />
+    <Section>
+      <HeadingTag message={cal.date} />
+      <HeadingTag message ={`${cal.startTime} - ${cal.endTime}`} />
+      {#if cal.description}
+        <p>{@html cal.description}</p>
+      {/if}
+    </Section>
+  {/each}
+</Section>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
-{#each calendar as cal}
-  <h2>{cal.summary}</h2>
-  <h3>{cal.date}</h3>
-  <h4>{cal.startTime} - {cal.endTime}</h4>
-  {#if cal.description}
-    <p>{@html cal.description}</p>
-  {/if}
-{/each}
+<Icon iconId={'#icon-nut-free'}>
+  Nut Free
+</Icon>  
+<Icon iconId={'#icon-gluten-free'}>
+  Gluten Free
+</Icon>
+<Icon iconId={'#icon-soy-free'}>
+  Soy Free
+</Icon> -->
+
 
 
 
