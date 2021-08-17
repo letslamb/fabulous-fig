@@ -14,8 +14,6 @@ sections:
   label: Master List Menu Items
   create: all
   match: "*.md"
-  templates:
-  - menu-item
 upload_dir: static/images
 public_path: "/images"
 front_matter_path: ''
