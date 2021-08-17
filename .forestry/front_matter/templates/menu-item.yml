@@ -17,5 +17,3 @@ fields:
 - type: textarea
   name: description
   label: Description
-pages:
-- markdowns/menu/banh-mi-sandwich.md
