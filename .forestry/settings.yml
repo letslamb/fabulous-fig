@@ -4,15 +4,15 @@ auto_deploy: false
 admin_path: "/static/admin"
 webhook_url: 
 sections:
-  - type: heading
-    label: Menu
-  - type: directory
-    path: markdowns/menu
-    label: Master List Menu Items
-    create: all
-    match: "*.md"
-    templates:
-    - menu-item
+- type: heading
+  label: Menu
+- type: directory
+  path: markdowns/menu
+  label: Master List Menu Items
+  create: all
+  match: "*.md"
+  templates:
+  - menu-item
 upload_dir: static/images
 public_path: "/images"
 front_matter_path: ''
