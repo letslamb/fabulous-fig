@@ -5,13 +5,13 @@ fields:
 - type: text
   name: title
   label: Name
-- type: toggle
+- type: boolean
   name: glutenFree
   label: Gluten Free?
-- type: toggle
+- type: boolean
   name: nutFree
   label: Nut Free?
-- type: toggle
+- type: boolean
   name: soyFree
   label: Soy Free?
 - type: textarea
