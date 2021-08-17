@@ -18,6 +18,5 @@ fields:
   name: description
   label: Description
 pages:
-- markdowns/menu/Grateful Dead Concert/second-test-item.md
 - markdowns/menu/test-item-copy.md
 - markdowns/menu/test-item.md
