@@ -9,7 +9,7 @@ sections:
   - type: directory
     path: markdowns/menu
     label: Master List Menu Items
-    create: documents
+    create: all
     match: "*.md"
     templates:
     - menu-item
