@@ -1,0 +1,20 @@
+---
+label: Menu Item
+hide_body: true
+fields:
+- type: text
+  name: title
+  label: Name
+- type: toggle
+  name: glutenFree
+  label: Gluten Free?
+- type: toggle
+  name: nutFree
+  label: Nut Free?
+- type: toggle
+  name: soyFree
+  label: Soy Free?
+- type: textarea
+  name: description
+  label: Description
+---
