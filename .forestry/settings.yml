@@ -12,7 +12,7 @@ sections:
     create: documents
     match: "*.md"
     templates:
-      - menu-item
+    - menu-item.yml
 upload_dir: static/images
 public_path: "/images"
 front_matter_path: ''
