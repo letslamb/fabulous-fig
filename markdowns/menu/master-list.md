@@ -1,8 +1,8 @@
 ---
-title: Test item-(copy)
+title: Spring Roll Noodle Bowl
 glutenFree: true
-nutFree: false
-soyFree: false
-description: test
+nutFree: true
+soyFree: true
+description: Thai chili rice noodles topped with carrots, mango, scallions, black sesame seeds, cilantro and paired with a sweet Sriracha aioli
 
 ---
