@@ -4,15 +4,15 @@ auto_deploy: false
 admin_path: "/static/admin"
 webhook_url: 
 sections:
-  - type: heading
-    label: Menu
-  - type: directory
-    path: markdowns/menu
-    label: Master List Menu Items
-    create: documents
-    match: "*.md"
-    templates:
-    - menu-item
+- type: heading
+  label: Menu
+- type: directory
+  path: markdowns/menu
+  label: Master List Menu Items
+  create: documents
+  match: "*.md"
+  templates:
+  - menu-item
 upload_dir: static/images
 public_path: "/images"
 front_matter_path: ''
@@ -21,6 +21,5 @@ file_template: ":filename:"
 build:
   install_dependencies_command: npm install
   preview_docker_image: forestryio/node:16
-  # mount_path: "/srv"
-  # working_dir: "/srv"
+  mount_path: "/srv"
   instant_preview_command: npm run dev
