@@ -1,10 +1,6 @@
 <script context="module">
   export async function load({ fetch }) {
-    const res = await fetch('/api/googleCalendar/getCalendarEvents', {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    const res = await fetch('/api/googleCalendar/getCalendarEvents')
     const cal = await res.json()
 
     if (res.ok) {
