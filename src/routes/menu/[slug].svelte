@@ -69,18 +69,19 @@
           </Stack>
         </div>
         <Section>
-          <Box wrapperClass="menu-section--wrapper-box">
             {#each data.sections as section, i}
+
+            <Box wrapperClass="menu-section--wrapper-box">
+
               <ToggleSection headerText={section.title} expanded={i === 0 ? true : false}>
                 <Stack>
                   {#if section.description}
                     <p>{section.description}</p>
                   {/if}
                   {#each section.items as item}
-                  <!-- <Box wrapperClass="menu-section--wrapper-boxes"> -->
-
-                    <Section>
+                    <Section wrapperClass="menu-item--wrapper-section">
                       <Stack --space="var(--s-2)">
+                        <hr>
                         <HeadingTag message={item.name} />
                         {#if item.images}
                           <Sidebar wrapperClass="menu-item--wrapper-sidebar">
@@ -95,31 +96,33 @@
                               </Loader>
                             </div>
                             <div slot="main-content">
-                              {#if item.glutenFree || item.nutFree || item.soyFree}
-                                <Cluster wrapperClass="menu-item-icons--cluster-wrapper" wrapperElement="ul">
-                                  {#if item.glutenFree}
-                                  <li>
-                                    <Icon iconId={'#icon-gluten-free'} label="Gluten Free" />
-                                  </li>
-                                  {/if}
-                                  {#if item.nutFree}
-                                  <li>
-                                    <Icon iconId={'#icon-nut-free'} label="Nut Free" />
-                                  </li>
-                                  {/if}
-                                  {#if item.soyFree}
-                                  <li>
-                                    <Icon iconId={'#icon-soy-free'} label="Soy Free" />
-                                  </li>
-                                  {/if}
-                                </Cluster>
-                              {/if}
-                              {#if item.price}
-                                <p>{item.price}</p>
-                              {/if}
-                              {#if item.description}
-                                <p>{item.description}</p>
-                              {/if}
+                              <Stack>                              
+                                {#if item.glutenFree || item.nutFree || item.soyFree}
+                                  <Cluster wrapperClass="menu-item-icons--cluster-wrapper" wrapperElement="ul">
+                                    {#if item.glutenFree}
+                                    <li>
+                                      <Icon iconId={'#icon-gluten-free'} label="Gluten Free" />
+                                    </li>
+                                    {/if}
+                                    {#if item.nutFree}
+                                    <li>
+                                      <Icon iconId={'#icon-nut-free'} label="Nut Free" />
+                                    </li>
+                                    {/if}
+                                    {#if item.soyFree}
+                                    <li>
+                                      <Icon iconId={'#icon-soy-free'} label="Soy Free" />
+                                    </li>
+                                    {/if}
+                                  </Cluster>
+                                {/if}
+                                {#if item.price}
+                                  <p>{item.price}</p>
+                                {/if}
+                                {#if item.description}
+                                  <p>{item.description}</p>
+                                {/if}
+                              </Stack>
                             </div>
                           </Sidebar>
                         {:else if !item.images}
@@ -151,12 +154,12 @@
                         {/if}
                       </Stack>
                     </Section>
-                  <!-- </Box> -->
                   {/each}
                 </Stack>
               </ToggleSection>
+            </Box>
+
             {/each}
-          </Box>
         </Section>
       </Stack>
 
@@ -170,11 +173,6 @@
     width: 100%;
     color: var(--color-dark);
   }
-
-  /* div :global(.menu-wrapper-stack) {
-    width: 100%;
-    padding: var(--s-3);
-  } */
 
   div :global(.menu-wrapper-stack > div) {
     text-align: center;
@@ -199,7 +197,12 @@
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;
+    min-height: 100vh;
     padding: var(--s-3);
+  }
+
+  div :global(.menu-section--wrapper-box + .menu-section--wrapper-box) {
+    border-top: 1px;
   }
 
   div :global(.menu-section--wrapper-box) {
@@ -208,14 +211,35 @@
     padding: var(--s-1)
   }
 
+  div :global(.menu-item--wrapper-section hr) {
+    background-color: var(--color-lightish);
+    border: 0;
+    display: block;
+    width: 100%;
+    height: 1px;
+  }
+
   div :global(.menu-item--wrapper-sidebar) {
-    --sidebar-spacing: var(--s1); 
+    --sidebar-spacing: var(--s0); 
     --sidebar-width: 15ch;
   }
 
-  /* div :global(.menu-item-icons--cluster-wrapper) {
+  div :global(:not(.mainContent) > div > div > ul > li) {
+    display: inline-block;
+    /* hack to compensate for the <li> wanting to have extra height beneath its content, Stack can't
+      make alignment perfectly even */
+    margin-top: var(--s-4);
+  }
+
+  div :global(.stack .with-sidebar) {
+    --space: var(--s0);
+  }
+
+  div :global(.menu-item-icons--cluster-wrapper) {
     --space: var(--s-2);
-  } */
+  }
+
+
 
   div :global(.with-icon svg) {
     font-size: var(--s2);
