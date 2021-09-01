@@ -43,7 +43,7 @@ export async function get() {
             body: JSON.stringify({ tag: `${entry.summary}` })
           })
 
-          entry.menu = await menu.json()
+          entry.menu = await menu.json() || {}
 
         }
 
