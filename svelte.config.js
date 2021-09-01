@@ -8,17 +8,17 @@ const config = {
   "extensions": [".svelte"],
 
   kit: {
-      // hydrate the <div id="svelte"> element in src/app.html
-      target: '#svelte',
-  adapter: vercel(),
+    // hydrate the <div id="svelte"> element in src/app.html
+    target: '#svelte',
+    adapter: vercel(),
   // vite: {
     // resolve: {
     //   alias: {
     //     $static: path.resolve('static')
     //   }
     // }
-  }
-  },
+    }
+  // },
 
   // preprocess: [mdsvex(mdsvexConfig)]
 };
