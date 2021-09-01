@@ -17,7 +17,7 @@ export async function post(request) {
       Prismic.Predicates.at('document.tags', [`${request.body.tag}`])
     ])
   })
-    .then(res => res.json())
+    .then(res => res)
     .catch((error) => {
       return {
         status: 401,
