@@ -1,5 +1,5 @@
 <script>
-  import Sprite from '$static/svg/icons.svg'
+  import Sprite from '/svg/icons.svg'
 
 </script>
 
