@@ -40,7 +40,6 @@ export async function get() {
             headers: {
               'Content-Type': 'application/json'
             },
-
             body: JSON.stringify({ tag: `${entry.summary}` })
           })
 
