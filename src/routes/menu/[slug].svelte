@@ -218,6 +218,6 @@
   } */
 
   div :global(.with-icon svg) {
-    font-size: var(--s1);
+    font-size: var(--s2);
   }
 </style>
