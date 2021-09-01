@@ -4,7 +4,7 @@
 
 <script>
 
-  import { setContext, getContext } from 'svelte'
+  import { getContext } from 'svelte'
 
   /**
    * @type {string}
