@@ -1,15 +1,16 @@
 <script context="module">
   export async function load({ fetch }) {
     const res = await fetch('/api/googleCalendar/getCalendarEvents')
-    const cal = await res.json()
+      .then(data => data.json())
+    // const cal = await res.json()
 
-    if (res.ok) {
+    // if (res.ok) {
       return {
         props: {
-          calendar: cal
+          calendar: res
         }
       }
-    }
+    // }
 
     return {
       status: res.status,
