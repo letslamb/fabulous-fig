@@ -17,10 +17,13 @@ export async function post(request) {
       Prismic.Predicates.at('document.tags', [`${request.body.tag}`])
     ])
   })
-    .then(res => res)
+    .then(res => res.json())
     .catch((error) => {
       return {
         status: 401,
+        headers: {
+          'content-type': 'application/json'
+        },
         body: {
           message: "This event has no menu"
         }
@@ -32,6 +35,9 @@ export async function post(request) {
 
   return {
     status: 200,
+    headers: {
+      'content-type': 'application/json'
+    },
     body: {
       link
     }

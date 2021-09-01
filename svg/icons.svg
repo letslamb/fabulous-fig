@@ -1,14 +1,6 @@
-<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1" style="width:0;height:0;position:absolute;">
-  <!-- <defs> -->
+<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
 
-    <radialGradient id="rg" r="150%" cx="30%" cy="107%">
-      <stop stop-color="#fdf497" offset="0" />
-      <stop stop-color="#fdf497" offset="0.05" />
-      <stop stop-color="#fd5949" offset="0.45" />
-      <stop stop-color="#d6249f" offset="0.6" />
-      <stop stop-color="#285AEB" offset="0.9" />
-    </radialGradient>
-  <!-- </defs> -->
     <symbol id="icon-email" width="30" height="24" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M36 0H4C1.79 0 0.02 1.79 0.02 4L0 28C0 30.21 1.79 32 4 32H36C38.21 32 40 30.21 40 28V4C40 1.79 38.21 0 36 0ZM36 8L20 18L4 8V4L20 14L36 4V8Z" fill="#cce6be"/>
     </symbol>
@@ -349,5 +341,5 @@
 <path d="M 220.22 951.52 C 220.64 956.80 219.69 961.83 218.69 966.98 C 219.27 961.83 219.72 956.68 220.22 951.52 Z" fill="currentColor" />
 <path d="M 238.39 964.78 C 238.55 971.25 237.47 977.55 237.93 984.00 C 239.06 1006.22 239.65 1029.95 245.71 1051.45 C 243.48 1049.62 243.28 1047.16 242.61 1044.53 C 238.54 1024.97 237.73 1004.89 236.79 985.00 C 236.50 978.51 237.12 972.09 237.21 965.61 C 237.60 965.33 237.99 965.05 238.39 964.78 Z" fill="#010001" />
 </symbol>
-  <!-- </defs> -->
+  </defs>
 </svg>
