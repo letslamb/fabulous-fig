@@ -11,7 +11,7 @@
           'content-type': 'application/json'
         },
         props: {
-          calendar: res
+          calendar: res || {}
         }
       }
     // }
