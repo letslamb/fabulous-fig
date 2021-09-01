@@ -89,11 +89,11 @@
     color: var(--color-light);
   }
 
-  :global(.event-description ~ ul) {
+  :global(.event-description ul) {
     padding: 0 var(--s0) 0 var(--s0);
   }
 
-  :global(.event-description ~ ol) {
+  :global(.event-description ol) {
     padding: 0 var(--s1) 0 var(--s1);
   }
 </style>

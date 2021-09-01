@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 import { google } from 'googleapis'
 import { createClientData } from './_createClientData'
+import { base } from '$app/paths'
 
 const { privateKey } = JSON.parse(process.env['GOOGLE_PRIVATE_KEY'] || '{ privateKey: null }')
 const { GOOGLE_CLIENT_EMAIL, GOOGLE_CALENDAR_ID, BASE_PATH } = process.env
