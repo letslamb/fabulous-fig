@@ -1,5 +1,4 @@
 <script context="module">
-  export const hydrate = false
 
   export async function load({ fetch }) {
     const res = await fetch('/api/googleCalendar/getCalendarEvents', {
