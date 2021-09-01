@@ -1,6 +1,12 @@
 <script context="module">
   export async function load({ fetch }) {
-    const res = await fetch('/api/googleCalendar/getCalendarEvents')
+    const res = await fetch('/api/googleCalendar/getCalendarEvents', {
+      method: 'GET',
+      mode: 'cors',
+      // headers: {
+      //   'content-type': 'application/json'
+      // }
+    })
       .then(data => data.json())
     // const cal = await res.json()
 

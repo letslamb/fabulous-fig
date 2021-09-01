@@ -44,11 +44,11 @@ export async function get() {
             body: JSON.stringify({ tag: `${entry.summary}` })
           })
 
-          entry.menu = await menu.json() || {}
+          entry.menu = await menu.json()
 
         }
 
-        return entries
+        return entries || {}
 
       } else {
         throw new Error("Response from Google Calendar API has no results")
