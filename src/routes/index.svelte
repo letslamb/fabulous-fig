@@ -40,7 +40,7 @@
 
   setContext('calendarData', calendar)
 
-  $: console.log(calendar)
+  // $: console.log(calendar)
 
 </script>
 

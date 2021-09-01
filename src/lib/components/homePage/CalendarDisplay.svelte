@@ -9,7 +9,7 @@
 
   let calendar = getContext('calendarData')
 
-  $: console.log(calendar)
+  // $: console.log(calendar)
 
 </script>
 
