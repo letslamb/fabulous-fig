@@ -6,6 +6,10 @@
 
     // if (res.ok) {
       return {
+        status: res.status,
+        headers: {
+          'content-type': 'application/json'
+        },
         props: {
           calendar: res
         }
