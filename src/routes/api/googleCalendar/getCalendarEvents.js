@@ -38,7 +38,7 @@ export async function get() {
           let menu = await fetch(`${BASE_PATH}/api/menu/getMenuByTag`, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'content-type': 'application/json'
             },
             body: JSON.stringify({ tag: `${entry.summary}` })
           })
