@@ -20,7 +20,7 @@
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="/about">Catering Menu</a>            
+            <a href="/menu/catering">Catering Menu</a>            
           </li>
         </Cluster>
       </nav>
@@ -43,11 +43,6 @@
   header :global(.header-cluster) {
     justify-content: space-between;
     width: 100%;
-  }
-
-  header :global(.header-social-contact--wrapper-stack) {
-    /* margin-top: var(--s0);
-    margin-bottom: var(--s0); */
   }
   header div {
     max-width: 22ch;
