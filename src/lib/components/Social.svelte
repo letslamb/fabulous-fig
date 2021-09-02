@@ -29,7 +29,6 @@
 <script>
 
   import Icon from '$lib/components/layout/Icon.svelte'
-  // import Sprite from '$static/svg/icons.svg'
   import Cluster from '$lib/components/layout/Cluster.svelte'
 
 </script>
@@ -45,15 +44,15 @@
 </Cluster>
 
 <style>
-  
+
 
   :global(.social-wrapper-cluster) {
     /* TODO: this is a hack. is it worth it? */
-    margin-top: var(--s-4)
+    /* margin-top: var(--s-4) */
   }
 
   li :global(.social-icon .icon) {
-    font-size: var(--s1);
+    font-size: var(--s2);
     overflow: visible;
   }
 
