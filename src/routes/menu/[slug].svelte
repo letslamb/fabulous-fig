@@ -1,4 +1,6 @@
 <script context="module">
+  import { navigating } from '$app/stores'
+
   export async function load({ fetch, page }) {
 
     const { slug } = page.params
@@ -45,7 +47,7 @@
       <Stack wrapperClass="menu-wrapper-stack">
         <div>
           <Stack>
-            <HeadingTag message={data.menuTitle} />
+            <h1>{data.menuTitle}</h1>
             {#if data.menuDescription}
               <p>{data.menuDescription}</p>
             {/if}

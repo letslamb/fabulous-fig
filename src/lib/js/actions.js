@@ -28,5 +28,4 @@ export function enhanceToggleSection(node, params) {
     button.setAttribute('aria-expanded', params.expanded)
     contentWrapper.hidden = !params.expanded
   }
-
 }

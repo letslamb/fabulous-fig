@@ -5,6 +5,7 @@
       method: 'GET',
       mode: 'cors'
     })
+    // TODO - what happens when you remove this 'await'
     const cal = await res.json()
 
     if (res.ok) {

@@ -17,10 +17,10 @@
       <nav>
         <Cluster wrapperElement="ul">
           <li>
-            <a href="/">Home</a>
+            <a sveltekit:prefetch href="/">Home</a>
           </li>
           <li>
-            <a href="/menu/catering">Catering Menu</a>            
+            <a sveltekit:prefetch href="/menu/catering">Catering Menu</a>            
           </li>
         </Cluster>
       </nav>
