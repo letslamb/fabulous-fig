@@ -45,20 +45,12 @@
 
 <style>
 
-
-  :global(.social-wrapper-cluster) {
-    /* TODO: this is a hack. is it worth it? */
-    /* margin-top: var(--s-4) */
-  }
-
-  li :global(.social-icon .icon) {
-    font-size: var(--s2);
-    overflow: visible;
-  }
-
   a {
     display: block;
   }
 
-
+  li :global(.social-icon .icon) {
+    font-size: var(--s2);
+  }
+  
 </style>
