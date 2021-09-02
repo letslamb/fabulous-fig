@@ -1,9 +1,7 @@
 <script>
-
   import Section from '$lib/components/utils/Section.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
   import { enhanceToggleSection } from '$lib/js/actions.js'
-
   /**
    * @type {string}
    * set an optional class name for the top-level element of this component to enable scoped styling of each component instance from outside (in parent components or pages)
@@ -19,8 +17,6 @@
    * controls the aria-expanded state and the hidden attribute on the content
   */
   export let expanded = false
-
-
 </script>
 
 <div class={wrapperClass
@@ -45,22 +41,17 @@
     width: 100%;
     padding: 0.5em 0;
   }
-
   .collapsible-section-wrapper :global(svg.toggle-svg) {
     height: 1em;
     margin-left: 0.5em;
   }
-
   .collapsible-section-wrapper :global([aria-expanded] rect) {
     fill: currentColor;
   }
-
   .collapsible-section-wrapper :global([aria-expanded="true"] .vert) {
     display: none;
   }
-
   .collapsible-section-wrapper :global(h2 button:focus svg) {
     outline: 2px solid;
   }
-
 </style>

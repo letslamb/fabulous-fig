@@ -1,11 +1,8 @@
 <!-- <script context="module">
-
 </script> -->
 
 <script>
-
   import { getContext } from 'svelte'
-
   /**
    * @type {string}
    * set an optional class name for the top-level element of this component to enable 
@@ -28,8 +25,7 @@
   } else {
     level = 1
   }
-
-
+  
   const render = () => {
     id = `h-${Math.floor((new Date() * Math.random()))}`
     return `
@@ -41,7 +37,6 @@
     </h${level}>
   `
   }
-
 </script>
 
 {@html render()}
