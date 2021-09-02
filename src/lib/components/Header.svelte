@@ -3,8 +3,6 @@
   import Cluster from '$lib/components/layout/Cluster.svelte'
   import Center from '$lib/components/layout/Center.svelte'
   import Stack from '$lib/components/layout/Stack.svelte'
-  import Box from '$lib/components/layout/Box.svelte'
-
   import Social from '$lib/components/Social.svelte'
 
 </script>
@@ -14,7 +12,7 @@
     <Cluster wrapperClass="header-cluster" wrapperElement="div">
       <Stack wrapperClass="header-social-contact--wrapper-stack">
         <Social />
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id euismod ipsum. Integer efficitur enim tristique urna viverra cursus. Vivamus in luctus nisi. Quisque in diam leo.</p>
+        <div>Text 267-432-7790 for events and catering needs!</div>
       </Stack>
       <nav>
         <Cluster wrapperElement="ul">
@@ -33,7 +31,7 @@
 <style>
 
   header {
-    padding: var(--s-3);
+    padding: var(--s3) var(--s-3);
     background: var(--color-dark);
     color: var(--color-white);
   }
@@ -48,11 +46,11 @@
   }
 
   header :global(.header-social-contact--wrapper-stack) {
-    margin-top: var(--s0);
-    margin-bottom: var(--s0);
+    /* margin-top: var(--s0);
+    margin-bottom: var(--s0); */
   }
-  header p {
-    max-width: 25ch;
+  header div {
+    max-width: 22ch;
   }
 
 </style>

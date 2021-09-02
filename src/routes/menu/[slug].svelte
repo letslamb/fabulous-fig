@@ -224,10 +224,10 @@
     --sidebar-width: 15ch;
   }
 
+  /* hack to compensate for the <li> wanting to have extra height beneath its content, Stack can't
+  make alignment perfectly even. Only do this for the vertical layout */
   div :global(:not(.mainContent) > div > div > ul > li) {
     display: inline-block;
-    /* hack to compensate for the <li> wanting to have extra height beneath its content, Stack can't
-      make alignment perfectly even */
     margin-top: var(--s-4);
   }
 
@@ -238,8 +238,6 @@
   div :global(.menu-item-icons--cluster-wrapper) {
     --space: var(--s-2);
   }
-
-
 
   div :global(.with-icon svg) {
     font-size: var(--s2);

@@ -32,14 +32,14 @@
                       {/if}
                       {#if cal.googleMapsLink}
                         <div>
-                          <a href={cal.googleMapsLink} target="_blank" id={`googleMapsLink-${i}`} aria-labelledby={`googleMapsLink-${i} googleMapsSpan-${i}`}>Link to Map</a>
+                          <a href={cal.googleMapsLink} class="view-map-link" target="_blank" id={`googleMapsLink-${i}`} aria-labelledby={`googleMapsLink-${i} googleMapsSpan-${i}`}>View Map</a>
                           <span id={`googleMapsSpan-${i}`}>
                             (opens a new window)
                           </span>
                         </div>
                       {/if}
                       {#if cal.menu.link}
-                        <a href={cal.menu.link}>View Menu</a>
+                        <a class="visit-menu-link" href={cal.menu.link}>Visit Menu</a>
                       {/if}
                       {#if cal.description}
                         <p class="event-description">
@@ -95,6 +95,15 @@
 
   :global(.event-description ol) {
     padding: 0 var(--s1) 0 var(--s1);
+  }
+
+  :global(.calendar-box .event-box .visit-menu-link), :global(.calendar-box .event-box .view-map-link) {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    text-decoration: none;
+    padding: var(--s-3);
+    border: 2px solid var(--color-lightish);
+    width: fit-content;
   }
 </style>
 
