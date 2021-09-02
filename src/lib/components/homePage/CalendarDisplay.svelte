@@ -97,13 +97,32 @@
     padding: 0 var(--s1) 0 var(--s1);
   }
 
-  :global(.calendar-box .event-box .visit-menu-link), :global(.calendar-box .event-box .view-map-link) {
-    background-color: var(--color-light);
-    color: var(--color-dark);
+  :global(.calendar-wrapper-section a.visit-menu-link), :global(.calendar-wrapper-section a.view-map-link) {
     text-decoration: none;
     padding: var(--s-3);
-    border: 2px solid var(--color-lightish);
     width: fit-content;
+  }
+
+  :global(.calendar-wrapper-section a.visit-menu-link) {
+    box-shadow: 0 5px #000;
+    position: relative;
+    display: inline-block;
+    background-color: var(--color-mid);
+    color: var(--color-white);
+    border: 3px solid var(--color-light);
+  }
+
+  :global(.calendar-wrapper-section a.view-map-link) {
+    box-shadow: 0 5px #000;
+    position: relative;
+    display: inline-block;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    border: 3px solid var(--color-lightish);
+  }
+
+  a:active {
+    top: 5px;
   }
 </style>
 
