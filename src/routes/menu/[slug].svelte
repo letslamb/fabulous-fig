@@ -1,5 +1,4 @@
 <script context="module">
-  import { navigating } from '$app/stores'
 
   export async function load({ fetch, page }) {
 
