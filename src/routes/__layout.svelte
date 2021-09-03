@@ -1,4 +1,4 @@
-<script>
+<script context="module">
   import '../app.css'
   import '@fontsource/work-sans'
   import '@fontsource/work-sans/600.css'
