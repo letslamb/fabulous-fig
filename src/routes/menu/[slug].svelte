@@ -6,7 +6,10 @@
 
     console.log(`PAGE SLUG: ${slug}`)
 
-    const res = await fetch(`/api/menu/${slug}`)
+    const res = await fetch(`/api/menu/${slug}`, {
+      method: 'GET',
+      maxage: 3600
+    })
     .then(data => data.json())
 
     return {
