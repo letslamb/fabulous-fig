@@ -1,6 +1,19 @@
 <script>
 
-  import Sprite from '/svg/icons.svg'
+  // import Sprite from '/svg/icons.svg'
+
+  // import { getContext } from 'svelte'
+
+  // let sprite
+
+  // if (getContext('svgSprite')) {
+  //   console.log(`svg sprite in getContext: ${getContext('svgSprite')}`)
+  //   sprite = getContext('svgSprite')
+  // } else {
+  //   console.log(`we didn't find the sprite, trying async import now`)
+  //   sprite = async() => await import('/svg/icons.svg')
+  // }
+
 
   /**
    * @type {string}
@@ -33,7 +46,7 @@ aria-label={label ? label : null}
 role={label ? 'img' : null}
 >
   <svg class="icon">
-    <use href={`${Sprite}${iconId}`}></use>
+    <use href={`${iconId}`}></use>
   </svg>
   {#if !label}
     <slot />

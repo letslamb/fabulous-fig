@@ -38,11 +38,11 @@ export async function get() {
           // the fetch base URL needs to be changed to the production URL once this is deployed
           let menu = await fetch(`${BASE_PATH}/api/menu/getMenuByTag`, {
             method: 'POST',
-            mode: 'cors',
+            // mode: 'cors',
             headers: {
               'content-type': 'application/json'
             },
-            body: JSON.stringify({ tag: `${entry.summary}` })
+            body: JSON.stringify({ tag: `${entry.summary.trim()}` })
           })
 
           entry.menu = await menu.json()

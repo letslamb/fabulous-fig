@@ -3,9 +3,8 @@
   export async function load({ fetch }) {
     const res = await fetch('/api/googleCalendar/getCalendarEvents', {
       method: 'GET',
-      mode: 'cors'
+      maxage: 3600
     })
-    // TODO - what happens when you remove this 'await'
     const cal = await res.json()
 
     if (res.ok) {

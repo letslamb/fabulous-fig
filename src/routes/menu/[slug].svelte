@@ -1,5 +1,4 @@
 <script context="module">
-  import { navigating } from '$app/stores'
 
   export async function load({ fetch, page }) {
 
@@ -7,7 +6,10 @@
 
     console.log(`PAGE SLUG: ${slug}`)
 
-    const res = await fetch(`/api/menu/${slug}`)
+    const res = await fetch(`/api/menu/${slug}`, {
+      method: 'GET',
+      maxage: 3600
+    })
     .then(data => data.json())
 
     return {
