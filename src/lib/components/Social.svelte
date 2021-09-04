@@ -51,6 +51,7 @@
 
   li :global(.social-icon .icon) {
     font-size: var(--s2);
+    width: 1em;
   }
   
 </style>
