@@ -16,16 +16,17 @@ const config = {
     //     include: 
     //   }
     // }
-  // vite: {
-    // resolve: {
-    //   alias: {
-    //     $static: path.resolve('static')
-    //   }
-    // }
+
+    vite: {
+      resolve: {
+        alias: {
+          $static: path.resolve('static')
+        }
+      }
     }
-  // },
+  }
 
   // preprocess: [mdsvex(mdsvexConfig)]
-};
+}
 
 export default config;
