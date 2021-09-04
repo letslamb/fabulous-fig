@@ -1,6 +1,6 @@
 <script>
 
-let renderSprite = () => `<span style="visibility: hidden; position: absolute; z-index: -1;">
+const renderSprite = () => `<span style="visibility: hidden; position: absolute; z-index: -1;">
   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1">
     <defs>
    <!-- width="30" height="24" -->
