@@ -3,26 +3,14 @@
   import '@fontsource/work-sans'
   import '@fontsource/work-sans/600.css'
   import Header from '$lib/components/Header.svelte'
+  import Footer from '$lib/components/Footer.svelte'
   import Sprite from '$lib/components/utils/Sprite.svelte'
-  // import Sprite from '/svg/icons.svg'
+  // import BaseSEO from '$lib/components/BaseSEO.svelte'
 
-  // export async function load({ context }) {
-  //   return { context: Sprite }
-  // }
 
 </script>
 
-<script>
-  // import { setContext, getContext } from 'svelte'
-
-  // if (getContext('svgSprite')) {
-  //   null
-  // } else {
-  //   setContext('svgSprite', context.Sprite)
-  // }
-
-</script>
-
+<!-- <BaseSEO /> -->
 <svelte:head>
   <meta name="robots" content="noindex">
 </svelte:head>
@@ -33,6 +21,7 @@
 <main>
   <slot />
 </main>
+<Footer />
 
 <style>
 
