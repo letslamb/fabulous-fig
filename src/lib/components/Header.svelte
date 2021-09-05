@@ -29,7 +29,6 @@
 </header>
 
 <style>
-
   header {
     padding: var(--s3) var(--s-3);
     background: var(--color-dark);
