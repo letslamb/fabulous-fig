@@ -10,7 +10,7 @@ const renderSprite = () => `<span style="visibility: hidden; position: absolute;
   
 
       <symbol id="icon-email" class="sprite" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M36 0H4C1.79 0 0.02 1.79 0.02 4L0 28C0 30.21 1.79 32 4 32H36C38.21 32 40 30.21 40 28V4C40 1.79 38.21 0 36 0ZM36 8L20 18L4 8V4L20 14L36 4V8Z" fill="#cce6be"/>
+        <path d="M36 0H4C1.79 0 0.02 1.79 0.02 4L0 28C0 30.21 1.79 32 4 32H36C38.21 32 40 30.21 40 28V4C40 1.79 38.21 0 36 0ZM36 8L20 18L4 8V4L20 14L36 4V8Z" fill="#f1fceb"/>
       </symbol>
       <symbol id="icon-facebook" class="sprite" viewBox="0 0 24 24">
         <path style="fill:#A6E1FA" d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
