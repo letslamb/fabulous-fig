@@ -16,7 +16,7 @@
 
 <div>
   <Stack>
-    <HeadingTag wrapperClass={"calendar-heading"} message={"Where To Find The Fabulous Fig"} />
+    <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig"/>
     <Section>
       <Stack>
         {#each calendar as cal, i}
@@ -59,6 +59,7 @@
  
   div :global(.calendar-heading) {
     text-align: center;
+    font-size: var(--font-size-biggish);
   }
 
   div :global(.event-box.box) {
