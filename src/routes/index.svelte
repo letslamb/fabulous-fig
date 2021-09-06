@@ -1,11 +1,13 @@
 <script context="module">
 
-  export async function load({ fetch }) {
+  export async function load({ fetch, context }) {
     const res = await fetch('/api/googleCalendar/getCalendarEvents', {
       method: 'GET',
       maxage: 3600
     })
     const cal = await res.json()
+
+    let seo = context.seo
 
     if (res.ok) {
       return {
@@ -14,7 +16,8 @@
           'content-type': 'application/json'
         },
         props: {
-          calendar: cal
+          calendar: cal,
+          seo
         }
       }
     }
@@ -28,12 +31,14 @@
 
 <script>
 
+  import BaseSEO from '$lib/components/BaseSEO.svelte'
   import CalendarDisplay from '$lib/components/homePage/CalendarDisplay.svelte'
   import Hero from '$lib/components/homePage/Hero.svelte'
   import Section from '$lib/components/utils/Section.svelte'
   import Center from '$lib/components/layout/Center.svelte'
   import Box from '$lib/components/layout/Box.svelte'
 
+  export let seo
 
   import { setContext } from 'svelte'
 
@@ -41,7 +46,7 @@
 
   setContext('calendarData', calendar)
 
-  // $: console.log(calendar)
+  $: console.log(seo)
 
 </script>
 
@@ -68,6 +73,7 @@
     --color: var(--color-dark);
     --background-color: var(--color-light);
     padding: var(--s-3);
+    width: 100%;
   }
 </style>
 
