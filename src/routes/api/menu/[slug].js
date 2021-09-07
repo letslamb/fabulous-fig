@@ -25,7 +25,7 @@ export async function get({ request, params }) {
 
         let menuObject = res.results[0].data
 
-        let data, menuTitle, menuDescription, sections
+        let data, menuTitle, menuDescription, sections, seo
 
         // using all these ternary operators isn't ideal for readability, but for a bunch of the response fields,
         // we need to check that their arrays aren't empty before accessing child objects with dot notation
@@ -40,14 +40,17 @@ export async function get({ request, params }) {
           ? menuObject.menu_description[0].text 
           : null
 
-        sections = menuObject.body.map(section => {
-          return {
-            title: section.primary.menu_section_title[0] 
-              ? section.primary.menu_section_title[0].text 
-              : null,
-            description: section.primary.menu_section_description[0] 
-              ? section.primary.menu_section_description[0].text 
-              : null,
+        
+        sections = menuObject.body
+          .filter(section => section.slice_type === "menu_section")
+          .map(section => {
+            return {
+              title: section.primary.menu_section_title[0] 
+                ? section.primary.menu_section_title[0].text 
+                : null,
+              description: section.primary.menu_section_description[0] 
+                ? section.primary.menu_section_description[0].text 
+                : null,
               items: section.items.map(item => {
                 return {
                   name: item.name[0] 
@@ -63,20 +66,54 @@ export async function get({ request, params }) {
                   altText: item.image.alt
                     ? item.image.alt
                     : null,
-                  images: item.image.desktop.dimensions ? [
-                    { width: item.image.desktop.dimensions.width, src: item.image.desktop.url },
-                    { width: item.image.tablet.dimensions.width, src: item.image.tablet.url },
-                    { width: item.image.mobile.dimensions.width, src: item.image.mobile.url }
-                  ] : null
+                  images: item.image.desktop.dimensions 
+                    ? [
+                        { width: item.image.desktop.dimensions.width, src: item.image.desktop.url },
+                        { width: item.image.tablet.dimensions.width, src: item.image.tablet.url },
+                        { width: item.image.mobile.dimensions.width, src: item.image.mobile.url }
+                      ] 
+                    : null
                 }
               })
+            } 
+          })
+
+        seo = menuObject.body
+          .filter(section => section.slice_type === "seo")
+          .map(section => {
+            return {
+              title: section.primary.title[0]
+                ? section.primary.title[0].text
+                : null,
+              description: section.primary.description[0]
+                ? section.primary.description[0].text
+                : null,
+              altText: section.primary.image.alt,
+              images: section.primary.image.dimensions 
+                ? {
+                    facebook: {
+                      width: section.primary.image.dimensions.width,
+                      height: section.primary.image.dimensions.height,
+                      url: section.primary.image.url
+                    },
+                    twitter: {
+                      width: section.primary.image.twitter.dimensions.width,
+                      height: section.primary.image.twitter.dimensions.height,
+                      url: section.primary.image.twitter.url
+                    }
+                  } 
+                : null
             }
           })
+
+
+
         
         data = {
-          menuTitle: menuTitle,
-          menuDescription: menuDescription,
-          sections: sections
+          menuTitle,
+          menuDescription,
+          sections,
+          seo
         }
 
         return data

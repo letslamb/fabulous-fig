@@ -26,7 +26,7 @@
   span {
     text-align: center;
     /* hack to make it look more centered beneath the social icons */
-    margin-right: var(--s0);
+    margin-right: var(--s-2);
   }
 
   footer :global(a) {

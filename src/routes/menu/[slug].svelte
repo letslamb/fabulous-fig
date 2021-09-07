@@ -1,12 +1,12 @@
 <script context="module">
 
-  export async function load({ fetch, page }) {
+  export async function load({ fetch, page, context }) {
 
     const { slug } = page.params
 
     console.log(`PAGE SLUG: ${slug}`)
 
-    const res = await fetch(`/api/menu/${slug}`, {
+    let res = await fetch(`/api/menu/${slug}`, {
       method: 'GET',
       maxage: 3600
     })
@@ -14,7 +14,8 @@
 
     return {
       props: {
-        data: res
+        data: res,
+        globalSEO: context.seo
       }
     }
   }
@@ -22,6 +23,7 @@
 </script>
 
 <script>
+  import BaseSEO from '$lib/components/BaseSEO.svelte'
   import Image from '$lib/components/layout/Image.svelte'
   import Frame from '$lib/components/layout/Frame.svelte'
   import Stack from '$lib/components/layout/Stack.svelte'
@@ -34,13 +36,25 @@
   import Section from '$lib/components/utils/Section.svelte'
   import ToggleSection from '$lib/components/utils/ToggleSection.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
+  import { setContext } from 'svelte'
 
   export let data
 
-  $: console.log(JSON.stringify(data, null, 2))
+  export let globalSEO
+
+  setContext('seo', {
+    page: data.seo,
+    global: globalSEO
+  })
+
+  // $: console.log(globalSEO)
+
+  // $: console.log(JSON.stringify(data, null, 2))
 
 
 </script>
+
+<BaseSEO />
 
 <div>
   <Center>
@@ -73,100 +87,98 @@
           </Stack>
         </div>
         <Section>
-            {#each data.sections as section, i}
+        {#each data.sections as section, i}
 
-            <Box wrapperClass="menu-section--wrapper-box">
+          <Box wrapperClass="menu-section--wrapper-box">
 
-              <ToggleSection headerText={section.title} expanded={i === 0 ? true : false}>
-                <Stack>
-                  {#if section.description}
-                    <p>{section.description}</p>
-                  {/if}
-                  {#each section.items as item}
-                    <Section wrapperClass="menu-item--wrapper-section">
-                      <Stack --space="var(--s-2)">
-                        <hr>
-                        <HeadingTag message={item.name} />
-                        {#if item.images}
-                          <Sidebar wrapperClass="menu-item--wrapper-sidebar">
-                            <div slot="sidebar-content">
-                              <Loader>
-                                <Frame>
-                                  <Image
-                                    images={item.images}
-                                    altText={item.altText}
-                                  />
-                                </Frame>
-                              </Loader>
-                            </div>
-                            <div slot="main-content">
-                              <Stack>                              
-                                {#if item.glutenFree || item.nutFree || item.soyFree}
-                                  <Cluster wrapperClass="menu-item-icons--cluster-wrapper" wrapperElement="ul">
-                                    {#if item.glutenFree}
-                                    <li>
-                                      <Icon iconId={'#icon-gluten-free'} label="Gluten Free" />
-                                    </li>
-                                    {/if}
-                                    {#if item.nutFree}
-                                    <li>
-                                      <Icon iconId={'#icon-nut-free'} label="Nut Free" />
-                                    </li>
-                                    {/if}
-                                    {#if item.soyFree}
-                                    <li>
-                                      <Icon iconId={'#icon-soy-free'} label="Soy Free" />
-                                    </li>
-                                    {/if}
-                                  </Cluster>
-                                {/if}
-                                {#if item.price}
-                                  <p>{item.price}</p>
-                                {/if}
-                                {#if item.description}
-                                  <p>{item.description}</p>
-                                {/if}
-                              </Stack>
-                            </div>
-                          </Sidebar>
-                        {:else if !item.images}
-                          {#if item.glutenFree || item.nutFree || item.soyFree}
-                            <Cluster wrapperClass="menu-item-icons--cluster-wrapper" wrapperElement="ul">
-                              {#if item.glutenFree}
-                                <li>
-                                  <Icon iconId={'#icon-gluten-free'} label="Gluten Free" />
-                                </li>
+            <ToggleSection headerText={section.title} expanded={i === 0 ? true : false}>
+              <Stack>
+                {#if section.description}
+                  <p>{section.description}</p>
+                {/if}
+                {#each section.items as item}
+                  <Section wrapperClass="menu-item--wrapper-section">
+                    <Stack --space="var(--s-2)">
+                      <hr>
+                      <HeadingTag message={item.name} />
+                      {#if item.images}
+                        <Sidebar wrapperClass="menu-item--wrapper-sidebar">
+                          <div slot="sidebar-content">
+                            <Loader>
+                              <Frame>
+                                <Image
+                                  images={item.images}
+                                  altText={item.altText}
+                                />
+                              </Frame>
+                            </Loader>
+                          </div>
+                          <div slot="main-content">
+                            <Stack>                              
+                              {#if item.glutenFree || item.nutFree || item.soyFree}
+                                <Cluster wrapperClass="menu-item-icons--cluster-wrapper" wrapperElement="ul">
+                                  {#if item.glutenFree}
+                                  <li>
+                                    <Icon iconId={'#icon-gluten-free'} label="Gluten Free" />
+                                  </li>
+                                  {/if}
+                                  {#if item.nutFree}
+                                  <li>
+                                    <Icon iconId={'#icon-nut-free'} label="Nut Free" />
+                                  </li>
+                                  {/if}
+                                  {#if item.soyFree}
+                                  <li>
+                                    <Icon iconId={'#icon-soy-free'} label="Soy Free" />
+                                  </li>
+                                  {/if}
+                                </Cluster>
                               {/if}
-                              {#if item.nutFree}
-                                <li>
-                                  <Icon iconId={'#icon-nut-free'} label="Nut Free" />
-                                </li>
+                              {#if item.price}
+                                <p>{item.price}</p>
                               {/if}
-                              {#if item.soyFree}
-                                <li>
-                                  <Icon iconId={'#icon-soy-free'} label="Soy Free" />
-                                </li>
+                              {#if item.description}
+                                <p>{item.description}</p>
                               {/if}
-                            </Cluster>
-                          {/if}
-                          {#if item.price}
-                            <p>{item.price}</p>
-                          {/if}
-                          {#if item.description}
-                            <p>{item.description}</p>
-                          {/if}
+                            </Stack>
+                          </div>
+                        </Sidebar>
+                      {:else if !item.images}
+                        {#if item.glutenFree || item.nutFree || item.soyFree}
+                          <Cluster wrapperClass="menu-item-icons--cluster-wrapper" wrapperElement="ul">
+                            {#if item.glutenFree}
+                              <li>
+                                <Icon iconId={'#icon-gluten-free'} label="Gluten Free" />
+                              </li>
+                            {/if}
+                            {#if item.nutFree}
+                              <li>
+                                <Icon iconId={'#icon-nut-free'} label="Nut Free" />
+                              </li>
+                            {/if}
+                            {#if item.soyFree}
+                              <li>
+                                <Icon iconId={'#icon-soy-free'} label="Soy Free" />
+                              </li>
+                            {/if}
+                          </Cluster>
                         {/if}
-                      </Stack>
-                    </Section>
-                  {/each}
-                </Stack>
-              </ToggleSection>
-            </Box>
-
-            {/each}
+                        {#if item.price}
+                          <p>{item.price}</p>
+                        {/if}
+                        {#if item.description}
+                          <p>{item.description}</p>
+                        {/if}
+                      {/if}
+                    </Stack>
+                  </Section>
+                {/each}
+              </Stack>
+            </ToggleSection>
+          </Box>
+        {/each}
         </Section>
       </Stack>
-
     </Box>
   </Center>
 </div>

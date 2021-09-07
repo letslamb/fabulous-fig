@@ -2,8 +2,16 @@
 // The heading tag is dynamically generated based on number of levels nested within
 // instances of Section.svelte, so we don't know which heading level it will be here
 export function enhanceSection(node) {
-  let sectionHeaderId = node.querySelector('h1, h2, h3, h4, h5, h6').id
-  node.setAttribute('aria-labelledby', sectionHeaderId ? sectionHeaderId : null)
+
+  // make sectionHeaderId undefined if no heading tags w/ ids are found in the section
+  let sectionHeaderId = node.querySelector('h1, h2, h3, h4, h5, h6')
+    ?.id
+
+  // ...so that this will no-op in the error case
+  if (sectionHeaderId) {
+    node.setAttribute('aria-labelledby', sectionHeaderId)
+  } 
+  return
 }
 
 // Add the button inside the heading tag, hide the content, add an onclick method
