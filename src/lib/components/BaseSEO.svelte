@@ -6,9 +6,6 @@
   const { global } = data
   const [ page ] = data.page
 
-  $: console.log(`HERE'S WHAT'S COMING INTO BASESEO: ${JSON.stringify(data, null, 2)}`)
-  $: console.log(`GLOBAL: ${JSON.stringify(global, null, 2)}`)
-  $: console.log(`PAGE: ${JSON.stringify(page, null, 2)}`)
 </script>
 
 <svelte:head>

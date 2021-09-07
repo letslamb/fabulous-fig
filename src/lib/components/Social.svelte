@@ -47,6 +47,7 @@
 
   :global(.cluster.social-wrapper-cluster) {
     --space: var(--s-2);
+    justify-content: space-between;
   }
 
   /* give email icon a little extra margin-right to compensate for looking wider than others */

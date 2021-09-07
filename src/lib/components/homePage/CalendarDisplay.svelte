@@ -8,7 +8,7 @@
   import { getContext } from 'svelte'
 
   let calendar = getContext('calendarData')
-  
+
 </script>
 
 
@@ -29,14 +29,14 @@
                   {/if}
                   {#if cal.googleMapsLink}
                     <div>
-                      <a href={cal.googleMapsLink} class="view-map-link" target="_blank" id={`googleMapsLink-${i}`} aria-labelledby={`googleMapsLink-${i} googleMapsSpan-${i}`}>View Map</a>
+                      <a href={cal.googleMapsLink} class="view-map-link" target="_blank" id={`googleMapsLink-${i}`} aria-labelledby={`googleMapsLink-${i} googleMapsSpan-${i}`}>Map</a>
                       <span id={`googleMapsSpan-${i}`}>
                         (opens a new window)
                       </span>
                     </div>
                   {/if}
                   {#if cal.menu.link}
-                    <a class="visit-menu-link" href={cal.menu.link}>Visit Menu</a>
+                    <a class="visit-menu-link" href={cal.menu.link}>Event Menu</a>
                   {/if}
                   {#if cal.description}
                     <p class="event-description">
@@ -97,15 +97,15 @@
   }
 
   div a.visit-menu-link {
-    background-color: var(--color-mid);
-    color: var(--color-white);
-    border: 3px solid var(--color-light);
-  }
-
-  div a.view-map-link {
     background-color: var(--color-light);
     color: var(--color-dark);
     border: 3px solid var(--color-lightish);
+  }
+
+  div a.view-map-link {
+    background-color: var(--color-mid);
+    color: var(--color-white);
+    border: 3px solid var(--color-light);
   }
 
   div a:active {
