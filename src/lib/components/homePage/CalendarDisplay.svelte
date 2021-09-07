@@ -8,8 +8,7 @@
   import { getContext } from 'svelte'
 
   let calendar = getContext('calendarData')
-
-
+  
 </script>
 
 

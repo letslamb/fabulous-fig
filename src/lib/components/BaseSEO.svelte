@@ -25,7 +25,7 @@
   <meta property="og:image:alt" content={page.altText} />
   <meta property="og:type" content="website" />
   <meta property="og:url" content={global.canonical} />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:creator" content="@letslamb" />
   <meta name="twitter:title" content={global.siteName} />
   <meta name="twitter:description" content={page.description} />
