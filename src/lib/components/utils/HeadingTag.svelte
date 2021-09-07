@@ -23,7 +23,7 @@
     level = getContext('headingLevel')
     level = Math.min(level, 6)
   } else {
-    level = 1
+    level = 2
   }
   
   const render = () => {
