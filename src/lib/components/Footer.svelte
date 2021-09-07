@@ -7,7 +7,7 @@
 <footer>
   <Stack>
     <Social />
-    <span>&#169; The Fabulous Fig - {new Date().getFullYear()}</span>
+    <span class="copyright">&#169; The Fabulous Fig - {new Date().getFullYear()}</span>
   </Stack>
 </footer>
 
@@ -23,7 +23,7 @@
     margin: 0 auto;
   }
 
-  span {
+  footer :global(span.copyright) {
     text-align: center;
     /* hack to make it look more centered beneath the social icons */
     margin-right: var(--s-2);
