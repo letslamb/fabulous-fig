@@ -1,22 +1,28 @@
 <script context="module">
 
   export async function load({ fetch, context }) {
-    const res = await fetch('/api/googleCalendar/getCalendarEvents', {
+    const calendarData = await fetch('/api/googleCalendar/getCalendarEvents', {
       method: 'GET',
       maxage: 3600
     })
-    const cal = await res.json()
+    const cal = await calendarData.json()
 
-    let seo = context.seo
+    const homePageData = await fetch('/api/home/getHomePageData', {
+      method: 'GET',
+      maxage: 3600
+    })
+    const homePageSEO = await homePageData.json()
 
-    if (res.ok) {
+    if (calendarData.ok && homePageData.ok) {
       return {
-        status: res.status,
+        status: calendarData.status,
         headers: {
           'content-type': 'application/json'
         },
         props: {
           calendar: cal,
+          pageSEO: homePageSEO.seo,
+          globalSEO: context.seo
         }
       }
     }
@@ -30,24 +36,33 @@
 
 <script>
 
-  // import BaseSEO from '$lib/components/BaseSEO.svelte'
+  import BaseSEO from '$lib/components/BaseSEO.svelte'
   import CalendarDisplay from '$lib/components/homePage/CalendarDisplay.svelte'
   import Hero from '$lib/components/homePage/Hero.svelte'
   import Section from '$lib/components/utils/Section.svelte'
   import Center from '$lib/components/layout/Center.svelte'
   import Box from '$lib/components/layout/Box.svelte'
 
-  // export let seo
+  export let pageSEO
+  export let globalSEO
+
 
   import { setContext } from 'svelte'
 
   export let calendar
 
+  setContext('seo', {
+    page: pageSEO,
+    global: globalSEO
+  })
+
   setContext('calendarData', calendar)
 
-  // $: console.log(seo)
+  // $: console.log(JSON.stringify(seo, null, 2))
 
 </script>
+
+<BaseSEO />
 
 <Hero />
 
