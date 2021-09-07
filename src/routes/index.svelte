@@ -17,7 +17,6 @@
         },
         props: {
           calendar: cal,
-          seo
         }
       }
     }
@@ -31,14 +30,14 @@
 
 <script>
 
-  import BaseSEO from '$lib/components/BaseSEO.svelte'
+  // import BaseSEO from '$lib/components/BaseSEO.svelte'
   import CalendarDisplay from '$lib/components/homePage/CalendarDisplay.svelte'
   import Hero from '$lib/components/homePage/Hero.svelte'
   import Section from '$lib/components/utils/Section.svelte'
   import Center from '$lib/components/layout/Center.svelte'
   import Box from '$lib/components/layout/Box.svelte'
 
-  export let seo
+  // export let seo
 
   import { setContext } from 'svelte'
 
@@ -46,7 +45,7 @@
 
   setContext('calendarData', calendar)
 
-  $: console.log(seo)
+  // $: console.log(seo)
 
 </script>
 
