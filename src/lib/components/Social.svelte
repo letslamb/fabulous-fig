@@ -33,25 +33,27 @@
 
 </script>
 
-<Cluster wrapperElement="ul" wrapperClass="social-wrapper-cluster">
-  {#each socialIconsData as socialIcon}
-    <li>
-      <a href={socialIcon.link}>
-        <Icon wrapperClass="social-icon" iconId={socialIcon.id} label={socialIcon.label} />
-      </a>
-    </li>
-  {/each}
-</Cluster>
+<div>
+  <Cluster wrapperElement="ul" wrapperClass="social-wrapper-cluster">
+    {#each socialIconsData as socialIcon}
+      <li>
+        <a href={socialIcon.link}>
+          <Icon wrapperClass="social-icon" iconId={socialIcon.id} label={socialIcon.label} />
+        </a>
+      </li>
+    {/each}
+  </Cluster>
+</div>
 
 <style>
 
-  :global(.cluster.social-wrapper-cluster) {
+  div :global(.cluster.social-wrapper-cluster) {
     --space: var(--s-2);
     justify-content: space-between;
   }
 
   /* give email icon a little extra margin-right to compensate for looking wider than others */
-  :global(.cluster.social-wrapper-cluster :nth-child(2)) {
+  div :global(.cluster.social-wrapper-cluster :nth-child(2)) {
     --space: var(--s-1);
   }
 
