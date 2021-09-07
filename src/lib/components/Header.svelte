@@ -36,7 +36,20 @@
   }
 
   header a {
-    color: var(--color-light);
+    /* color: var(--color-light); */
+    text-decoration: none;
+    padding: var(--s-3);
+    width: fit-content;
+    box-shadow: 0 5px #000;
+    position: relative;
+    display: inline-block;
+    background-color: var(--color-light);
+    color: var(--color-dark);
+    border: 3px solid var(--color-lightish);
+  }
+
+  header a:active {
+    top: 5px;
   }
 
   header :global(.header-cluster) {
