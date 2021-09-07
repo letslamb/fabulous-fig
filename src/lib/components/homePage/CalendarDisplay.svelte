@@ -14,7 +14,7 @@
 
 <div>
   <Stack>
-    <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig"/>
+    <h1 class="calendar-heading">Where to Find the Fabulous Fig</h1>
     <Section>
       <Stack>
         {#each calendar as cal, i}
@@ -67,7 +67,7 @@
   }
 
   div :global(.event-title) {
-    font-size: var(--s1);
+    /* font-size: var(--s1); */
     /* TODO: does this font-weight need to be decreased to 400 too? */
   }
 

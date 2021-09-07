@@ -14,7 +14,7 @@
     level = getContext('headingLevel') + 1
     setContext('headingLevel', level)
   } else {
-    level = 1
+    level = 2
     setContext('headingLevel', level)
   }
 

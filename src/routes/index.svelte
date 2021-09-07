@@ -66,7 +66,7 @@
 
 <Hero />
 
-<Section wrapperClass="calendar-wrapper-section">
+<div wrapperClass="calendar-wrapper-section">
   <Center>
     <Box wrapperClass={"calendar-box"}>
       {#if calendar[0]}
@@ -76,7 +76,7 @@
       {/if}
     </Box>
   </Center>
-</Section>
+</div>
 
 <style>
   :global(.calendar-wrapper-section) {

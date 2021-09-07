@@ -59,7 +59,6 @@
 <div>
   <Center>
     <Box wrapperClass="menu--wrapper-box">
-
       <Stack wrapperClass="menu-wrapper-stack">
         <div>
           <Stack>
