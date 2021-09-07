@@ -9,7 +9,6 @@
 
   let calendar = getContext('calendarData')
 
-  $: console.log(`CALENDAR: ${JSON.stringify(calendar, null, 2)}`)
 
 </script>
 
