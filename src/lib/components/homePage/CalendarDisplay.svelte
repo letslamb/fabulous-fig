@@ -14,7 +14,7 @@
 
 <div>
   <Stack>
-    <h1 class="calendar-heading">Where to Find the Fabulous Fig</h1>
+    <h1 class="calendar-heading">Where to Find The Fabulous Fig</h1>
     <Section>
       <Stack>
         {#each calendar as cal, i}
