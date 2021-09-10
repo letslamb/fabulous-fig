@@ -48,10 +48,12 @@
 
 
   import { setContext } from 'svelte'
+  import { seo } from '$lib/js/constants'
+
 
   export let calendar
 
-  setContext('seo', {
+  setContext(seo, {
     page: pageSEO,
     global: globalSEO
   })

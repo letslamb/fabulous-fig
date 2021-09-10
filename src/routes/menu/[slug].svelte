@@ -37,12 +37,13 @@
   import ToggleSection from '$lib/components/utils/ToggleSection.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
   import { setContext } from 'svelte'
+  import { seo } from '$lib/js/constants'
 
   export let data
 
   export let globalSEO
 
-  setContext('seo', {
+  setContext(seo, {
     page: data.seo,
     global: globalSEO
   })
