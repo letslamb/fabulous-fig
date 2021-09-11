@@ -4,6 +4,8 @@
 
 </script>
 
+<svelte:options immutable={true} />
+
 <footer>
   <Stack>
     <Social />

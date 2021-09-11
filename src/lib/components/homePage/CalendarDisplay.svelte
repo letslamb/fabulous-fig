@@ -6,15 +6,16 @@
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
 
   import { getContext } from 'svelte'
+  import { calendarData } from '$lib/js/constants'
 
-  let calendar = getContext('calendarData')
+  let calendar = getContext(calendarData)
 
 </script>
 
 
 <div>
   <Stack>
-    <h1 class="calendar-heading">Where to Find the Fabulous Fig</h1>
+    <h1 class="calendar-heading">Where to Find The Fabulous Fig</h1>
     <Section>
       <Stack>
         {#each calendar as cal, i}

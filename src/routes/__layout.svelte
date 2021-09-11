@@ -6,7 +6,13 @@
   import Footer from '$lib/components/Footer.svelte'
   import Sprite from '$lib/components/utils/Sprite.svelte'
 
-  export async function load({page}) {
+  export async function load({page, fetch}) {
+
+    let res = await fetch('/api/layout/getHeaderData', {
+      method: 'GET',
+      maxage: 3600
+    })
+    .then(data => data.json())
 
     const { host, path } = page
 
@@ -14,14 +20,22 @@
       seo: {
         siteName: 'The Fabulous Fig Vegan Food Truck',
         locale: 'en_US',
-        canonical: `https://${page.host}${page.path}`
+        canonical: `https://${host}${path}`
       }
     }
     return {
+      props: {
+        res
+      },
       context
     }
   }
 
+
+</script>
+
+<script>
+  export let res
 
 </script>
 
@@ -31,7 +45,7 @@
 
 <Sprite />
 
-<Header />
+<Header headerData={res} />
 <main>
   <slot />
 </main>

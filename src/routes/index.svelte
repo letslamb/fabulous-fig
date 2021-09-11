@@ -48,17 +48,17 @@
 
 
   import { setContext } from 'svelte'
+  import { seo, calendarData } from '$lib/js/constants'
+
 
   export let calendar
 
-  setContext('seo', {
+  setContext(seo, {
     page: pageSEO,
     global: globalSEO
   })
 
-  setContext('calendarData', calendar)
-
-  // $: console.log(JSON.stringify(seo, null, 2))
+  setContext(calendarData, calendar)
 
 </script>
 
@@ -66,7 +66,7 @@
 
 <Hero />
 
-<div wrapperClass="calendar-wrapper-section">
+<div>
   <Center>
     <Box wrapperClass={"calendar-box"}>
       {#if calendar[0]}
@@ -79,15 +79,13 @@
 </div>
 
 <style>
-  :global(.calendar-wrapper-section) {
-    max-height: fit-content;
-  }
 
-  :global(.calendar-box) {
-    --color: var(--color-dark);
+  /* TODO - these styles are identical to the wrapper for the menu page's content. Do you care? */
+  div :global(.box) {
     --background-color: var(--color-light);
-    padding: var(--s-3);
+    --color: var(--color-dark);
     width: 100%;
+    padding: var(--s-3);
   }
 </style>
 
