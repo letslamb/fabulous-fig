@@ -99,14 +99,14 @@
                       {#if item.images}
                         <Sidebar wrapperClass="menu-item--wrapper-sidebar">
                           <div slot="sidebar-content">
-                            <Loader>
-                              <Frame>
+                            <Frame>
+                              <Loader>
                                 <Image
                                   images={item.images}
                                   altText={item.altText}
                                 />
-                              </Frame>
-                            </Loader>
+                              </Loader>
+                            </Frame>
                           </div>
                           <div slot="main-content">
                             <Stack>                              
@@ -211,7 +211,7 @@
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;
-    padding: var(--s-3);
+    padding: var(--s0) var(--s-3);
   }
 
   div :global(.menu-section--wrapper-box + .menu-section--wrapper-box) {
