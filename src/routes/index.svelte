@@ -60,15 +60,13 @@
 
   setContext('calendarData', calendar)
 
-  // $: console.log(JSON.stringify(seo, null, 2))
-
 </script>
 
 <BaseSEO />
 
 <Hero />
 
-<div wrapperClass="calendar-wrapper-section">
+<div>
   <Center>
     <Box wrapperClass={"calendar-box"}>
       {#if calendar[0]}
@@ -81,7 +79,10 @@
 </div>
 
 <style>
-  :global(.calendar-wrapper-section) {
+
+  div {
+    /* TODO - verify that this isn't causing any problems 
+    - just realized it wasn't working & fixed the selector 9/10/2021 */
     max-height: fit-content;
   }
 
