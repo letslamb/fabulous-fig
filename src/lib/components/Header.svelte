@@ -2,6 +2,8 @@
 
   import Cluster from '$lib/components/layout/Cluster.svelte'
   import Center from '$lib/components/layout/Center.svelte'
+  import Box from '$lib/components/layout/Box.svelte'
+
   import Stack from '$lib/components/layout/Stack.svelte'
   import Social from '$lib/components/Social.svelte'
 
@@ -20,7 +22,10 @@
         <Social />
         <Stack wrapperClass="contact-info--stack">
           <div>{phoneNumber}</div>
-          <div>{email}</div>
+          <div>
+            <!-- TODO - need to insert this <br> tag into the email address -->
+            thefabulousfig<br>@gmail.com
+          </div>
           <div>{message}</div>
         </Stack>
       </Stack>
@@ -59,6 +64,10 @@
 
   header a:active {
     top: 5px;
+  }
+
+  header :global(.box) {
+    min-width: 1px; /* ***********************/
   }
 
   header :global(.header-cluster) {
