@@ -68,8 +68,13 @@
   }
 
   div :global(.event-title) {
+    font-weight: 600;
     /* font-size: var(--s1); */
     /* TODO: does this font-weight need to be decreased to 400 too? */
+  }
+
+  div :global(h3) {
+    font-weight: 400;
   }
 
   div :global(.event-box section) {
