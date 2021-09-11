@@ -48,11 +48,6 @@
     global: globalSEO
   })
 
-  // $: console.log(globalSEO)
-
-  // $: console.log(JSON.stringify(data, null, 2))
-
-
 </script>
 
 <BaseSEO />
@@ -209,11 +204,13 @@
     align-items: center;
   }
 
+  /* TODO - when you break this page up into a couple more components, you can just target
+  div :global(.box), and if any overrides are still needed, use the cascade.
+  Unique classes got out of control because the page comp is too big */
   div :global(.menu--wrapper-box) {
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;
-    min-height: 100vh;
     padding: var(--s-3);
   }
 
