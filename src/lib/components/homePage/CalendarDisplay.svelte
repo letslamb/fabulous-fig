@@ -6,8 +6,9 @@
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
 
   import { getContext } from 'svelte'
+  import { calendarData } from '$lib/js/constants'
 
-  let calendar = getContext('calendarData')
+  let calendar = getContext(calendarData)
 
 </script>
 

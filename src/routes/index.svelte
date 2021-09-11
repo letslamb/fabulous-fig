@@ -48,7 +48,7 @@
 
 
   import { setContext } from 'svelte'
-  import { seo } from '$lib/js/constants'
+  import { seo, calendarData } from '$lib/js/constants'
 
 
   export let calendar
@@ -58,7 +58,7 @@
     global: globalSEO
   })
 
-  setContext('calendarData', calendar)
+  setContext(calendarData, calendar)
 
 </script>
 
