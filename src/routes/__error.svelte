@@ -12,12 +12,8 @@
   import Image from '$lib/components/layout/Image.svelte'
   import Frame from '$lib/components/layout/Frame.svelte'
   import Box from '$lib/components/layout/Box.svelte'
-  import Stack from '$lib/components/layout/Stack.svelte'
   import Center from '$lib/components/layout/Center.svelte'
   import Loader from '$lib/components/utils/Loader.svelte'
-  // import Pug from '$static/images/pug-400.jpg'
-
-  // $: console.log(Pug)
 
   export let title
 </script>
