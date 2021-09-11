@@ -80,17 +80,12 @@
 
 <style>
 
-  div {
-    /* TODO - verify that this isn't causing any problems 
-    - just realized it wasn't working & fixed the selector 9/10/2021 */
-    max-height: fit-content;
-  }
-
-  :global(.calendar-box) {
-    --color: var(--color-dark);
+  /* TODO - these styles are identical to the wrapper for the menu page's content. Do you care? */
+  div :global(.box) {
     --background-color: var(--color-light);
-    padding: var(--s-3);
+    --color: var(--color-dark);
     width: 100%;
+    padding: var(--s-3);
   }
 </style>
 
