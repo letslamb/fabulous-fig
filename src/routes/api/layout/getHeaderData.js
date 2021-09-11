@@ -1,6 +1,7 @@
 import Prismic from '@prismicio/client'
 import dotenv from 'dotenv'
 dotenv.config()
+import { capitalizeEachLetter } from '$lib/js/utils'
 
 const { PRISMIC_API_ENDPOINT } = process.env
 
@@ -17,10 +18,10 @@ export async function get({ request }) {
       Prismic.Predicates.at('my.global_content.uid', 'global-layout')
     ])
   })
-  // .then(res => res)
     .then(res => {
       if (res.results[0]) {
-        let phoneNumber, email, message
+
+        let phoneNumber, email, message, navLinks
 
         let body = res.results[0].data.body
 
@@ -42,10 +43,22 @@ export async function get({ request }) {
           .text_content[0]
           .text
 
+        let linkSlice = body
+          .filter(slice => slice.slice_type === "links")[0]
+        
+        navLinks = linkSlice.items.map(item => {
+          if (item.nav_link.type === "homepage") {
+            return { href: '/', text: 'Home'}
+          } else if (item.nav_link.type === "menu_layout") {
+            return { href: `/menu/${item.nav_link.uid}`, text: `${capitalizeEachLetter(item.nav_link.uid)} Menu`}
+          }
+        })
+
         return {
           phoneNumber,
           email,
-          message
+          message,
+          navLinks
         }
 
       }
