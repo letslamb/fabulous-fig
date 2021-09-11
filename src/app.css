@@ -236,9 +236,3 @@ b {
   width: 1px !important;
   overflow: hidden !important;
 }
-
-/* @media (min-width: 480px) {
-  html {
-    font-size: var(--s2);
-  }
-} */
