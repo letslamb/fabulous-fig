@@ -85,7 +85,7 @@
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;
-    padding: var(--s-3);
+    padding: var(--s0) var(--s-3);
   }
 </style>
 
