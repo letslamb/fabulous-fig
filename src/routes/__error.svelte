@@ -1,13 +1,3 @@
-<script context="module">
-  export function load({ error, status }) {
-    return {
-      props: {
-        title: `${status}: ${error.message}`
-      }
-    }
-  }
-</script>
-
 <script>
   import Image from '$lib/components/layout/Image.svelte'
   import Frame from '$lib/components/layout/Frame.svelte'
@@ -15,7 +5,6 @@
   import Center from '$lib/components/layout/Center.svelte'
   import Loader from '$lib/components/utils/Loader.svelte'
 
-  export let title
 </script>
 
 <section aria-labelledby="error-page-label">
