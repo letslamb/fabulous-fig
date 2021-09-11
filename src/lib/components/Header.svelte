@@ -5,23 +5,32 @@
   import Stack from '$lib/components/layout/Stack.svelte'
   import Social from '$lib/components/Social.svelte'
 
+  export let headerData
+
+  const { phoneNumber, email, message, navLinks } = headerData
+
 </script>
+
+<svelte:options immutable={true} />
 
 <header>
   <Center>
     <Cluster wrapperClass="header-cluster" wrapperElement="div">
       <Stack wrapperClass="header-social-contact--wrapper-stack">
         <Social />
-        <div>Text 267-432-7790 for events and catering needs!</div>
+        <Stack wrapperClass="contact-info--stack">
+          <div>{phoneNumber}</div>
+          <div>{email}</div>
+          <div>{message}</div>
+        </Stack>
       </Stack>
       <nav>
         <Cluster wrapperElement="ul">
-          <li>
-            <a sveltekit:prefetch href="/">Home</a>
-          </li>
-          <li>
-            <a sveltekit:prefetch href="/menu/catering">Catering Menu</a>            
-          </li>
+          {#each navLinks as link}
+            <li>
+              <a sveltekit:prefetch href={link.href}>{link.text}</a>
+            </li>
+          {/each}
         </Cluster>
       </nav>
     </Cluster>
@@ -56,6 +65,11 @@
     justify-content: space-between;
     width: 100%;
   }
+
+  header :global(.contact-info--stack > *) {
+    --space: var(--s-2);
+  }
+  
   header div {
     max-width: 22ch;
   }
