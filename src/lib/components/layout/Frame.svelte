@@ -29,6 +29,9 @@
     position: relative;
   }
 
+  /* 
+  for cropping non - <img> or <video> direct children 
+  */
   .frame > :global(*) {
     overflow: hidden;
     position: absolute;
@@ -41,12 +44,13 @@
     align-items: center;
   }
 
-  /* TODO - keep an eye on this, the original comp. had img as a direct child of <Frame>
-  but we canged it so that <Loader> could slot into <Frame> instead of wrapping it,
-  thus preserving the browser's pre-calculated aspect-ratio. Watch to see if
-  you have any problems with this component elsewhere */
+  /* 
+  for cropping <img> or <video> descendants of .frame
+  Note that this allows the option of a <Loader> component to slot into .frame & 
+  wrap the <img> for lazyloading 
+  */
   .frame :global(img),
-  .frame > :global(video) {
+  .frame :global(video) {
     width: 100%;
     height: 100%;
     object-fit: cover;
