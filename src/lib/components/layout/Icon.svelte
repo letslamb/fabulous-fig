@@ -1,20 +1,5 @@
 <script>
 
-  // import Sprite from '/svg/icons.svg'
-
-  // import { getContext } from 'svelte'
-
-  // let sprite
-
-  // if (getContext('svgSprite')) {
-  //   console.log(`svg sprite in getContext: ${getContext('svgSprite')}`)
-  //   sprite = getContext('svgSprite')
-  // } else {
-  //   console.log(`we didn't find the sprite, trying async import now`)
-  //   sprite = async() => await import('/svg/icons.svg')
-  // }
-
-
   /**
    * @type {string}
    * set an optional class name for the top-level element of this component to enable 
