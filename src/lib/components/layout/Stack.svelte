@@ -63,9 +63,4 @@
     display: flex;
   }
 
-  /* Remove the margin-top if a slot is unused so layout remains visually consistent */
-  .stack > :global(:nth-child(2):empty), .stack > :global(:nth-child(3):empty) {
-    margin-top: 0;
-  }
-
 </style>
