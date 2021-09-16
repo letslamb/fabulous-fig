@@ -1,6 +1,5 @@
 <script>
   import Section from '$lib/components/utils/Section.svelte'
-  import Center from '$lib/components/layout/Center.svelte'
   import Stack from '$lib/components/layout/Stack.svelte'
   import Box from '$lib/components/layout/Box.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
@@ -66,8 +65,6 @@
 
   div :global(.event-title) {
     font-weight: 600;
-    /* font-size: var(--s1); */
-    /* TODO: does this font-weight need to be decreased to 400 too? */
   }
 
   div :global(h3) {
