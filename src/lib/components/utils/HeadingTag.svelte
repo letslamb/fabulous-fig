@@ -16,7 +16,7 @@
   let id
   let level
 
-  if (getContext('headingLevel')) {
+  if (typeof(getContext('headingLevel')) === Number) {
     level = getContext('headingLevel')
     level = Math.min(level, 6)
   } else {
