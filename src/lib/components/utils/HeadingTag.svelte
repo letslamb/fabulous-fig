@@ -1,5 +1,6 @@
 <script>
   import { getContext } from 'svelte'
+  import { headingLevel } from '$lib/js/constants'
   /**
    * @type {string}
    * set an optional class name for the top-level element of this component to enable 
@@ -16,11 +17,12 @@
   let id
   let level
 
-  if (typeof(getContext('headingLevel')) === Number) {
-    level = getContext('headingLevel')
-    level = Math.min(level, 6)
+  if (typeof getContext(headingLevel) === 'number') {
+    console.log(`HERE'S THE HEADING LEVEL CONTEXT: ${getContext(headingLevel)}`)
+    level = Math.min(getContext(headingLevel), 6)
+    // level = Math.min(level, 6)
   } else {
-    level = 2
+    level = 1
   }
   
   const render = () => {
