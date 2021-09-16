@@ -18,8 +18,6 @@
     setContext('headingLevel', level)
   }
 
-
-
 </script>
 
 <section
