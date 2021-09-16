@@ -39,42 +39,36 @@
   import BaseSEO from '$lib/components/BaseSEO.svelte'
   import CalendarDisplay from '$lib/components/homePage/CalendarDisplay.svelte'
   import Hero from '$lib/components/homePage/Hero.svelte'
-  import Section from '$lib/components/utils/Section.svelte'
   import Center from '$lib/components/layout/Center.svelte'
   import Box from '$lib/components/layout/Box.svelte'
+  import Article from '$lib/components/utils/Article.svelte'
 
   export let pageSEO
   export let globalSEO
 
 
-  import { setContext } from 'svelte'
-  import { seo, calendarData } from '$lib/js/constants'
-
-
   export let calendar
-
-  setContext(seo, {
-    page: pageSEO,
-    global: globalSEO
-  })
-
-  setContext(calendarData, calendar)
 
 </script>
 
-<BaseSEO />
+<BaseSEO data={{
+  page: pageSEO, 
+  global: globalSEO
+}}/>
 
 <Hero />
 
 <div>
   <Center>
-    <Box wrapperClass={"calendar-box"}>
-      {#if calendar[0]}
-        <CalendarDisplay />
-      {:else}
-        <p>This is a placeholder for when there are no calendar events</p>
-      {/if}
-    </Box>
+    <Article>
+      <Box wrapperClass={"calendar-box"}>
+        {#if calendar[0]}
+          <CalendarDisplay {calendar}/>
+        {:else}
+          <p>This is a placeholder for when there are no calendar events</p>
+        {/if}
+      </Box>
+    </Article>
   </Center>
 </div>
 

@@ -1,7 +1,7 @@
 <script>
   import { setContext, getContext } from 'svelte'
   import { headingLevel } from '$lib/js/constants'
-  import { enhanceSection } from '$lib/js/actions.js'
+  import { enhanceSection } from '$lib/js/actions'
 
   /**
    * @type {string}
@@ -21,8 +21,8 @@
 
 </script>
 
-<section
+<article
   use:enhanceSection
   class={wrapperClass}>
   <slot />
-</section>
+</article>

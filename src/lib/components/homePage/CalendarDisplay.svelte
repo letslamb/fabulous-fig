@@ -1,21 +1,17 @@
 <script>
   import Section from '$lib/components/utils/Section.svelte'
-  import Center from '$lib/components/layout/Center.svelte'
   import Stack from '$lib/components/layout/Stack.svelte'
   import Box from '$lib/components/layout/Box.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
 
-  import { getContext } from 'svelte'
-  import { calendarData } from '$lib/js/constants'
-
-  let calendar = getContext(calendarData)
+  export let calendar = {}
 
 </script>
 
 
 <div>
   <Stack>
-    <h1 class="calendar-heading">Where to Find The Fabulous Fig</h1>
+    <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
     <Section>
       <Stack>
         {#each calendar as cal, i}
@@ -69,8 +65,6 @@
 
   div :global(.event-title) {
     font-weight: 600;
-    /* font-size: var(--s1); */
-    /* TODO: does this font-weight need to be decreased to 400 too? */
   }
 
   div :global(h3) {

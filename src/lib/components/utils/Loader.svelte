@@ -14,3 +14,11 @@
     <slot />
   {/if}
 </IntersectionObserver>
+
+<style>
+
+  noscript {
+    width: 100%;
+  }
+  
+</style>

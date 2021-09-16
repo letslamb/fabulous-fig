@@ -35,13 +35,10 @@
 </script>
 
 <script>
+  
   export let res
 
 </script>
-
-<svelte:head>
-  <meta name="robots" content="noindex">
-</svelte:head>
 
 <Sprite />
 

@@ -25,7 +25,7 @@ export async function get({ request, params }) {
 
         let menuObject = res.results[0].data
 
-        let data, menuTitle, menuDescription, sections, seo
+        let data, menuTitle, menuDescription, sections 
 
         // using all these ternary operators isn't ideal for readability, but for a bunch of the response fields,
         // we need to check that their arrays aren't empty before accessing child objects with dot notation
@@ -78,7 +78,7 @@ export async function get({ request, params }) {
             } 
           })
 
-        seo = menuObject.body
+        let getSEO = menuObject.body
           .filter(section => section.slice_type === "seo")
           .map(section => {
             return {
@@ -106,8 +106,7 @@ export async function get({ request, params }) {
             }
           })
 
-
-
+          const [seo] = getSEO
         
         data = {
           menuTitle,
