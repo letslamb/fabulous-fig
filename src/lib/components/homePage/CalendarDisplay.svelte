@@ -5,10 +5,7 @@
   import Box from '$lib/components/layout/Box.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
 
-  import { getContext } from 'svelte'
-  import { calendarData } from '$lib/js/constants'
-
-  let calendar = getContext(calendarData)
+  export let calendar = {}
 
 </script>
 

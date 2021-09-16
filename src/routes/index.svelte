@@ -47,13 +47,7 @@
   export let globalSEO
 
 
-  import { setContext } from 'svelte'
-  import { calendarData } from '$lib/js/constants'
-
-
   export let calendar
-
-  setContext(calendarData, calendar)
 
 </script>
 
@@ -68,7 +62,7 @@
   <Center>
     <Box wrapperClass={"calendar-box"}>
       {#if calendar[0]}
-        <CalendarDisplay />
+        <CalendarDisplay {calendar}/>
       {:else}
         <p>This is a placeholder for when there are no calendar events</p>
       {/if}
