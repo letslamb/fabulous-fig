@@ -31,7 +31,7 @@
         <Cluster wrapperElement="ul">
           {#each navLinks as link}
             <li>
-              <a sveltekit:prefetch href={link.href}>{link.text}</a>
+              <a rel="external" href={link.href}>{link.text}</a>
             </li>
           {/each}
         </Cluster>
