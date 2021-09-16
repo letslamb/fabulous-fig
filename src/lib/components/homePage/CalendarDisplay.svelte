@@ -11,7 +11,7 @@
 
 <div>
   <Stack>
-    <h1 class="calendar-heading">Where to Find The Fabulous Fig</h1>
+    <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
     <Section>
       <Stack>
         {#each calendar as cal, i}
