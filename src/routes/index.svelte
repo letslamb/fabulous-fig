@@ -48,21 +48,19 @@
 
 
   import { setContext } from 'svelte'
-  import { seo, calendarData } from '$lib/js/constants'
+  import { calendarData } from '$lib/js/constants'
 
 
   export let calendar
-
-  setContext(seo, {
-    page: pageSEO,
-    global: globalSEO
-  })
 
   setContext(calendarData, calendar)
 
 </script>
 
-<BaseSEO />
+<BaseSEO data={{
+  page: pageSEO, 
+  global: globalSEO
+}}/>
 
 <Hero />
 

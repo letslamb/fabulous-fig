@@ -1,12 +1,8 @@
 <script>
-  import { getContext } from 'svelte'
-  import { seo } from '$lib/js/constants'
 
+  export let data
 
-  let data = getContext(seo)
-
-  const { global } = data
-  const [ page ] = data.page
+  const { global, page } = data
 
 </script>
 

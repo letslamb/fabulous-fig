@@ -12,10 +12,11 @@
     })
     .then(data => data.json())
 
+
     return {
       props: {
         data: res,
-        globalSEO: context.seo
+        globalSEO: context.seo,
       }
     }
   }
@@ -36,21 +37,17 @@
   import Section from '$lib/components/utils/Section.svelte'
   import ToggleSection from '$lib/components/utils/ToggleSection.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
-  import { setContext } from 'svelte'
-  import { seo } from '$lib/js/constants'
 
   export let data
 
   export let globalSEO
 
-  setContext(seo, {
-    page: data.seo,
-    global: globalSEO
-  })
-
 </script>
 
-<BaseSEO />
+<BaseSEO data={{
+  page: data.seo, 
+  global: globalSEO
+}}/>
 
 <div>
   <Center>

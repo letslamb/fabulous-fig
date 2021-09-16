@@ -21,7 +21,7 @@ export async function get({ request }) {
       if (res.results[0]) {
         let homePageObject = res.results[0].data
 
-        let seo = homePageObject.body
+        let getSEO = homePageObject.body
           .filter(section => section.slice_type === "seo")
           .map(section => {
             return {
@@ -49,11 +49,9 @@ export async function get({ request }) {
             }
           })
 
-        let data = {
-          seo
-        }
+        const [seo] = getSEO
 
-        return data
+        return { seo }
 
       } else {
         throw new Error("Response from Prismic has no results")
