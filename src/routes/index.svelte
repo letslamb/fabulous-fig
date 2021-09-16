@@ -41,6 +41,7 @@
   import Hero from '$lib/components/homePage/Hero.svelte'
   import Center from '$lib/components/layout/Center.svelte'
   import Box from '$lib/components/layout/Box.svelte'
+  import Article from '$lib/components/utils/Article.svelte'
 
   export let pageSEO
   export let globalSEO
@@ -59,13 +60,15 @@
 
 <div>
   <Center>
-    <Box wrapperClass={"calendar-box"}>
-      {#if calendar[0]}
-        <CalendarDisplay {calendar}/>
-      {:else}
-        <p>This is a placeholder for when there are no calendar events</p>
-      {/if}
-    </Box>
+    <Article>
+      <Box wrapperClass={"calendar-box"}>
+        {#if calendar[0]}
+          <CalendarDisplay {calendar}/>
+        {:else}
+          <p>This is a placeholder for when there are no calendar events</p>
+        {/if}
+      </Box>
+    </Article>
   </Center>
 </div>
 
