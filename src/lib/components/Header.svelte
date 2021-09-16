@@ -2,8 +2,6 @@
 
   import Cluster from '$lib/components/layout/Cluster.svelte'
   import Center from '$lib/components/layout/Center.svelte'
-  import Box from '$lib/components/layout/Box.svelte'
-
   import Stack from '$lib/components/layout/Stack.svelte'
   import Social from '$lib/components/Social.svelte'
 
