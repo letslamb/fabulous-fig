@@ -2,7 +2,6 @@ import dotenv from 'dotenv'
 dotenv.config()
 import { google } from 'googleapis'
 import { createClientData } from './_createClientData'
-import { base } from '$app/paths'
 
 const { privateKey } = JSON.parse(process.env['GOOGLE_PRIVATE_KEY'] || '{ privateKey: null }')
 const { GOOGLE_CLIENT_EMAIL, GOOGLE_CALENDAR_ID, BASE_PATH } = process.env
@@ -38,7 +37,6 @@ export async function get() {
           // the fetch base URL needs to be changed to the production URL once this is deployed
           let menu = await fetch(`${BASE_PATH}/api/menu/getMenuByTag`, {
             method: 'POST',
-            // mode: 'cors',
             headers: {
               'content-type': 'application/json'
             },
