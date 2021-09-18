@@ -10,52 +10,44 @@
 
 
 <div>
-  <Stack>
-    <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
-    <Section>
-      <Stack>
-        {#each calendar as cal, i}
-          <Box wrapperClass={"event-box"} switchColors={true}>
-            <Stack>
-              <HeadingTag wrapperClass={"event-title"} message={cal.summary} />
-              <Section>
-                <Stack>
-                  <HeadingTag message={`${cal.dayOfWeek}, ${cal.date}`} />
-                  {#if cal.startTime && cal.endTime}
-                    <HeadingTag message ={`${cal.startTime} - ${cal.endTime}`} />
-                  {/if}
-                  {#if cal.googleMapsLink}
-                    <div>
-                      <a href={cal.googleMapsLink} class="view-map-link" target="_blank" id={`googleMapsLink-${i}`} aria-labelledby={`googleMapsLink-${i} googleMapsSpan-${i}`}>Map</a>
-                      <span id={`googleMapsSpan-${i}`}>
-                        (opens a new window)
-                      </span>
-                    </div>
-                  {/if}
-                  {#if cal.menu.link}
-                    <a class="visit-menu-link" href={cal.menu.link}>Event Menu</a>
-                  {/if}
-                  {#if cal.description}
-                    <p class="event-description">
-                      {@html cal.description}
-                    </p>
-                  {/if}
-                </Stack>
-              </Section>
-            </Stack>
-          </Box>
-        {/each}
-      </Stack>
-    </Section>
-  </Stack>
+  <Section>
+    <Stack>
+      {#each calendar as cal, i}
+        <Box wrapperClass={"event-box"} switchColors={true}>
+          <Stack>
+            <HeadingTag wrapperClass={"event-title"} message={cal.summary} />
+            <Section>
+              <Stack>
+                <HeadingTag message={`${cal.dayOfWeek}, ${cal.date}`} />
+                {#if cal.startTime && cal.endTime}
+                  <HeadingTag message ={`${cal.startTime} - ${cal.endTime}`} />
+                {/if}
+                {#if cal.googleMapsLink}
+                  <div>
+                    <a href={cal.googleMapsLink} class="view-map-link" target="_blank" id={`googleMapsLink-${i}`} aria-labelledby={`googleMapsLink-${i} googleMapsSpan-${i}`}>Map</a>
+                    <span id={`googleMapsSpan-${i}`}>
+                      (opens a new window)
+                    </span>
+                  </div>
+                {/if}
+                {#if cal.menu.link}
+                  <a class="visit-menu-link" href={cal.menu.link}>Event Menu</a>
+                {/if}
+                {#if cal.description}
+                  <p class="event-description">
+                    {@html cal.description}
+                  </p>
+                {/if}
+              </Stack>
+            </Section>
+          </Stack>
+        </Box>
+      {/each}
+    </Stack>
+  </Section>
 </div>
 
 <style>
- 
-  div :global(.calendar-heading) {
-    text-align: center;
-    font-size: var(--font-size-biggish);
-  }
 
   div :global(.event-box.box) {
     padding: var(--s-1);

@@ -9,6 +9,8 @@
 
   const { phoneNumber, email, message, navLinks } = headerData
 
+  $: console.log(email)
+
 </script>
 
 <svelte:options immutable={true} />
@@ -21,8 +23,7 @@
         <Stack wrapperClass="contact-info--stack">
           <div>{phoneNumber}</div>
           <div>
-            <!-- TODO - need to insert this <br> tag into the email address -->
-            thefabulousfig<br>@gmail.com
+            {@html email}
           </div>
           <div>{message}</div>
         </Stack>

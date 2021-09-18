@@ -18,9 +18,7 @@
   let level
 
   if (typeof getContext(headingLevel) === 'number') {
-    console.log(`HERE'S THE HEADING LEVEL CONTEXT: ${getContext(headingLevel)}`)
     level = Math.min(getContext(headingLevel), 6)
-    // level = Math.min(level, 6)
   } else {
     level = 1
   }

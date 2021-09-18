@@ -11,7 +11,9 @@
       method: 'GET',
       maxage: 3600
     })
-    const homePageSEO = await homePageData.json()
+    const homePage = await homePageData.json()
+
+    console.log(homePage)
 
     if (calendarData.ok && homePageData.ok) {
       return {
@@ -21,7 +23,8 @@
         },
         props: {
           calendar: cal,
-          pageSEO: homePageSEO.seo,
+          noCalendarMessage: homePage.placeholder,
+          pageSEO: homePage.seo,
           globalSEO: context.seo
         }
       }
@@ -41,10 +44,16 @@
   import Hero from '$lib/components/homePage/Hero.svelte'
   import Center from '$lib/components/layout/Center.svelte'
   import Box from '$lib/components/layout/Box.svelte'
+  import Stack from '$lib/components/layout/Stack.svelte'
   import Article from '$lib/components/utils/Article.svelte'
+  import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
+
 
   export let pageSEO
   export let globalSEO
+  export let noCalendarMessage
+
+  $: console.log(noCalendarMessage)
 
 
   export let calendar
@@ -62,11 +71,14 @@
   <Center>
     <Article>
       <Box wrapperClass={"calendar-box"}>
-        {#if calendar[0]}
-          <CalendarDisplay {calendar}/>
-        {:else}
-          <p>This is a placeholder for when there are no calendar events</p>
-        {/if}
+        <Stack>
+          <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
+          {#if calendar[0]}
+            <CalendarDisplay {calendar}/>
+          {:else}
+            <p>{noCalendarMessage.message}</p>
+          {/if}
+        </Stack>
       </Box>
     </Article>
   </Center>
@@ -80,6 +92,15 @@
     --color: var(--color-dark);
     width: 100%;
     padding: var(--s0) var(--s-3);
+  }
+
+  div :global(.calendar-heading) {
+    text-align: center;
+    font-size: var(--font-size-biggish);
+  }
+
+  div p {
+    text-align: center;
   }
 </style>
 

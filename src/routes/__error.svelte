@@ -3,23 +3,20 @@
   import Frame from '$lib/components/layout/Frame.svelte'
   import Box from '$lib/components/layout/Box.svelte'
   import Center from '$lib/components/layout/Center.svelte'
-  import Loader from '$lib/components/utils/Loader.svelte'
 
 </script>
 
 <section aria-labelledby="error-page-label">
   <Center>
     <Box>
-      <Frame>
-        <Loader>
-          <Image
-            images={[
-              { width: 1200, src: "/images/pug-1200.jpg"},
-              { width: 800, src: "/images/pug-800.jpg"},
-              { width: 400, src: "/images/pug-400.jpg"}]}
-            altText={"a cute puppy"}
-          />
-          </Loader>
+      <Frame lazy={true}>
+        <Image
+          images={[
+            { width: 1200, src: "/images/pug-1200.jpg"},
+            { width: 800, src: "/images/pug-800.jpg"},
+            { width: 400, src: "/images/pug-400.jpg"}]}
+          altText={"a cute puppy"}
+        />
       </Frame>
       <Box>  
         <p>Sorry,</p>
