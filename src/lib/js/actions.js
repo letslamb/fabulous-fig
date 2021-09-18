@@ -37,3 +37,34 @@ export function enhanceToggleSection(node, params) {
     contentWrapper.hidden = !params.expanded
   }
 }
+
+export function intersectionObserver(node, boolean) {
+  if (boolean === true && typeof IntersectionObserver !== "undefined") {
+    const onIntersection = (entry) => {
+      node.dispatchEvent(new CustomEvent("intersection", {detail: entry}))
+    }
+
+    let top = 0;
+    let bottom = 0;
+    let left = 0;
+    let right = 0;
+
+    const rootMargin = `${bottom}px ${left}px ${top}px ${right}px`;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting === true) {
+          onIntersection(entries[0])
+          return observer.unobserve(node)
+        }
+      },
+      {
+        rootMargin,
+      }
+    );
+
+    observer.observe(node);
+    return () => observer.unobserve(node);
+  }
+  return
+}
