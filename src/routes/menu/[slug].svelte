@@ -31,7 +31,6 @@
   import Sidebar from '$lib/components/layout/Sidebar.svelte'
   import Cluster from '$lib/components/layout/Cluster.svelte'
   import Box from '$lib/components/layout/Box.svelte'
-  import Loader from '$lib/components/utils/Loader.svelte'
   import Section from '$lib/components/utils/Section.svelte'
   import Article from '$lib/components/utils/Article.svelte'
   import ToggleSection from '$lib/components/utils/ToggleSection.svelte'
@@ -97,13 +96,11 @@
                         {#if item.images}
                           <Sidebar wrapperClass="menu-item--wrapper-sidebar">
                             <div slot="sidebar-content">
-                              <Frame>
-                                <Loader>
-                                  <Image
-                                    images={item.images}
-                                    altText={item.altText}
-                                  />
-                                </Loader>
+                              <Frame lazy={true}>
+                                <Image
+                                  images={item.images}
+                                  altText={item.altText}
+                                />
                               </Frame>
                             </div>
                             <div slot="main-content">
