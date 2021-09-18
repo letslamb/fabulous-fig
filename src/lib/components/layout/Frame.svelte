@@ -1,4 +1,6 @@
 <script>
+  import { intersectionObserver } from '$lib/js/actions'
+
   /**
    * @type {string}
    * set an optional class name for the top-level element of this component to enable 
@@ -6,14 +8,30 @@
   */
   export let wrapperClass
 
+  export let lazy = false
+
+  let intersecting = false
+
+  const setIntersecting = () => {
+    intersecting = true
+  }
+
 </script>
 
 
-<div class={wrapperClass
+<div
+  use:intersectionObserver={lazy}
+  on:intersection={setIntersecting}
+  class={wrapperClass
   ? `frame ${wrapperClass}`
   : "frame"
 }>
-  <slot />
+  <noscript>
+    <slot />
+  </noscript>
+  {#if intersecting}
+    <slot />
+  {/if}
 </div>
 
 
@@ -44,13 +62,22 @@
     align-items: center;
   }
 
+  .frame > :global(noscript) {
+    overflow: visible;
+  }
+
   /* 
   for cropping <img> or <video> descendants of .frame
   Note that this allows the option of a <Loader> component to slot into .frame & 
   wrap the <img> for lazyloading 
+
+  TODO - test how this will affect e.g. when a <div> is the child of .frame,
+  but the <div> has multiple children including an <img>
   */
-  .frame :global(img),
-  .frame :global(video) {
+  .frame > :global(img),
+  .frame > :global(noscript > img),
+  .frame > :global(video),
+  .frame > :global(noscript > video) {
     width: 100%;
     height: 100%;
     object-fit: cover;
