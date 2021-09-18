@@ -49,9 +49,19 @@ export async function get({ request }) {
             }
           })
 
-        const [seo] = getSEO
+        let placeholderMessage = homePageObject.body
+          .filter(section => section.slice_type === "text_box")
+          .map(section => {
+            return {
+              message: section.primary.text_content[0].text
+            }
+          })
+        // console.log(homePageObject.body.filter(section => section.slice_type === "text_box")[0].primary.text_content[0].text)
 
-        return { seo }
+        const [seo] = getSEO
+        const [placeholder] = placeholderMessage
+
+        return { seo, placeholder }
 
       } else {
         throw new Error("Response from Prismic has no results")
