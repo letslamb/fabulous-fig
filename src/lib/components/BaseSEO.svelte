@@ -21,7 +21,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content={global.canonical} />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:creator" content="@letslamb" />
+  <meta name="twitter:creator" content="@realgoatish" />
   <meta name="twitter:title" content={global.siteName} />
   <meta name="twitter:description" content={page.description} />
   <meta name="twitter:image" content={page.images.twitter.url} />
