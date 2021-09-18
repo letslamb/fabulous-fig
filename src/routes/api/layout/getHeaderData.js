@@ -36,6 +36,8 @@ export async function get({ request }) {
           .primary
           .text_content[0]
           .text
+          .split('@')
+          .join('<br>@')
 
         message = body
           .filter(slice => slice.slice_label === "message")[0]
