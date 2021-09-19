@@ -7,9 +7,8 @@
 
   export let headerData
 
-  const { phoneNumber, email, message, navLinks } = headerData
-
-  $: console.log(email)
+  const { navLinks, socialIconsData } = headerData
+  const { phoneNumber, email, message } = headerData.headerVisibleText
 
 </script>
 
@@ -19,7 +18,7 @@
   <Center>
     <Cluster wrapperClass="header-cluster" wrapperElement="div">
       <Stack wrapperClass="header-social-contact--wrapper-stack">
-        <Social />
+        <Social {socialIconsData} />
         <Stack wrapperClass="contact-info--stack">
           <div>{phoneNumber}</div>
           <div>
