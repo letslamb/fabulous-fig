@@ -2,13 +2,15 @@
   import Social from '$lib/components/Social.svelte'
   import Stack from '$lib/components/layout/Stack.svelte'
 
+  export let footerData
+
 </script>
 
 <svelte:options immutable={true} />
 
 <footer>
   <Stack>
-    <Social />
+    <Social socialIconsData={footerData} />
     <span class="copyright">&#169; The Fabulous Fig - {new Date().getFullYear()}</span>
   </Stack>
 </footer>

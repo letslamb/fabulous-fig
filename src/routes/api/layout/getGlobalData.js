@@ -21,9 +21,21 @@ export async function get({ request }) {
     .then(res => {
       if (res.results[0]) {
 
-        let phoneNumber, email, message, navLinks
+        let facebookUrl, instagramUrl, phoneNumber, email, message, navLinks
 
         let body = res.results[0].data.body
+
+        facebookUrl = body
+          .filter(slice => slice.slice_label === "facebook")[0]
+          .primary
+          .text_content[0]
+          .text
+
+        instagramUrl = body
+          .filter(slice => slice.slice_label === "instagram")[0]
+          .primary
+          .text_content[0]
+          .text
 
         phoneNumber = body
           .filter(slice => slice.slice_label === "phone_number")[0]
@@ -36,8 +48,6 @@ export async function get({ request }) {
           .primary
           .text_content[0]
           .text
-          .split('@')
-          .join('<br>@')
 
         message = body
           .filter(slice => slice.slice_label === "message")[0]
@@ -57,9 +67,36 @@ export async function get({ request }) {
         })
 
         return {
-          phoneNumber,
-          email,
-          message,
+          socialIconsData: [
+            {
+              id: '#icon-phone',
+              label: 'Call the Fabulous Fig (opens your native phone app)',
+              link: `tel:+1-${phoneNumber}`
+            },
+            {
+              id: '#icon-email',
+              label: 'Click to Email The Fabulous Fig (opens your native mail app)',
+              link: `mailto: ${email}`
+            },
+            {
+              id: '#icon-facebook',
+              label: 'Visit The Fabulous Fig on Facebook (opens a new window)',
+              link: facebookUrl
+            },
+            {
+              id: '#icon-instagram',
+              label: 'Visit The Fabulous Fig on Instagram (opens a new window)',
+              link: instagramUrl
+            }
+          ],
+          headerVisibleText: {
+            phoneNumber,
+            email: email
+              .split('@')
+              .join('<br>@'),
+            message,
+
+          },
           navLinks
         }
 
