@@ -8,7 +8,7 @@
 
   export async function load({page, fetch}) {
 
-    let res = await fetch('/api/layout/getHeaderData', {
+    let res = await fetch('/api/layout/getGlobalData', {
       method: 'GET',
       maxage: 3600
     })
@@ -46,7 +46,7 @@
 <main>
   <slot />
 </main>
-<Footer />
+<Footer footerData={res.socialIconsData} />
 
 <style>
 
