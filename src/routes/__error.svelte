@@ -15,7 +15,7 @@
             { width: 1200, src: "/images/pug-1200.jpg"},
             { width: 800, src: "/images/pug-800.jpg"},
             { width: 400, src: "/images/pug-400.jpg"}]}
-          altText={"a cute puppy"}
+          altText={"a cute puppy looking over his shoulder at you"}
         />
       </Frame>
       <Box>  
