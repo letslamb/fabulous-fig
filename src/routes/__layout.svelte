@@ -18,9 +18,16 @@
 
     const context = {
       seo: {
-        siteName: 'The Fabulous Fig Vegan Food Truck',
+        siteName: res.seo.title,
+        siteDescription: res.seo.description,
+        logo: res.seo.image.logo.url,
+        facebook: res.seo.facebookUrl,
+        instagram: res.seo.instagramUrl,
+        phone: res.seo.phoneNumber,
+        email: res.seo.email,
         locale: 'en_US',
-        canonical: `https://${host}${path}`
+        canonical: `https://${host}${path}`,
+        siteUrl: `https://${host}`
       }
     }
     return {
