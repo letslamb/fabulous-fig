@@ -21,6 +21,7 @@ export async function get({ request }) {
     .then(res => {
       if (res.results[0]) {
 
+
         let facebookUrl, instagramUrl, phoneNumber, email, message, navLinks
 
         let body = res.results[0].data.body
@@ -55,6 +56,35 @@ export async function get({ request }) {
           .text_content[0]
           .text
 
+        let getSEO = body
+          .filter(slice => slice.slice_type === "seo")
+          .map(slice => {
+            return {
+              title: slice.primary.title[0]
+                ? slice.primary.title[0].text
+                : null,
+              description: slice.primary.description[0]
+                ? slice.primary.description[0].text
+                : null,
+              altText: slice.primary.image.alt,
+              image: slice.primary.image.dimensions 
+                ? {
+                    logo: {
+                      width: slice.primary.image.dimensions.width,
+                      height: slice.primary.image.dimensions.height,
+                      url: slice.primary.image.url
+                    }
+                  } 
+                : null,
+              facebookUrl,
+              instagramUrl,
+              phoneNumber,
+              email
+            }
+          })
+  
+          const [seo] = getSEO
+
         let linkSlice = body
           .filter(slice => slice.slice_type === "links")[0]
         
@@ -67,6 +97,7 @@ export async function get({ request }) {
         })
 
         return {
+          seo,
           socialIconsData: [
             {
               id: '#icon-phone',
