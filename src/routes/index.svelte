@@ -13,8 +13,6 @@
     })
     const homePage = await homePageData.json()
 
-    console.log(homePage)
-
     if (calendarData.ok && homePageData.ok) {
       return {
         status: calendarData.status,
@@ -53,15 +51,12 @@
   export let globalSEO
   export let noCalendarMessage
 
-  $: console.log(noCalendarMessage)
-
-
   export let calendar
 
 </script>
 
 <BaseSEO data={{
-  page: pageSEO, 
+  currentPage: pageSEO, 
   global: globalSEO
 }}/>
 
@@ -69,8 +64,8 @@
 
 <div>
   <Center>
-    <Article>
-      <Box wrapperClass={"calendar-box"}>
+    <Box wrapperClass={"calendar-box"}>
+      <Article>
         <Stack>
           <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
           {#if calendar[0]}
@@ -79,8 +74,8 @@
             <p>{noCalendarMessage.message}</p>
           {/if}
         </Stack>
-      </Box>
-    </Article>
+      </Article>
+    </Box>
   </Center>
 </div>
 

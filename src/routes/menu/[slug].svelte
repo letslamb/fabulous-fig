@@ -35,7 +35,7 @@
 </script>
 
 <BaseSEO data={{
-  page: data.seo, 
+  currentPage: data.seo, 
   global: globalSEO
 }}/>
 
