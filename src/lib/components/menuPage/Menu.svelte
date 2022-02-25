@@ -9,44 +9,54 @@
 
   export let data
 
+  // let render = {}
+
+  // function reMount (event) {
+  //   render = {}
+  // }
+
 </script>
 
-<div>
-  <Stack wrapperClass="menu-wrapper-stack">
-    <div>
-      <Stack>
-        <HeadingTag message={data.menuTitle} />
-        {#if data.menuDescription}
-          <p>{data.menuDescription}</p>
-        {/if}
-        <Cluster wrapperElement="ul" wrapperClass="icon-legend">
-          <li>
-            <Icon iconId={'#icon-gluten-free'}>
-              Gluten Free
-            </Icon>
-          </li>
-          <li>
-            <Icon iconId={'#icon-nut-free'}>
-              Nut Free
-            </Icon>
-          </li>
-          <li>
-            <Icon iconId={'#icon-soy-free'}>
-              Soy Free
-            </Icon>
-          </li>
-        </Cluster>
-      </Stack>
-    </div>
-    <Section>
-    {#each data.sections as section, i}
-      <Box wrapperClass="menu-section--wrapper-box">
-        <MenuSection {section} index={i} />
-      </Box>
-    {/each}
-    </Section>
-  </Stack>
-</div>  
+<!-- <svelte:window on:sveltekit:navigation-end={reMount} />
+
+{#key render} -->
+  <div>
+    <Stack wrapperClass="menu-wrapper-stack">
+      <div>
+        <Stack>
+          <HeadingTag message={data.menuTitle} />
+          {#if data.menuDescription}
+            <p>{data.menuDescription}</p>
+          {/if}
+          <Cluster wrapperElement="ul" wrapperClass="icon-legend">
+            <li>
+              <Icon iconId={'#icon-gluten-free'}>
+                Gluten Free
+              </Icon>
+            </li>
+            <li>
+              <Icon iconId={'#icon-nut-free'}>
+                Nut Free
+              </Icon>
+            </li>
+            <li>
+              <Icon iconId={'#icon-soy-free'}>
+                Soy Free
+              </Icon>
+            </li>
+          </Cluster>
+        </Stack>
+      </div>
+      <Section>
+      {#each data.sections as section, i}
+        <Box wrapperClass="menu-section--wrapper-box">
+          <MenuSection {section} index={i} />
+        </Box>
+      {/each}
+      </Section>
+    </Stack>
+  </div>  
+<!-- {/key} -->
 
 <style>
   div :global(.menu-wrapper-stack > div) {
