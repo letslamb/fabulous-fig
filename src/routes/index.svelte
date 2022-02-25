@@ -1,6 +1,6 @@
 <script context="module">
 
-  export async function load({ fetch, context }) {
+  export async function load({ fetch, stuff }) {
     const calendarData = await fetch('/api/googleCalendar/getCalendarEvents', {
       method: 'GET',
       maxage: 3600
@@ -13,8 +13,6 @@
     })
     const homePage = await homePageData.json()
 
-    console.log(homePage)
-
     if (calendarData.ok && homePageData.ok) {
       return {
         status: calendarData.status,
@@ -25,7 +23,7 @@
           calendar: cal,
           noCalendarMessage: homePage.placeholder,
           pageSEO: homePage.seo,
-          globalSEO: context.seo
+          globalSEO: stuff.seo
         }
       }
     }
@@ -53,53 +51,58 @@
   export let globalSEO
   export let noCalendarMessage
 
-  $: console.log(noCalendarMessage)
-
-
   export let calendar
 
 </script>
 
 <BaseSEO data={{
-  page: pageSEO, 
+  currentPage: pageSEO, 
   global: globalSEO
 }}/>
 
-<Hero />
+<main>
 
-<div>
-  <Center>
-    <Article>
+  <div>
+    <Center>
+      <Hero /> 
+    </Center>
+  </div>
+
+  <div>
+    <Center>
       <Box wrapperClass={"calendar-box"}>
-        <Stack>
-          <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
-          {#if calendar[0]}
-            <CalendarDisplay {calendar}/>
-          {:else}
-            <p>{noCalendarMessage.message}</p>
-          {/if}
-        </Stack>
+        <Article>
+          <Stack>
+            <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
+            {#if calendar && calendar[0]}
+              <CalendarDisplay {calendar}/>
+            {:else}
+              <p>{noCalendarMessage.message}</p>
+            {/if}
+          </Stack>
+        </Article>
       </Box>
-    </Article>
-  </Center>
-</div>
+    </Center>
+  </div>
+
+</main>
 
 <style>
 
   /* TODO - these styles are identical to the wrapper for the menu page's content. Do you care? */
-  div :global(.box) {
+  main :global(.box) {
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;
     padding: var(--s0) var(--s-3);
   }
 
-  div :global(.calendar-heading) {
+  main :global(.calendar-heading) {
     text-align: center;
     font-size: var(--font-size-biggish);
   }
 
-  div p {
+  main p {
     text-align: center;
   }
 </style>

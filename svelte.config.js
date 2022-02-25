@@ -1,5 +1,3 @@
-// import { mdsvex } from "mdsvex";
-// import mdsvexConfig from "./mdsvex.config.js";
 import vercel from '@sveltejs/adapter-vercel'
 import path from 'path'
 
@@ -8,15 +6,7 @@ const config = {
   "extensions": [".svelte"],
 
   kit: {
-    // hydrate the <div id="svelte"> element in src/app.html
-    target: '#svelte',
     adapter: vercel(),
-    // vite: {
-    //   optimizeDeps: {
-    //     include: 
-    //   }
-    // }
-
     vite: {
       resolve: {
         alias: {
@@ -26,7 +16,6 @@ const config = {
     }
   }
 
-  // preprocess: [mdsvex(mdsvexConfig)]
 }
 
 export default config;

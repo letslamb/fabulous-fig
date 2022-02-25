@@ -1,8 +1,8 @@
 <script context="module">
 
-  export async function load({ fetch, page, context }) {
+  export async function load({ fetch, params, stuff }) {
 
-    const { slug } = page.params
+    const { slug } = params
 
     let res = await fetch(`/api/menu/${slug}`, {
       method: 'GET',
@@ -14,7 +14,7 @@
     return {
       props: {
         data: res,
-        globalSEO: context.seo,
+        globalSEO: stuff.seo,
       }
     }
   }
@@ -35,28 +35,30 @@
 </script>
 
 <BaseSEO data={{
-  page: data.seo, 
+  currentPage: data.seo, 
   global: globalSEO
 }}/>
 
-<div>
-  <Center>
-    <Box>
-      <Article>
-        <Menu {data} />
-      </Article>
-    </Box>
-  </Center>
-</div>
+<main>
+  <div>
+    <Center>
+      <Box>
+        <Article>
+          <Menu {data} />
+        </Article>
+      </Box>
+    </Center>
+  </div>
+</main>
 
 
 <style>
-  div {
+  main {
     width: 100%;
     color: var(--color-dark);
   }
 
-  div :global(.box) {
+  main :global(.box) {
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;

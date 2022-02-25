@@ -91,10 +91,13 @@ export async function get({ request, params }) {
               altText: section.primary.image.alt,
               images: section.primary.image.dimensions 
                 ? {
-                    facebook: {
-                      width: section.primary.image.dimensions.width,
-                      height: section.primary.image.dimensions.height,
+                    main: {
                       url: section.primary.image.url
+                    },
+                    facebook: {
+                      width: section.primary.image.facebook.dimensions.width,
+                      height: section.primary.image.facebook.dimensions.height,
+                      url: section.primary.image.facebook.url
                     },
                     twitter: {
                       width: section.primary.image.twitter.dimensions.width,
