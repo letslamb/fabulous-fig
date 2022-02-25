@@ -3,13 +3,13 @@
   export async function load({ fetch, stuff }) {
     const calendarData = await fetch('/api/googleCalendar/getCalendarEvents', {
       method: 'GET',
-      maxage: 3600
+      // maxage: 3600
     })
     const cal = await calendarData.json()
 
     const homePageData = await fetch('/api/home/getHomePageData', {
       method: 'GET',
-      maxage: 3600
+      // maxage: 3600
     })
     const homePage = await homePageData.json()
 
