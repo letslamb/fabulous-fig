@@ -60,41 +60,49 @@
   global: globalSEO
 }}/>
 
-<Hero />
+<main>
 
-<div>
-  <Center>
-    <Box wrapperClass={"calendar-box"}>
-      <Article>
-        <Stack>
-          <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
-          {#if calendar[0]}
-            <CalendarDisplay {calendar}/>
-          {:else}
-            <p>{noCalendarMessage.message}</p>
-          {/if}
-        </Stack>
-      </Article>
-    </Box>
-  </Center>
-</div>
+  <div>
+    <Center>
+      <Hero /> 
+    </Center>
+  </div>
+
+  <div>
+    <Center>
+      <Box wrapperClass={"calendar-box"}>
+        <Article>
+          <Stack>
+            <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
+            {#if calendar && calendar[0]}
+              <CalendarDisplay {calendar}/>
+            {:else}
+              <p>{noCalendarMessage.message}</p>
+            {/if}
+          </Stack>
+        </Article>
+      </Box>
+    </Center>
+  </div>
+
+</main>
 
 <style>
 
   /* TODO - these styles are identical to the wrapper for the menu page's content. Do you care? */
-  div :global(.box) {
+  main :global(.box) {
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;
     padding: var(--s0) var(--s-3);
   }
 
-  div :global(.calendar-heading) {
+  main :global(.calendar-heading) {
     text-align: center;
     font-size: var(--font-size-biggish);
   }
 
-  div p {
+  main p {
     text-align: center;
   }
 </style>
