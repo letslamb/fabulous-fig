@@ -1,16 +1,19 @@
 // Create aria-labelledby relationship with Section.svelte's first heading tag.
 // The heading tag is dynamically generated based on number of levels nested within
 // instances of Section.svelte, so we don't know which heading level it will be here
-export function enhanceSection(node) {
+export function labelRegionWithHeading(node, inBrowser) {
 
-  // make sectionHeaderId undefined if no heading tags w/ ids are found in the section
-  let sectionHeaderId = node.querySelector('h1, h2, h3, h4, h5, h6')
-    ?.id
+  if (node && inBrowser) {
 
-  // ...so that this will no-op in the error case
-  if (sectionHeaderId) {
-    node.setAttribute('aria-labelledby', sectionHeaderId)
-  } 
+    let sectionHeaderId = node.querySelector('h1, h2, h3, h4, h5, h6')
+      ?.id
+
+    if (sectionHeaderId) {
+      node.setAttribute('aria-labelledby', sectionHeaderId)
+    } else {
+      console.log(`no header for this container: ${node}`)
+    }
+  }
   return
 }
 

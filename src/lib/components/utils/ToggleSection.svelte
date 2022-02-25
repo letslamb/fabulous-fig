@@ -1,7 +1,10 @@
+
 <script>
-  import Section from '$lib/components/utils/Section.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
   import { enhanceToggleSection } from '$lib/js/actions.js'
+  import { afterUpdate } from 'svelte'
+  import { browser } from '$app/env'
+
   /**
    * @type {string}
    * set an optional class name for the top-level element of this component to enable scoped styling of each component instance from outside (in parent components or pages)
@@ -17,13 +20,21 @@
    * controls the aria-expanded state and the hidden attribute on the content
   */
   export let expanded = false
+
+  let toggleSection
+
+  afterUpdate(() => {
+    if (browser) {
+      enhanceToggleSection(toggleSection, {headerText, expanded})
+    }
+   })
+
 </script>
 
-<div class={wrapperClass
+<div bind:this={toggleSection} class={wrapperClass
   ? `collapsible-section-wrapper ${wrapperClass}`
   : "collapsible-section-wrapper"
 }
-  use:enhanceToggleSection={{headerText, expanded}}
 >
   <HeadingTag message={headerText} />
   <div class="content-wrapper">
