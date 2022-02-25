@@ -28,11 +28,6 @@ export function createClientData(googleCalendarItems) {
         Date.parse(calendarEntry.start.dateTime)
       )
 
-      // if this event has already passed, return null for it instead of processing the rest of its data
-      if (parsedStartDate <= new Date(Date.now())) {
-        return
-      }
-
       let dayAbbreviation = parsedStartDate
         .toDateString()
         .split(' ')[0]
@@ -64,11 +59,6 @@ export function createClientData(googleCalendarItems) {
       let parsedEndDate = new Date(
         Date.parse(calendarEntry.end.date)
       )
-
-      // if this event has already passed, return null for it instead of processing the rest of its data
-      if (parsedEndDate <= new Date(Date.now())) {
-        return
-      }
 
       let dayAbbreviation = parsedEndDate
         .toDateString()
@@ -103,8 +93,5 @@ export function createClientData(googleCalendarItems) {
 
   })
 
-  // filter out the null values to only send upcoming events to the client
-  let upcomingEventsOnly = clientCalendarEntryData.filter(x => x)
-
-  return upcomingEventsOnly
+  return clientCalendarEntryData
 }

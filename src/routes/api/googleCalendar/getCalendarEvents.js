@@ -27,11 +27,16 @@ export async function get() {
   let calendar = google.calendar('v3')
   let resp = await calendar.events.list({
     auth: jwtClient,
-    calendarId: GOOGLE_CALENDAR_ID
+    calendarId: GOOGLE_CALENDAR_ID,
+    timeMin: (new Date()).toISOString()
   })
     .then(async res => {
+      // console.log(`res in getCalendarEvents.js ${JSON.stringify(res, null, 2)}`)
+
       if (res.data) {
         let entries = createClientData(res.data.items)
+
+        // console.log(`entries (cleaned up calendar events) in getCalendarEvents.js: ${JSON.stringify(entries, null, 2)}`)
 
         for (let entry of entries) {
           // the fetch base URL needs to be changed to the production URL once this is deployed
