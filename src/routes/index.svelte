@@ -16,9 +16,9 @@
     if (calendarData.ok && homePageData.ok) {
       return {
         status: calendarData.status,
-        headers: {
-          'content-type': 'application/json'
-        },
+        // headers: {
+        //   'content-type': 'application/json'
+        // },
         props: {
           calendar: cal,
           noCalendarMessage: homePage.placeholder,
