@@ -1,5 +1,13 @@
 <script>
 
+  // TODO with new info architecture of site, this comp needs to be set up to pull data for the restaurant
+
+  // TODO missing properties on Restaurant structured data type:
+  // https://developers.google.com/search/docs/advanced/structured-data/local-business
+  //    - address (required)
+  //    - opengHoursSpecification
+  //    - geo
+
   import { page } from '$app/stores'
 
   export let data
@@ -10,14 +18,14 @@
 
   restaurantType = {
     "@type": "Restaurant",
-    "@id": `${global.siteUrl}#westmont`,
+    "@id": `${global.siteUrl}#medford`,
     name: global.siteName,
     logo: {
       "@type": "ImageObject",
       "@id": `${global.siteUrl}#logo`,
       url: global.logo,
     },
-    hasMenu: `${global.siteUrl}/menu/catering`,
+    hasMenu: `${global.siteUrl}/menu/catering`, // TODO this URL needs to be changed to the URL for the restaurant menu
     telephone: global.phone,
     url: global.siteUrl,
     sameAs: [
@@ -33,7 +41,7 @@
     paymentAccepted: "Cash, Credit Card",
     currenciesAccepted: "USD",
     acceptsReservations: "No",
-    description: global.siteDescription,
+    description: global.siteDescription
   }
 
   webSiteType = {
@@ -48,7 +56,7 @@
     },
     publisher: {
       "@id": `${global.siteUrl}#westmont`,
-    },
+    }
   }
 
   webPageType = {
@@ -68,62 +76,62 @@
     primaryImageOfPage: {
       "@id": `${global.canonical}#primaryimage`,
     },
-    description: currentPage.description,
-    ...($page.path.startsWith("/menu/")) && 
-    { 
-      breadcrumb: {
-        "@id": `${global.canonical}#breadcrumb`
-      }
+    description: currentPage.description
+  }
+
+  // add a breadcrumb reference only on menu pages
+  if ($page.url.pathname.startsWith('/menu/')) {
+    webPageType['breadcrumb'] = {
+      "@id": `${global.canonical}#breadcrumb`
     }
   }
 
 
-  jsonld = JSON.stringify({
+
+  jsonld = {
     "@context": "https://schema.org",
     "@graph": [
       restaurantType,
       webSiteType,
-      webPageType,
-      // conditional logic to add breadcrumbs only on pages in /menu/ directory.
-      // TODO - need to solve for more robust breadcrumb displays on future projects.
-      // Probably means getting all routes in the site & storing it in a context
-      // to be referenced in this component for more complicated conditional checks
-      ...($page.path.startsWith("/menu/")) 
-        && [{
-            "@type": "BreadcrumbList",
-            "@id": `${global.canonical}#breadcrumb`,
-            itemListElement: [
-              {
-                "@type": "ListItem",
-                position: 1,
-                item: {
-                  "@type": "WebPage",
-                  "@id": `${global.siteUrl}/#webPage`,
-                  url: global.siteUrl,
-                  name: `Home`,
-                },
-              },
-              {
-                "@type": "ListItem",
-                position: 2,
-                item: {
-                  "@type": "WebPage",
-                  "@id": `${global.canonical}#webPage`,
-                  url: global.canonical,
-                  name: currentPage.title,
-                },
-              },
-            ],
-          }]
+      webPageType
     ]
-  })
+  }
 
+  if ($page.url.pathname.startsWith('/menu/')) {
+    jsonld["@graph"].push(
+      [{
+        "@type": "BreadcrumbList",
+        "@id": `${global.canonical}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "WebPage",
+              "@id": `${global.siteUrl}/#webPage`,
+              url: global.siteUrl,
+              name: `Home`,
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            item: {
+              "@type": "WebPage",
+              "@id": `${global.canonical}#webPage`,
+              url: global.canonical,
+              name: currentPage.title,
+            },
+          },
+        ],
+      }]
+    )
+  }
 
-  console.log(jsonld)
-
+  let jsonldString = JSON.stringify(jsonld)
 
   let jsonldScript = `<script type="application/ld+json">${
-    jsonld + "<"
+    jsonldString + "<"
   }/script>`
 
 </script>
