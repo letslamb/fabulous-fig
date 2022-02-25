@@ -6,7 +6,7 @@
   import Footer from '$lib/components/Footer.svelte'
   import Sprite from '$lib/components/utils/Sprite.svelte'
 
-  export async function load({page, fetch}) {
+  export async function load({url, fetch}) {
 
     let res = await fetch('/api/layout/getGlobalData', {
       method: 'GET',
@@ -14,9 +14,12 @@
     })
     .then(data => data.json())
 
-    const { host, path } = page
+    const host = url.hostname
 
-    const context = {
+    const path = url.pathname
+
+
+    const stuff = {
       seo: {
         siteName: res.seo.title,
         siteDescription: res.seo.description,
@@ -34,7 +37,7 @@
       props: {
         res
       },
-      context
+      stuff
     }
   }
 
@@ -50,9 +53,7 @@
 <Sprite />
 
 <Header headerData={res} />
-<main>
   <slot />
-</main>
 <Footer footerData={res.socialIconsData} />
 
 <style>

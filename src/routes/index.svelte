@@ -1,6 +1,6 @@
 <script context="module">
 
-  export async function load({ fetch, context }) {
+  export async function load({ fetch, stuff }) {
     const calendarData = await fetch('/api/googleCalendar/getCalendarEvents', {
       method: 'GET',
       maxage: 3600
@@ -23,7 +23,7 @@
           calendar: cal,
           noCalendarMessage: homePage.placeholder,
           pageSEO: homePage.seo,
-          globalSEO: context.seo
+          globalSEO: stuff.seo
         }
       }
     }
