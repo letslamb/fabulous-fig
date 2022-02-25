@@ -66,12 +66,22 @@ export async function get(event) {
         return { seo, placeholder }
 
       } else {
-        throw new Error("Response from Prismic has no results")
+        return {
+          status: 502,
+          body: {
+            customMessage: "THE ERROR IS IN getHomePageData.js. We ARE NOT receiving a response with homePageData from Prismic"
+          }
+        }
       }
     })
 
     .catch((error) => {
-    console.error(error)
+    return {
+      status: 502,
+      body: {
+        customMessage: `THE ERROR IS IN getHomePageData.js. WE ARE RECEIVING a response with homePageData from Prismic, but this error happens during our processing data for the client: ${error.message}`
+      }
+    }
   })
 
   return {

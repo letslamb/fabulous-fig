@@ -30,7 +30,11 @@
 
     return {
       status: res.status,
-      error: new Error('could not load endpoint data')
+      body: {
+        resultOfGetCalendarEvents: calendarData.body,
+        resultOfGetHomePageData: homePageData.body
+      }
+      // error: new Error('could not load endpoint data')
     }
   }
 </script>
