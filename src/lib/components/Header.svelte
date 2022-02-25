@@ -30,8 +30,9 @@
       <nav>
         <Cluster wrapperElement="ul">
           {#each navLinks as link}
+          <!-- TODO you need an if/else here with a $page.url.hostname check so you can make only the Order Online link rel="external" -->
             <li>
-              <a rel="external" href={link.href}>{link.text}</a>
+              <a sveltekit:prefetch href={link.href}>{link.text}</a> 
             </li>
           {/each}
         </Cluster>
