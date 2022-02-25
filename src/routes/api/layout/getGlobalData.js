@@ -11,9 +11,9 @@ function initApi(req) {
   })
 }
 
-export async function get({ request }) {
+export async function get(event) {
 
-  const result = await initApi(request).then(function(api) {
+  const result = await initApi(event.request).then(function(api) {
     return api.query([
       Prismic.Predicates.at('my.global_content.uid', 'global-layout')
     ])

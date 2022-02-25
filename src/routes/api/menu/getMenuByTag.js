@@ -10,11 +10,11 @@ function initApi(req) {
   })
 }
 
-export async function post(request) {
+export async function post(event) {
 
-  const result = await initApi(request).then(function(api) {
+  const result = await initApi(event.request).then(function(api) {
     return api.query([
-      Prismic.Predicates.at('document.tags', [`${request.body.tag}`])
+      Prismic.Predicates.at('document.tags', [`${event.request.body.tag}`])
     ])
   })
     .then(res => res)
@@ -29,6 +29,8 @@ export async function post(request) {
         }
       }
     })
+
+    // console.log(`result in getMenuByTag.js ${JSON.stringify(result, null, 2)}`)
 
     let link = result.results[0] ? `${MENUS_PATH}${result.results[0].uid}` : null
 
