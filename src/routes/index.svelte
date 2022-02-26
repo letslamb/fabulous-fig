@@ -3,22 +3,24 @@
   export async function load({ fetch, stuff }) {
     const calendarData = await fetch('/api/googleCalendar/getCalendarEvents', {
       method: 'GET',
-      // maxage: 3600
+      maxage: 3600
     })
     const cal = await calendarData.json()
 
     const homePageData = await fetch('/api/home/getHomePageData', {
       method: 'GET',
-      // maxage: 3600
+      maxage: 3600
     })
     const homePage = await homePageData.json()
+
+    console.log(JSON.stringify(cal, null, 2))
 
     if (calendarData.ok && homePageData.ok) {
       return {
         status: calendarData.status,
-        // headers: {
-        //   'content-type': 'application/json'
-        // },
+        headers: {
+          'content-type': 'application/json'
+        },
         props: {
           calendar: cal,
           noCalendarMessage: homePage.placeholder,
@@ -30,11 +32,11 @@
 
     return {
       status: res.status,
-      body: {
-        resultOfGetCalendarEvents: calendarData.body,
-        resultOfGetHomePageData: homePageData.body
-      }
-      // error: new Error('could not load endpoint data')
+      // body: {
+      //   resultOfGetCalendarEvents: calendarData.body,
+      //   resultOfGetHomePageData: homePageData.body
+      // },
+      error: new Error('could not load endpoint data')
     }
   }
 </script>

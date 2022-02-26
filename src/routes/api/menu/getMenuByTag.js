@@ -30,9 +30,19 @@ export async function post(event) {
       }
     })
 
-    // console.log(`result in getMenuByTag.js ${JSON.stringify(result, null, 2)}`)
+    let link
 
-    let link = result.results[0] ? `${MENUS_PATH}${result.results[0].uid}` : null
+    console.log(JSON.stringify(result, null, 2))
+
+    if (result?.results && Array.isArray(result.results) && result.results[0]) {
+      link = `${MENUS_PATH}${result.results[0].uid}`
+    } else {
+      link = null
+    }
+
+    console.log(JSON.stringify(link, null, 2))
+
+    // let link = result.results[0] ? `${MENUS_PATH}${result.results[0].uid}` : null
 
 
   return {
