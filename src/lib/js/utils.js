@@ -13,11 +13,3 @@ export function linkResolver(doc) {
 
 	return '/';
 }
-
-// navLinks = linkSlice.items.map(item => {
-//   if (item.nav_link.type === "homepage") {
-//     return { href: '/', text: 'Home'}
-//   } else if (item.nav_link.type === "menu_layout") {
-//     return { href: `/menu/${item.nav_link.uid}`, text: `${capitalizeEachLetter(item.nav_link.uid)} Menu`}
-//   }
-// })
