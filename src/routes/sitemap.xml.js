@@ -6,7 +6,7 @@ const { BASE_PATH, MENUS_PATH } = process.env
 let pages = []
 
 export async function get() {
-  const data = await fetch(`${BASE_PATH}/api/menu/getAllMenus`)
+  const data = await fetch(`${BASE_PATH}/api/menu/getAllMenus/`)
   const menus = await data.json()
 
 
