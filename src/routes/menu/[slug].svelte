@@ -4,12 +4,11 @@
 
     const { slug } = params
 
-    let res = await fetch(`/api/menu/${slug}`, {
+    let res = await fetch(`/api/menu/${slug}/`, {
       method: 'GET',
       maxage: 3600
     })
     .then(data => data.json())
-
 
     return {
       props: {

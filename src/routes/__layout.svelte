@@ -8,16 +8,18 @@
 
   export async function load({url, fetch}) {
 
-    let res = await fetch('/api/layout/getGlobalData', {
+    let res = await fetch('/api/layout/getGlobalData/', {
       method: 'GET',
+      headers: {
+        'accept': 'application/json'
+      },
       maxage: 3600
     })
     .then(data => data.json())
 
-    const host = url.hostname
+    const host = url.host
 
     const path = url.pathname
-
 
     const stuff = {
       seo: {
@@ -30,14 +32,15 @@
         email: res.seo.email,
         locale: 'en_US',
         canonical: `https://${host}${path}`,
-        siteUrl: `https://${host}`
+        siteUrl: `https://${host}${path}`
       }
     }
+
     return {
       props: {
         res
       },
-      stuff
+      stuff    
     }
   }
 

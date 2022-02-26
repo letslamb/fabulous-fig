@@ -7,7 +7,7 @@ const config = {
 
   kit: {
     adapter: vercel(),
-    // trailingSlash: 'always',
+    trailingSlash: 'always',
     vite: {
       resolve: {
         alias: {
