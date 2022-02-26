@@ -22,6 +22,7 @@
 		"@fontsource/work-sans": "^4.5.0",
 		"@prismicio/client": "^5.1.0",
 		"dotenv": "^10.0.0",
-		"googleapis": "^84.0.0"
+		"googleapis": "^84.0.0",
+		"prismic-dom": "^2.2.7"
 	}
 }
