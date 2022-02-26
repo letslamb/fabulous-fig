@@ -32,7 +32,7 @@ export async function post(event) {
 
     let link
 
-    console.log(JSON.stringify(result, null, 2))
+    // console.log(JSON.stringify(result, null, 2))
 
     if (result?.results && Array.isArray(result.results) && result.results[0]) {
       link = `${MENUS_PATH}${result.results[0].uid}`
@@ -40,10 +40,7 @@ export async function post(event) {
       link = null
     }
 
-    console.log(JSON.stringify(link, null, 2))
-
-    // let link = result.results[0] ? `${MENUS_PATH}${result.results[0].uid}` : null
-
+    // console.log(JSON.stringify(link, null, 2))
 
   return {
     status: 200,
