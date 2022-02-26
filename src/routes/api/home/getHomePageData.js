@@ -10,9 +10,9 @@ function initApi(req) {
   })
 }
 
-export async function get({ request }) {
+export async function get(event) {
 
-  const result = await initApi(request).then(function(api) {
+  const result = await initApi(event.request).then(function(api) {
     return api.query([
       Prismic.Predicates.at('document.type', 'homepage')
     ])
@@ -66,12 +66,22 @@ export async function get({ request }) {
         return { seo, placeholder }
 
       } else {
-        throw new Error("Response from Prismic has no results")
+        return {
+          status: 502,
+          body: {
+            customMessage: "THE ERROR IS IN getHomePageData.js. We ARE NOT receiving a response with homePageData from Prismic"
+          }
+        }
       }
     })
 
     .catch((error) => {
-    console.error(error)
+    return {
+      status: 502,
+      body: {
+        customMessage: `THE ERROR IS IN getHomePageData.js. WE ARE RECEIVING a response with homePageData from Prismic, but this error happens during our processing data for the client: ${error.message}`
+      }
+    }
   })
 
   return {

@@ -13,6 +13,8 @@
     })
     const homePage = await homePageData.json()
 
+    console.log(JSON.stringify(cal, null, 2))
+
     if (calendarData.ok && homePageData.ok) {
       return {
         status: calendarData.status,
@@ -30,6 +32,10 @@
 
     return {
       status: res.status,
+      // body: {
+      //   resultOfGetCalendarEvents: calendarData.body,
+      //   resultOfGetHomePageData: homePageData.body
+      // },
       error: new Error('could not load endpoint data')
     }
   }

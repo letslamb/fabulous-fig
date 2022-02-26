@@ -10,11 +10,11 @@ function initApi(req) {
   })
 }
 
-export async function post(request) {
+export async function post(event) {
 
-  const result = await initApi(request).then(function(api) {
+  const result = await initApi(event.request).then(function(api) {
     return api.query([
-      Prismic.Predicates.at('document.tags', [`${request.body.tag}`])
+      Prismic.Predicates.at('document.tags', [`${event.request.body.tag}`])
     ])
   })
     .then(res => res)
@@ -30,7 +30,19 @@ export async function post(request) {
       }
     })
 
-    let link = result.results[0] ? `${MENUS_PATH}${result.results[0].uid}` : null
+    let link
+
+    console.log(JSON.stringify(result, null, 2))
+
+    if (result?.results && Array.isArray(result.results) && result.results[0]) {
+      link = `${MENUS_PATH}${result.results[0].uid}`
+    } else {
+      link = null
+    }
+
+    console.log(JSON.stringify(link, null, 2))
+
+    // let link = result.results[0] ? `${MENUS_PATH}${result.results[0].uid}` : null
 
 
   return {

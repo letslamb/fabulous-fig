@@ -10,9 +10,9 @@ function initApi(req) {
   })
 }
 
-export async function get(request) {
+export async function get(event) {
 
-  const result = await initApi(request).then(function(api) {
+  const result = await initApi(event.request).then(function(api) {
     return api.query([
       Prismic.Predicates.at('document.type', 'menu_layout'),
       Prismic.Predicates.not('my.menu_layout.uid', 'master-list')
