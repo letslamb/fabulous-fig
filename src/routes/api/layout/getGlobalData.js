@@ -88,6 +88,8 @@ export async function get(event) {
         let linkSlice = body
           .filter(slice => slice.slice_type === "links")[0]
 
+        console.log(`linkSlice in getGlobalData.js: ${JSON.stringify(linkSlice, null, 2)}`)
+
 
         // TODO this is messy and should be handled better in the CMS so extra processing isn't necessary - see realgoatish.com in Prismic for example
         navLinks = linkSlice.items.map(item => {
@@ -100,6 +102,11 @@ export async function get(event) {
             return {
               href: event.locals.DOM.Link.url(item.nav_link, event.locals.ctx.linkResolver), 
               text: `${capitalizeEachLetter(item.nav_link.uid)} Menu`
+            }
+          } else if (item.nav_link.link_type === "Web") {
+            return {
+              href: item.nav_link.url,
+              text: "Order Online"
             }
           }
 
