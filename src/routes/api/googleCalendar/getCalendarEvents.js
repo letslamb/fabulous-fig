@@ -1,72 +1,65 @@
 import dotenv from 'dotenv'
 dotenv.config()
-import { google } from 'googleapis'
 import { createClientData } from './_createClientData'
+import { queryGoogleCalendarApi } from '$lib/js/utils'
 
-const { privateKey } = JSON.parse(process.env['GOOGLE_PRIVATE_KEY'] || '{ privateKey: null }')
-const { GOOGLE_CLIENT_EMAIL, GOOGLE_CALENDAR_ID, BASE_PATH } = process.env
-
-let jwtClient = new google.auth.JWT(
-  GOOGLE_CLIENT_EMAIL,
-  null,
-  privateKey,
-  ['https://www.googleapis.com/auth/calendar']
-)
-
-jwtClient.authorize(function (err) {
-  if (err) {
-    console.log(err)
-    return
-  } else {
-    console.log('Successfully connected!')
-  }
-})
+const { BASE_PATH } = process.env
 
 export async function get() {
 
-  let calendar = google.calendar('v3')
-  let resp = await calendar.events.list({
-    auth: jwtClient,
-    calendarId: GOOGLE_CALENDAR_ID,
-    timeMin: (new Date()).toISOString()
-  })
+  let response
+
+  try {
+
+    response = await queryGoogleCalendarApi()
+
     .then(async res => {
-      // console.log(`res in getCalendarEvents.js ${JSON.stringify(res, null, 2)}`)
 
-      if (res.data) {
+      try {
+
         let entries = createClientData(res.data.items)
-
-        // console.log(`entries (cleaned up calendar events) in getCalendarEvents.js: ${JSON.stringify(entries, null, 2)}`)
 
         for (let entry of entries) {
           // the fetch base URL needs to be changed to the production URL once this is deployed
-          let menu = await fetch(`${BASE_PATH}/api/menu/getMenuByTag`, {
+          let menu = fetch(`${BASE_PATH}/api/menu/getMenuByTag/`, {
             method: 'POST',
             headers: {
               'content-type': 'application/json'
             },
-            body: JSON.stringify({ tag: `${entry.summary.trim()}` })
+            body: JSON.stringify({ tag: `${entry.summary.toLowerCase().trim()}` })
           })
 
-          entry.menu = await menu.json()
+          entry.menu = await menu.then(data => data.json())
+
+          console.log(`entry.menu after POST in getCalendarEvents.js: ${JSON.stringify(entry.menu, null, 2)}`)
 
         }
 
         return entries
 
-      } else {
+      } catch (e) {
         return {
-          status: 502,
-          body: {
-            customMessage: "THE ERROR IS IN getCalendarEvents.js"
-          }
+          customErrorMessage: `Failed processing menu data for each event after Google Calendar API call in getCalendarEvents.js`
         }
-        // throw new Error("Response from Google Calendar API has no results")
       }
     })
+  } catch (e) {
+    return {
+      customErrorMessage: `Failed during Google Calendar API call in getCalendarEvents.js`
+    }
+  }
+
+  console.log(`response at the end of getCalendarEvents.js (calls getMenuByTag.js): ${JSON.stringify(response, null, 2)}`)
+
+  if (response.customErrorMessage) {
+    return {
+      status: 502,
+      body: response
+    }
+  } 
 
   return {
     status: 200,
-    body: resp
+    body: response
   }
 }

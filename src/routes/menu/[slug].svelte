@@ -4,15 +4,23 @@
 
     const { slug } = params
 
-    let res = await fetch(`/api/menu/${slug}/`, {
+    const menuData = fetch(`/api/menu/${slug}/`, {
       method: 'GET',
       maxage: 3600
     })
-    .then(data => data.json())
+
+    const response = await menuData.then(data => data.json())
+
+    if (response.customErrorMessage) {
+      return {
+        status: 502,
+        error: response.customErrorMessage
+      }
+    }
 
     return {
       props: {
-        data: res,
+        data: response,
         globalSEO: stuff.seo,
       }
     }

@@ -1,36 +1,42 @@
 <script context="module">
 
   export async function load({ fetch, stuff }) {
-    const calendarData = await fetch('/api/googleCalendar/getCalendarEvents/', {
+    const calendarData = fetch('/api/googleCalendar/getCalendarEvents/', {
       method: 'GET',
       maxage: 3600
     })
-    const cal = await calendarData.json()
-
-    const homePageData = await fetch('/api/home/getHomePageData/', {
+  
+    const homePageData = fetch('/api/home/getHomePageData/', {
       method: 'GET',
       maxage: 3600
     })
-    const homePage = await homePageData.json()
 
-    if (calendarData.ok && homePageData.ok) {
+    const bothResponses = await Promise.allSettled([
+      calendarData.then(response => response.json()), 
+      homePageData.then(response => response.json())
+    ])
+
+    const [cal, home] = bothResponses
+
+    if (home.value.customErrorMessage) {
       return {
-        status: calendarData.status,
-        headers: {
-          'content-type': 'application/json'
-        },
-        props: {
-          calendar: cal,
-          noCalendarMessage: homePage.placeholder,
-          pageSEO: homePage.seo,
-          globalSEO: stuff.seo
-        }
+        status: 502,
+        error: home.value.customErrorMessage
       }
     }
 
     return {
-      status: res.status,
-      error: new Error('could not load endpoint data')
+      status: 200,
+      headers: {
+        'content-type': 'application/json'
+      },
+      props: {
+        calendar: cal.value,
+        noCalendarMessage: home.value.placeholder,
+        pageSEO: home.value.seo,
+
+        globalSEO: stuff.seo
+      }
     }
   }
 </script>

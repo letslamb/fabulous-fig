@@ -1,91 +1,88 @@
-import Prismic from '@prismicio/client'
-import dotenv from 'dotenv'
-dotenv.config()
 
-const { PRISMIC_API_ENDPOINT } = process.env
-
-function initApi(req) {
-  return Prismic.getApi(PRISMIC_API_ENDPOINT, {
-    req: req
-  })
-}
+import { initApi, getHomePageData } from '$lib/js/utils'
 
 export async function get(event) {
 
-  const result = await initApi(event.request).then(function(api) {
-    return api.query([
-      Prismic.Predicates.at('document.type', 'homepage')
-    ])
-  })
-    .then(res => {
-      if (res.results[0]) {
-        let homePageObject = res.results[0].data
+  let response
 
-        let getSEO = homePageObject.body
-          .filter(section => section.slice_type === "seo")
-          .map(section => {
-            return {
-              title: section.primary.title[0]
-                ? section.primary.title[0].text
-                : null,
-              description: section.primary.description[0]
-                ? section.primary.description[0].text
-                : null,
-              altText: section.primary.image.alt,
-              images: section.primary.image.dimensions 
-                ? {
-                    main: {
-                      url: section.primary.image.url
-                    },
-                    facebook: {
-                      width: section.primary.image.facebook.dimensions.width,
-                      height: section.primary.image.facebook.dimensions.height,
-                      url: section.primary.image.facebook.url
-                    },
-                    twitter: {
-                      width: section.primary.image.twitter.dimensions.width,
-                      height: section.primary.image.twitter.dimensions.height,
-                      url: section.primary.image.twitter.url
-                    }
-                  } 
-                : null
-            }
-          })
+  try {
+    response = await initApi(event.request, event.locals.ctx.endpoint).then(
+      function(api) {
+        return getHomePageData(api)
+      })
+      .then(res => {
 
-        let placeholderMessage = homePageObject.body
-          .filter(section => section.slice_type === "text_box")
-          .map(section => {
-            return {
-              message: section.primary.text_content[0].text
-            }
-          })
+        let homePageObject, getSEO, placeholderMessage
 
-        const [seo] = getSEO
-        const [placeholder] = placeholderMessage
+        try {
+          homePageObject = res.results[0].data
 
-        return { seo, placeholder }
+          getSEO = homePageObject.body
+            .filter(section => section.slice_type === "seo")
+            .map(section => {
+              return {
+                title: section.primary.title[0]
+                  ? section.primary.title[0].text
+                  : null,
+                description: section.primary.description[0]
+                  ? section.primary.description[0].text
+                  : null,
+                altText: section.primary.image.alt,
+                images: section.primary.image.dimensions 
+                  ? {
+                      main: {
+                        url: section.primary.image.url
+                      },
+                      facebook: {
+                        width: section.primary.image.facebook.dimensions.width,
+                        height: section.primary.image.facebook.dimensions.height,
+                        url: section.primary.image.facebook.url
+                      },
+                      twitter: {
+                        width: section.primary.image.twitter.dimensions.width,
+                        height: section.primary.image.twitter.dimensions.height,
+                        url: section.primary.image.twitter.url
+                      }
+                    } 
+                  : null
+              }
+            })
 
-      } else {
-        return {
-          status: 502,
-          body: {
-            customMessage: "THE ERROR IS IN getHomePageData.js. We ARE NOT receiving a response with homePageData from Prismic"
+          placeholderMessage = homePageObject.body
+            .filter(section => section.slice_type === "text_box")
+            .map(section => {
+              return {
+                message: section.primary.text_content[0].text
+              }
+            })
+
+          const [seo] = getSEO
+          const [placeholder] = placeholderMessage
+
+          return { seo, placeholder }
+
+        } catch (e) {
+          return {
+            customErrorMessage: "Failed during processing of homePage data after Prismic API call"
           }
         }
-      }
-    })
+      })
 
-    .catch((error) => {
+  } catch (e) {
+      response = {
+        customErrorMessage: `Failed during Prismic API call`
+      }
+  }
+
+  if (response.customErrorMessage) {
     return {
       status: 502,
-      body: {
-        customMessage: `THE ERROR IS IN getHomePageData.js. WE ARE RECEIVING a response with homePageData from Prismic, but this error happens during our processing data for the client: ${error.message}`
-      }
+      body: response
     }
-  })
+  }
 
   return {
     status: 200,
-    body: result
+    body: response
   }
 }

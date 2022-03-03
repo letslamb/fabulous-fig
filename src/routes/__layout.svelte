@@ -8,14 +8,22 @@
 
   export async function load({url, fetch}) {
 
-    let res = await fetch('/api/layout/getGlobalData/', {
+    const layoutData = fetch('/api/layout/getGlobalData/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
       },
       maxage: 3600
     })
-    .then(data => data.json())
+
+    const response = await layoutData.then(data => data.json())
+
+    if (response.customErrorMessage) {
+      return {
+        status: 502,
+        error: response.customErrorMessage
+      }
+    }
 
     const host = url.host
 
@@ -23,13 +31,13 @@
 
     const stuff = {
       seo: {
-        siteName: res.seo.title,
-        siteDescription: res.seo.description,
-        logo: res.seo.image.logo.url,
-        facebook: res.seo.facebookUrl,
-        instagram: res.seo.instagramUrl,
-        phone: res.seo.phoneNumber,
-        email: res.seo.email,
+        siteName: response.seo.title,
+        siteDescription: response.seo.description,
+        logo: response.seo.image.logo.url,
+        facebook: response.seo.facebookUrl,
+        instagram: response.seo.instagramUrl,
+        phone: response.seo.phoneNumber,
+        email: response.seo.email,
         locale: 'en_US',
         canonical: `https://${host}${path}`,
         siteUrl: `https://${host}${path}`
@@ -38,7 +46,7 @@
 
     return {
       props: {
-        res
+        response
       },
       stuff    
     }
@@ -49,15 +57,15 @@
 
 <script>
   
-  export let res
+  export let response
 
 </script>
 
 <Sprite />
 
-<Header headerData={res} />
+<Header headerData={response} />
   <slot />
-<Footer footerData={res.socialIconsData} />
+<Footer footerData={response.socialIconsData} />
 
 <style>
 

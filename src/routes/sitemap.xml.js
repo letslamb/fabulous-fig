@@ -3,11 +3,11 @@ dotenv.config()
 
 const { BASE_PATH, MENUS_PATH } = process.env
 
-let pages = []
-
 export async function get() {
-  const data = await fetch(`${BASE_PATH}/api/menu/getAllMenus/`)
-  const menus = await data.json()
+  const allMenusData = fetch(`${BASE_PATH}/api/menu/getAllMenus/`)
+  const menus = await allMenusData.then(res => res.json())
+
+  // console.log(`menus received from Prismic API in sitemap.xml: ${JSON.stringify(menus, null, 2)}`)
 
 
   const headers = {
@@ -44,11 +44,11 @@ export async function get() {
     .map(
       page => `
     <url>
-      <loc>${BASE_PATH}${MENUS_PATH}${page.uid}</loc>
+      <loc>${BASE_PATH}${MENUS_PATH}${page.uid}/</loc>
       ${getPageImages(page.data.body)
         .map(item => `
       <image:image>
-        <image:loc>${item}</image:loc>
+        <image:loc>${item}/</image:loc>
       </image:image>`).join("")}
     </url>`).join("")}
   </urlset>
