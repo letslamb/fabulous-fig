@@ -1,7 +1,6 @@
 
 import { initApi, getAllPublicMenus } from '$lib/js/utils'
 
-
 export async function get(event) {
 
   let response
