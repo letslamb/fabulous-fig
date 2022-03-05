@@ -25,9 +25,9 @@
       "@id": `${global.siteUrl}#logo`,
       url: global.logo,
     },
-    hasMenu: `${global.siteUrl}/menu/catering`, // TODO this URL needs to be changed to the URL for the restaurant menu
+    hasMenu: `${global.siteUrl}menu/restaurant-medford/`, // TODO this URL needs to be changed to the URL for the restaurant menu
     telephone: global.phone,
-    url: global.siteUrl,
+    url: `${global.siteUrl}`,
     sameAs: [
       global.instagram,
       global.facebook,
@@ -55,7 +55,7 @@
       "query-input": "required name=search_term_string",
     },
     publisher: {
-      "@id": `${global.siteUrl}#westmont`,
+      "@id": `${global.siteUrl}#medford`,
     }
   }
 
@@ -80,7 +80,7 @@
   }
 
   // add a breadcrumb reference only on menu pages
-  if ($page.url.pathname.startsWith('/menu/')) {
+  if ($page.url.pathname !== '/') {
     webPageType['breadcrumb'] = {
       "@id": `${global.canonical}#breadcrumb`
     }
@@ -97,9 +97,12 @@
     ]
   }
 
-  if ($page.url.pathname.startsWith('/menu/')) {
-    jsonld["@graph"].push(
-      [{
+  // TODO these paths are hardcoded but ideally they should be fed from outside.
+  // This will be tedious to maintain. You should be able to pull URLs from the CMS???
+
+  if ($page.url.pathname !== '/') {
+    if ($page.url.pathname === '/restaurant-medford/' || $page.url.pathname === '/food-truck/') {
+      let breadcrumbs = [{
         "@type": "BreadcrumbList",
         "@id": `${global.canonical}#breadcrumb`,
         itemListElement: [
@@ -108,7 +111,7 @@
             position: 1,
             item: {
               "@type": "WebPage",
-              "@id": `${global.siteUrl}/#webPage`,
+              "@id": `${global.siteUrl}#webPage`,
               url: global.siteUrl,
               name: `Home`,
             },
@@ -125,8 +128,94 @@
           },
         ],
       }]
-    )
+
+      jsonld["@graph"].push(breadcrumbs)
+
+    } else if ($page.url.pathname === '/menu/restaurant-medford/') {
+      let breadcrumbs = [{
+        "@type": "BreadcrumbList",
+        "@id": `${global.canonical}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "WebPage",
+              "@id": `${global.siteUrl}#webPage`,
+              url: global.siteUrl,
+              name: `Home`,
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            item: {
+              "@type": "WebPage",
+              "@id": `${global.siteUrl}restaurant-medford/#webPage`,
+              url: global.siteUrl,
+              name: `Vegan Takeout in Medford, NJ`,
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            item: {
+              "@type": "WebPage",
+              "@id": `${global.canonical}#webPage`,
+              url: global.canonical,
+              name: currentPage.title,
+            },
+          },
+        ],
+      }]
+
+      jsonld["@graph"].push(breadcrumbs)
+
+    } else {
+      let breadcrumbs = [{
+        "@type": "BreadcrumbList",
+        "@id": `${global.canonical}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            item: {
+              "@type": "WebPage",
+              "@id": `${global.siteUrl}#webPage`,
+              url: global.siteUrl,
+              name: `Home`,
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            item: {
+              "@type": "WebPage",
+              "@id": `${global.siteUrl}food-truck/#webPage`,
+              url: global.siteUrl,
+              name: `Upcoming Food Truck Events`,
+            },
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            item: {
+              "@type": "WebPage",
+              "@id": `${global.canonical}#webPage`,
+              url: global.canonical,
+              name: currentPage.title,
+            },
+          },
+        ],
+      }]
+
+      jsonld["@graph"].push(breadcrumbs)
+    }
+    null
   }
+
+
+
 
   let jsonldString = JSON.stringify(jsonld)
 
@@ -156,5 +245,7 @@
   <meta name="twitter:description" content={currentPage.description} />
   <meta name="twitter:image" content={currentPage.images.twitter.url} />
   <meta name="twitter:image:alt" content={currentPage.altText} />
-  {@html jsonldScript}
 </svelte:head>
+
+{@html jsonldScript}
+

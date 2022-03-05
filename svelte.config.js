@@ -3,7 +3,6 @@ import path from 'path'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  "extensions": [".svelte"],
 
   kit: {
     adapter: vercel(),

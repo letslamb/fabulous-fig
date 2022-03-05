@@ -2,20 +2,29 @@
   import '../app.css'
   import '@fontsource/work-sans'
   import '@fontsource/work-sans/600.css'
-  import Header from '$lib/components/Header.svelte'
+  // import Header from '$lib/components/Header.svelte'
+  import Header from '$lib/components/NewHeader.svelte'
   import Footer from '$lib/components/Footer.svelte'
   import Sprite from '$lib/components/utils/Sprite.svelte'
 
   export async function load({url, fetch}) {
 
-    let res = await fetch('/api/layout/getGlobalData/', {
+    const layoutData = fetch('/api/layout/getGlobalData/', {
       method: 'GET',
       headers: {
         'accept': 'application/json'
       },
       maxage: 3600
     })
-    .then(data => data.json())
+
+    const response = await layoutData.then(data => data.json())
+
+    if (response.customErrorMessage) {
+      return {
+        status: 502,
+        error: response.customErrorMessage
+      }
+    }
 
     const host = url.host
 
@@ -23,22 +32,22 @@
 
     const stuff = {
       seo: {
-        siteName: res.seo.title,
-        siteDescription: res.seo.description,
-        logo: res.seo.image.logo.url,
-        facebook: res.seo.facebookUrl,
-        instagram: res.seo.instagramUrl,
-        phone: res.seo.phoneNumber,
-        email: res.seo.email,
+        siteName: response.seo.title,
+        siteDescription: response.seo.description,
+        logo: response.seo.image.logo.url,
+        facebook: response.seo.facebookUrl,
+        instagram: response.seo.instagramUrl,
+        phone: response.seo.phoneNumber,
+        email: response.seo.email,
         locale: 'en_US',
         canonical: `https://${host}${path}`,
-        siteUrl: `https://${host}${path}`
+        siteUrl: `https://${host}/`
       }
     }
 
     return {
       props: {
-        res
+        response
       },
       stuff    
     }
@@ -49,20 +58,21 @@
 
 <script>
   
-  export let res
+  export let response
 
 </script>
 
 <Sprite />
 
-<Header headerData={res} />
+<!-- <Header headerData={response} /> -->
+<Header headerData={response} />
   <slot />
-<Footer footerData={res.socialIconsData} />
+<Footer footerData={response.socialIconsData} />
 
 <style>
 
-  :global(body) {
-    font-family: 'Work Sans'
+  :global(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Work Sans';
   }
 
 </style>

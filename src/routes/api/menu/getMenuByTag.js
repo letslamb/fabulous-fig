@@ -1,55 +1,56 @@
-import Prismic from '@prismicio/client'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const { PRISMIC_API_ENDPOINT, MENUS_PATH } = process.env
+const { MENUS_PATH } = process.env
 
-function initApi(req) {
-  return Prismic.getApi(PRISMIC_API_ENDPOINT, {
-    req: req
-  })
-}
+import { initApi, getMenuByTag } from '$lib/js/utils'
 
 export async function post(event) {
 
-  const result = await initApi(event.request).then(function(api) {
-    return api.query([
-      Prismic.Predicates.at('document.tags', [`${event.request.body.tag}`])
-    ])
-  })
-    .then(res => res)
-    .catch((error) => {
-      return {
-        status: 401,
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: {
-          message: "This event has no menu"
-        }
-      }
+  let response
+
+  try {
+
+    let body = await event.request.json()
+
+    response = await initApi(event.request, event.locals.ctx.endpoint).then(
+      function(api) {
+        return getMenuByTag(api, body.tag)
     })
+      .then(res => {
 
-    let link
+        let link
 
-    // console.log(JSON.stringify(result, null, 2))
+        if (res?.results && Array.isArray(res.results) && res.results[0]) {
+          link = `${MENUS_PATH}${res.results[0].uid}/`
+        } else {
+          link = null
+        }
 
-    if (result?.results && Array.isArray(result.results) && result.results[0]) {
-      link = `${MENUS_PATH}${result.results[0].uid}`
-    } else {
-      link = null
+        return {
+          link: link
+        }
+
+      })
+  } catch (e) {
+    response = {
+      customErrorMessage: "Failed during Prismic API call in getMenuByTag.js"
     }
+  }
 
-    // console.log(JSON.stringify(link, null, 2))
+  if (response.customErrorMessage) {
+    return {
+      status: 502,
+      body: response
+    }
+  }
 
   return {
     status: 200,
     headers: {
       'content-type': 'application/json'
     },
-    body: {
-      link
-    }
+    body: response
   }
 }
 

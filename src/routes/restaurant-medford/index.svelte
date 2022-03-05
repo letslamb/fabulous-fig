@@ -2,17 +2,17 @@
 
   export async function load({ fetch, stuff }) {
   
-    const homePageData = fetch('/api/home/getHomePageData/', {
+    const restaurantPageData = fetch('/api/departments/restaurant-medford/home/getRestaurantPageData/', {
       method: 'GET',
       maxage: 3600
     })
 
-    const home = await homePageData.then(data => data.json())
+    const restaurant = await restaurantPageData.then(data => data.json())
 
-    if (home.customErrorMessage) {
+    if (restaurant.customErrorMessage) {
       return {
         status: 502,
-        error: home.customErrorMessage
+        error: restaurant.customErrorMessage
       }
     }
 
@@ -22,9 +22,9 @@
         'content-type': 'application/json'
       },
       props: {
-        pageSEO: home.seo,
+        pageSEO: restaurant.seo,
         globalSEO: stuff.seo,
-        data: home
+        data: restaurant
       }
     }
   }
@@ -33,15 +33,12 @@
 <script>
 
   import BaseSEO from '$lib/components/BaseSEO.svelte'
-  import Image from '$lib/components/layout/Image.svelte'
-  import Frame from '$lib/components/layout/Frame.svelte'
   import Center from '$lib/components/layout/Center.svelte'
-  import Box from '$lib/components/layout/Box.svelte'
   import Cluster from '$lib/components/layout/Cluster.svelte'
+  import Box from '$lib/components/layout/Box.svelte'
   import Stack from '$lib/components/layout/Stack.svelte'
   import Article from '$lib/components/utils/Article.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
-
 
   export let pageSEO
   export let globalSEO
@@ -56,31 +53,43 @@
 }}/>
 
 <main>
+
   <div>
     <Center>
       <Box>
         <Article>
-          <Stack>
-            <HeadingTag message={data.homePageTitle} />
+          <Center>
             <Stack>
-              <Center>
-                <p>{data.homePageInstructions}</p>
-              </Center>
-              <Cluster wrapperElement="ul">
-                <a href="/restaurant-medford/">Medford</a>
-                <a href="/food-truck/">Food Truck</a>
-              </Cluster>
+              <HeadingTag message={data.restaurantPageTitle} />
+                <Stack>
+                  <p>{data.restaurantPageDescription}</p>
+                  <Cluster wrapperElement="ul">
+                    {#each data.restaurantPageLinks as link}
+                      {#if !link.external}
+                        <a sveltekit:prefetch href={link.href}>{link.text}</a>
+                      {:else}
+                        <a rel="external" href={link.href}>{link.text}</a>
+                      {/if}
+                    {/each}
+                  </Cluster>
+                  {#if data.hours}
+                    <HeadingTag message={data.hours.title} />
+                    {#each data.hours.text as text}
+                      <p>{text}</p>
+                    {/each}
+                  {/if}
+                  {#if data.location}
+                    <HeadingTag message={data.location.title} />
+                    {#each data.location.text as text}
+                      <p>{text}</p>
+                    {/each}
+                  {/if}
+                </Stack>
+
+
             </Stack>
-            <div class="hero-image-wrapper">
-              <Frame>
-                <Image
-                  images={data.homePageHeroImage}
-                />
-              </Frame>
-            </div>
+          </Center>
 
-
-          </Stack>
         </Article>
       </Box>
 
@@ -104,23 +113,17 @@
     padding: var(--s3) var(--s-3);
   }
 
-  main :global(article > .stack) {
+  main :global(.stack) {
     --space: var(--s2);
   }
 
   main :global(h1) {
-    font-size: var(--font-size-biggish);
+    /* font-size: var(--font-size-biggish); */
   }
 
   main :global(.frame) {
     --numerator: 9;
     --denominator: 8;
-  }
-
-  main .hero-image-wrapper {
-    width:70%;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   main :global(article .center) {

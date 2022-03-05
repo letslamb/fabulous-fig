@@ -1,18 +1,24 @@
 <script context="module">
 
-  export async function load({ fetch, params, stuff }) {
+  export async function load({ fetch, url, stuff }) {
 
-    const { slug } = params
-
-    let res = await fetch(`/api/menu/${slug}/`, {
+    const menuData = fetch(`/api${url.pathname}`, {
       method: 'GET',
       maxage: 3600
     })
-    .then(data => data.json())
+
+    const response = await menuData.then(data => data.json())
+
+    if (response.customErrorMessage) {
+      return {
+        status: 502,
+        error: response.customErrorMessage
+      }
+    }
 
     return {
       props: {
-        data: res,
+        data: response,
         globalSEO: stuff.seo,
       }
     }
@@ -55,13 +61,14 @@
   main {
     width: 100%;
     color: var(--color-dark);
+    min-height: 100%;
   }
 
-  main :global(.box) {
+  main :global(.center > .box) {
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;
-    padding: var(--s0) var(--s-3);
+    padding: var(--s3) var(--s-3);
   }
 
 </style>

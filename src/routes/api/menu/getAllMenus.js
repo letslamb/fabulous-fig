@@ -1,42 +1,34 @@
-import Prismic from '@prismicio/client'
-import dotenv from 'dotenv'
-dotenv.config()
 
-const { PRISMIC_API_ENDPOINT } = process.env
-
-function initApi(req) {
-  return Prismic.getApi(PRISMIC_API_ENDPOINT, {
-    req: req
-  })
-}
+import { initApi, getAllPublicMenus } from '$lib/js/utils'
 
 export async function get(event) {
 
-  const result = await initApi(event.request).then(function(api) {
-    return api.query([
-      Prismic.Predicates.at('document.type', 'menu_layout'),
-      Prismic.Predicates.not('my.menu_layout.uid', 'master-list')
-    ])
-  })
-  .then(res => res)
-  .catch((error) => {
-    console.log(error)
-    return {
-      status: 401,
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: {
-        message: "Unable to get all messages"
-      }
+  let response
+
+  try {
+    response = await initApi(event.request, event.locals.ctx.endpoint).then(
+      function(api) {
+        return getAllPublicMenus(api)
+    })
+    .then(res => res)
+
+  } catch (e) {
+    response = {
+      customErrorMessage: "Failed during Prismic API call in getAllMenus.js"
     }
-  })
+  }
+
+  if (response.customErrorMessage) {
+    return {
+      status: 502,
+      body: response
+    }
+  }
+
+
 
   return {
     status: 200,
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: result
+    body: response
   }
 }

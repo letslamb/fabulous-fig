@@ -31,9 +31,13 @@
 
 
 <style>
-  section {
-    min-height: 100vh;
+
+  main {
+    min-height: 100%;
   }
+  /* section {
+    min-height: 100vh;
+  } */
 
   p {
     font-size: var(--font-size-biggish);

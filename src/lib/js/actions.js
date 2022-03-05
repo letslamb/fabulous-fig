@@ -41,33 +41,49 @@ export function enhanceToggleSection(node, params) {
   }
 }
 
-export function intersectionObserver(node, boolean) {
-  if (boolean === true && typeof IntersectionObserver !== "undefined") {
-    const onIntersection = (entry) => {
-      node.dispatchEvent(new CustomEvent("intersection", {detail: entry}))
-    }
+export function intersectionObserver(node, config) {
+	if (config === null) return;
 
-    let top = 0;
-    let bottom = 0;
-    let left = 0;
-    let right = 0;
+	let supported = 'IntersectionObserver' in window;
 
-    const rootMargin = `${bottom}px ${left}px ${top}px ${right}px`;
+	if (supported) {
+		const onIntersection = (entry) => {
+			node.dispatchEvent(new CustomEvent('intersection', { detail: entry }));
+		};
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting === true) {
-          onIntersection(entries[0])
-          return observer.unobserve(node)
-        }
-      },
-      {
-        rootMargin,
-      }
-    );
+		let timeout = null;
 
-    observer.observe(node);
-    return () => observer.unobserve(node);
-  }
-  return
+		const observer = new IntersectionObserver((entries) => {
+			if (entries[0].isIntersecting === true) {
+				onIntersection(entries[0]);
+				if (config.once) return observer.unobserve(node);
+				if (config.cooldown) {
+					observer.unobserve(node);
+					if (timeout) clearTimeout(timeout);
+					timeout = setTimeout(() => {
+						observer.observe(node);
+					}, config.cooldown);
+				}
+			}
+		}, config.options);
+
+		if (timeout) clearTimeout(timeout);
+		timeout = setTimeout(
+			() => {
+				observer.observe(node);
+			},
+			config.delay ? config.delay : 0
+		);
+
+		return {
+			update: (update) => {
+				console.log('update parameter changed');
+				if (timeout) clearTimeout(timeout);
+				observer.unobserve(node);
+				observer.observe(node);
+			},
+			destroy: () => observer.unobserve(node)
+		};
+	}
+	return;
 }
