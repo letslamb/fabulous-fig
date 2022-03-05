@@ -3,7 +3,7 @@
   import '@fontsource/work-sans'
   import '@fontsource/work-sans/600.css'
   // import Header from '$lib/components/Header.svelte'
-  import NewHeader from '$lib/components/NewHeader.svelte'
+  import Header from '$lib/components/NewHeader.svelte'
   import Footer from '$lib/components/Footer.svelte'
   import Sprite from '$lib/components/utils/Sprite.svelte'
 
@@ -65,7 +65,7 @@
 <Sprite />
 
 <!-- <Header headerData={response} /> -->
-<NewHeader headerData={response} />
+<Header headerData={response} />
   <slot />
 <Footer footerData={response.socialIconsData} />
 

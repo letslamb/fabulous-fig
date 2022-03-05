@@ -12,8 +12,6 @@ export async function get(event) {
       })
       .then(res => {
 
-        // console.log(`response from Prismic in /api/home/getHomePageData.js: ${JSON.stringify(res, null, 2)}`)
-
         let homePageObject, getSEO, homePageHeroImage, homePageTitle, homePageInstructions, homePageLinks
 
         try {
@@ -53,8 +51,6 @@ export async function get(event) {
               }
             } 
           })
-
-          console.log(`homePageLinks in getHomePageData.js: ${JSON.stringify(homePageLinks, null, 2)}`)
 
           getSEO = homePageObject.body
             .filter(section => section.slice_type === "seo")

@@ -12,8 +12,6 @@ export async function get(event) {
       })
       .then(res => {
 
-        console.log(`response from Prismic in /food-truck/home/getHomePageData.js`)
-
         let homePageObject, getSEO, title, description, placeholderMessage
 
         try {
@@ -55,16 +53,6 @@ export async function get(event) {
                   : null
               }
             })
-
-            console.log(`homePageObject in food-truck/home/getHomePageData.js: ${JSON.stringify(homePageObject, null, 2)}`)
-
-          // placeholderMessage = homePageObject.body
-          //   .filter(section => section.slice_type === "text_box")
-          //   .map(section => {
-          //     return {
-          //       message: section.primary.text_content[0].text
-          //     }
-          //   })
 
           const [seo] = getSEO
 

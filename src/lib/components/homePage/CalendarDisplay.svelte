@@ -49,6 +49,10 @@
 
 <style>
 
+  div :global(section .stack) {
+    --space: var(--s0);
+  }
+
   div :global(.event-box.box) {
     padding: var(--s-1);
     border: 2px solid var(--color-mid);

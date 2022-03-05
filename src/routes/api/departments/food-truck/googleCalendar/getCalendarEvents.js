@@ -31,8 +31,6 @@ export async function get() {
 
           entry.menu = await menu.then(data => data.json())
 
-          console.log(`entry.menu after POST in getCalendarEvents.js: ${JSON.stringify(entry.menu, null, 2)}`)
-
         }
 
         return entries
@@ -48,8 +46,6 @@ export async function get() {
       customErrorMessage: `Failed during Google Calendar API call in getCalendarEvents.js`
     }
   }
-
-  console.log(`response at the end of getCalendarEvents.js (calls getMenuByTag.js): ${JSON.stringify(response, null, 2)}`)
 
   if (response.customErrorMessage) {
     return {

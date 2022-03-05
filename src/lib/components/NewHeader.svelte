@@ -12,10 +12,6 @@
   const { navLinks, socialIconsData } = headerData
   const { phoneNumber, email, message } = headerData.headerVisibleText
 
-  // $: currentPath = $
-
-  // $: console.log($page.url.pathname)
-
 </script>
 
 <svelte:options immutable={true} />
@@ -23,15 +19,20 @@
 <header>
   <Center>
     <Switcher wrapperElement="div">
-      <div class="social-icons-wrapper">
+      <Stack>
         <Social {socialIconsData} />
-      </div>
+        {#if $page.url.pathname.includes('/restaurant-medford/')}
+          {#each navLinks as link}
+            <a class="external-link" rel="external" href={link.href}>{link.text}</a>
+          {/each}
+        {/if}
+      </Stack>
       <Stack wrapperClass="contact-info--stack">
         <div>{phoneNumber}</div>
         <div>
           {@html email}
         </div>
-        <div>{message}</div>
+        <!-- <div>{message}</div> -->
       </Stack>
     </Switcher>
     <nav>
@@ -49,15 +50,15 @@
           <span>></span>
           <span>MENU</span>
         {:else if $page.url.pathname === '/food-truck/'}
-        <a sveltekit:prefetch href="/">HOME</a>
-        <span>></span>
-        <span>FOOD TRUCK</span>
+          <a sveltekit:prefetch href="/">HOME</a>
+          <span>></span>
+          <span>FOOD TRUCK</span>
         {:else if $page.url.pathname.startsWith('/menu/')}
-        <a sveltekit:prefetch href="/">HOME</a>
-        <span>></span>
-        <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
-        <span>></span>
-        <span>{$page.params.slug.replaceAll('-', ' ').toUpperCase()}</span>
+          <a sveltekit:prefetch href="/">HOME</a>
+          <span>></span>
+          <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
+          <span>></span>
+          <span>{$page.params.slug.replaceAll('-', ' ').toUpperCase()}</span>
         {/if}
       </Cluster>
     </nav>
@@ -73,17 +74,21 @@
   }
 
   header a {
-    /* text-decoration: none; */
     color: var(--color-light);
-   /* text-decoration: none;
+  }
+
+  header .external-link {
     padding: var(--s-3);
+    text-decoration: none;
+    margin-left: auto;
+    margin-right: auto;
     width: fit-content;
     box-shadow: 0 5px #000;
     position: relative;
     display: inline-block;
     background-color: var(--color-light);
     color: var(--color-dark);
-    border: 3px solid var(--color-lightish); */
+    border: 3px solid var(--color-lightish);
   }
 
   header a:active {
@@ -112,6 +117,11 @@
   header div {
     max-width: 22ch;
   }
+
+  header nav {
+    margin-top: var(--s-2);
+  }
+
 
   header nav :global(.cluster) {
     --space: var(--s-4);

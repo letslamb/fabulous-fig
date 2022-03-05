@@ -45,8 +45,6 @@
 
   export let data
 
-  console.log(`data on medford homepage: ${JSON.stringify(data, null, 2)}`)
-
 </script>
 
 <BaseSEO data={{
@@ -65,6 +63,15 @@
               <HeadingTag message={data.restaurantPageTitle} />
                 <Stack>
                   <p>{data.restaurantPageDescription}</p>
+                  <Cluster wrapperElement="ul">
+                    {#each data.restaurantPageLinks as link}
+                      {#if !link.external}
+                        <a sveltekit:prefetch href={link.href}>{link.text}</a>
+                      {:else}
+                        <a rel="external" href={link.href}>{link.text}</a>
+                      {/if}
+                    {/each}
+                  </Cluster>
                   {#if data.hours}
                     <HeadingTag message={data.hours.title} />
                     {#each data.hours.text as text}
@@ -77,15 +84,6 @@
                       <p>{text}</p>
                     {/each}
                   {/if}
-                  <Cluster wrapperElement="ul">
-                    {#each data.restaurantPageLinks as link}
-                      {#if !link.external}
-                        <a sveltekit:prefetch href={link.href}>{link.text}</a>
-                      {:else}
-                        <a rel="external" href={link.href}>{link.text}</a>
-                      {/if}
-                    {/each}
-                  </Cluster>
                 </Stack>
 
 
@@ -120,7 +118,7 @@
   }
 
   main :global(h1) {
-    font-size: var(--font-size-biggish);
+    /* font-size: var(--font-size-biggish); */
   }
 
   main :global(.frame) {

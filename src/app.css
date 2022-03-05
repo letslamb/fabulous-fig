@@ -161,6 +161,10 @@ section {
   display: block;
 }
 
+/* a:active {
+  filter: invert(75%);
+} */
+
 /* BEGIN CODE BLOCK FOR PINNING FOOTER TO BOTTOM OF PAGE */
 
 body,

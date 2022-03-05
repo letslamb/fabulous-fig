@@ -62,13 +62,6 @@
         <Article>
           <Stack>
             <HeadingTag message={data.homePageTitle} />
-            <div class="hero-image-wrapper">
-              <Frame>
-                <Image
-                  images={data.homePageHeroImage}
-                />
-              </Frame>
-            </div>
             <Stack>
               <Center>
                 <p>{data.homePageInstructions}</p>
@@ -78,6 +71,14 @@
                 <a href="/food-truck/">Food Truck</a>
               </Cluster>
             </Stack>
+            <div class="hero-image-wrapper">
+              <Frame>
+                <Image
+                  images={data.homePageHeroImage}
+                />
+              </Frame>
+            </div>
+
 
           </Stack>
         </Article>

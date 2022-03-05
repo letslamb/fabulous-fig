@@ -33,6 +33,8 @@
       props: {
         calendar: cal.value,
         noCalendarMessage: home.value.placeholderMessage,
+        pageTitle: home.value.title,
+        pageDescription: home.value.description,
         pageSEO: home.value.seo,
         globalSEO: stuff.seo
       }
@@ -55,10 +57,10 @@
   export let pageSEO
   export let globalSEO
   export let noCalendarMessage
+  export let pageTitle
+  export let pageDescription
 
   export let calendar
-
-  $: console.log(`noCalendarMessage: ${JSON.stringify(noCalendarMessage, null, 2)}`)
 
 </script>
 
@@ -78,8 +80,10 @@
       <Box>
         <Article>
           <Stack>
-            <!-- TODO this title shouldn't be hardcoded -->
-            <HeadingTag wrapperClass="calendar-heading" message="Where to Find The Fabulous Fig" />
+            <HeadingTag wrapperClass="calendar-heading" message={pageTitle} />
+            {#if pageDescription}
+            <p>{pageDescription}</p>
+            {/if}
             {#if calendar && calendar[0]}
               <CalendarDisplay {calendar}/>
             {:else}
@@ -103,7 +107,11 @@
     --background-color: var(--color-light);
     --color: var(--color-dark);
     width: 100%;
-    padding: var(--s0) var(--s-3);
+    padding: var(--s3) var(--s-3);
+  }
+
+  main :global(.stack) {
+    --space: var(--s2);
   }
 
   main :global(.calendar-heading) {

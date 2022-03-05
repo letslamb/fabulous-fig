@@ -2,6 +2,8 @@
   import Stack from '$lib/components/layout/Stack.svelte'
   import Icon from '$lib/components/layout/Icon.svelte'
   import Cluster from '$lib/components/layout/Cluster.svelte'
+  import Center from '$lib/components/layout/Center.svelte'
+
   import Box from '$lib/components/layout/Box.svelte'
   import Section from '$lib/components/utils/Section.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
@@ -9,18 +11,9 @@
 
   export let data
 
-  // let render = {}
-
-  // function reMount (event) {
-  //   render = {}
-  // }
-
 </script>
 
-<!-- <svelte:window on:sveltekit:navigation-end={reMount} />
-
-{#key render} -->
-  <div>
+  <div class="menu-wrapper">
     <Stack wrapperClass="menu-wrapper-stack">
       <div>
         <Stack>
@@ -28,23 +21,31 @@
           {#if data.menuDescription}
             <p>{data.menuDescription}</p>
           {/if}
-          <Cluster wrapperElement="ul" wrapperClass="icon-legend">
-            <li>
-              <Icon iconId={'#icon-gluten-free'}>
-                Gluten Free
-              </Icon>
-            </li>
-            <li>
-              <Icon iconId={'#icon-nut-free'}>
-                Nut Free
-              </Icon>
-            </li>
-            <li>
-              <Icon iconId={'#icon-soy-free'}>
-                Soy Free
-              </Icon>
-            </li>
-          </Cluster>
+          <Section>
+            <Center>
+              <Stack>
+                <HeadingTag message={"Icon Map"} />
+                <Cluster wrapperElement="ul" wrapperClass="icon-legend">
+                  <li>
+                    <Icon iconId={'#icon-gluten-free'}>
+                      Gluten Free
+                    </Icon>
+                  </li>
+                  <li>
+                    <Icon iconId={'#icon-nut-free'}>
+                      Nut Free
+                    </Icon>
+                  </li>
+                  <li>
+                    <Icon iconId={'#icon-soy-free'}>
+                      Soy Free
+                    </Icon>
+                  </li>
+                </Cluster>
+              </Stack>
+            </Center>
+
+          </Section>
         </Stack>
       </div>
       <Section>
@@ -56,17 +57,26 @@
       </Section>
     </Stack>
   </div>  
-<!-- {/key} -->
 
 <style>
+
+  div.menu-wrapper {
+    --space: var(--s2);
+  }
+
+
   div :global(.menu-wrapper-stack > div) {
     text-align: center;
   }
 
+  div :global(section > .center) {
+    --measure: 20ch;
+  }
+
   div :global(.icon-legend) {
     --space: var(--s-1);
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     flex-direction: column;
   }
 
