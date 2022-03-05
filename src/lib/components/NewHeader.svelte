@@ -59,6 +59,8 @@
           <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
           <span>></span>
           <span>{$page.params.slug.replaceAll('-', ' ').toUpperCase()}</span>
+        {:else}
+          <a sveltekit:prefetch href="/">HOME</a>
         {/if}
       </Cluster>
     </nav>
