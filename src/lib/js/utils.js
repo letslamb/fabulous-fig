@@ -22,6 +22,8 @@ export function isError(e){
 export function linkResolver(doc) {
 	if (doc.type === 'menu_layout') {
     return '/menu/' + doc.uid + '/'
+  } else if (doc.type === 'restaurant_page' || doc.type === 'food_truck_page') {
+    return `/${doc.uid}/`
   }
 
 	return '/';
@@ -63,9 +65,9 @@ export function initApi(req, endpoint) {
 }
 
 // Prismic query for Home Page data
-export function getHomePageData(api) {
+export function getPageByType(api, type) {
   return api.query([
-    Prismic.Predicates.at('document.type', 'homepage')
+    Prismic.Predicates.at('document.type', type)
   ])
 }
 

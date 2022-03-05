@@ -1,5 +1,5 @@
 
-import { initApi, getHomePageData } from '$lib/js/utils'
+import { initApi, getPageByType } from '$lib/js/utils'
 
 export async function get(event) {
 
@@ -8,14 +8,53 @@ export async function get(event) {
   try {
     response = await initApi(event.request, event.locals.ctx.endpoint).then(
       function(api) {
-        return getHomePageData(api)
+        return getPageByType(api, 'home_page')
       })
       .then(res => {
 
-        let homePageObject, getSEO, placeholderMessage
+        // console.log(`response from Prismic in /api/home/getHomePageData.js: ${JSON.stringify(res, null, 2)}`)
+
+        let homePageObject, getSEO, homePageHeroImage, homePageTitle, homePageInstructions, homePageLinks
 
         try {
           homePageObject = res.results[0].data
+
+          // TODO these properties should probably be named differently (.title & .instructions)
+
+          homePageTitle = homePageObject.title[0]
+            ? homePageObject.title[0].text 
+            : null
+
+          homePageInstructions = homePageObject.instructions[0]
+            ? homePageObject.instructions[0].text 
+            : null
+
+          homePageHeroImage = homePageObject.hero_image.desktop.dimensions 
+          ? [
+              { width: homePageObject.hero_image.desktop.dimensions.width, src: homePageObject.hero_image.desktop.url },
+              { width: homePageObject.hero_image.tablet.dimensions.width, src: homePageObject.hero_image.tablet.url },
+              { width: homePageObject.hero_image.mobile.dimensions.width, src: homePageObject.hero_image.mobile.url }
+            ] 
+          : null
+
+          let linkSlice = homePageObject.body
+            .filter(slice => slice.slice_type === "links")[0]
+
+          homePageLinks = linkSlice.items.map(item => {
+            if (item.nav_link.type === "restaurant_page") {
+              return {
+                href: event.locals.DOM.Link.url(item.nav_link, event.locals.ctx.linkResolver), 
+                text: 'Medford'
+              }
+            } else if (item.nav_link.link_type === "food_truck_page") {
+              return {
+                href: event.locals.DOM.Link.url(item.nav_link, event.locals.ctx.linkResolver), 
+                text: `Food Truck`
+              }
+            } 
+          })
+
+          console.log(`homePageLinks in getHomePageData.js: ${JSON.stringify(homePageLinks, null, 2)}`)
 
           getSEO = homePageObject.body
             .filter(section => section.slice_type === "seo")
@@ -48,29 +87,28 @@ export async function get(event) {
               }
             })
 
-          placeholderMessage = homePageObject.body
-            .filter(section => section.slice_type === "text_box")
-            .map(section => {
-              return {
-                message: section.primary.text_content[0].text
-              }
-            })
-
           const [seo] = getSEO
-          const [placeholder] = placeholderMessage
 
-          return { seo, placeholder }
+          const data = { 
+            seo,
+            homePageTitle,
+            homePageInstructions,
+            homePageHeroImage,
+            homePageLinks
+          }
+
+          return data
 
         } catch (e) {
           return {
-            customErrorMessage: "Failed during processing of homePage data after Prismic API call"
+            customErrorMessage: "Failed during processing of homePage data in /api/home/getHomePageData.js after Prismic API call"
           }
         }
       })
 
   } catch (e) {
       response = {
-        customErrorMessage: `Failed during Prismic API call`
+        customErrorMessage: `Failed during Prismic API call in /api/home/getHomePageData.js`
       }
   }
 

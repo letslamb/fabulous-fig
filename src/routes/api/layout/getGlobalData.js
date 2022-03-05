@@ -97,6 +97,7 @@ export async function get(event) {
               }
             } else if (item.nav_link.link_type === "Web") {
               return {
+                external: true,
                 href: item.nav_link.url,
                 text: "Order Online"
               }

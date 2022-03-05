@@ -2,7 +2,8 @@
   import '../app.css'
   import '@fontsource/work-sans'
   import '@fontsource/work-sans/600.css'
-  import Header from '$lib/components/Header.svelte'
+  // import Header from '$lib/components/Header.svelte'
+  import NewHeader from '$lib/components/NewHeader.svelte'
   import Footer from '$lib/components/Footer.svelte'
   import Sprite from '$lib/components/utils/Sprite.svelte'
 
@@ -40,7 +41,7 @@
         email: response.seo.email,
         locale: 'en_US',
         canonical: `https://${host}${path}`,
-        siteUrl: `https://${host}${path}`
+        siteUrl: `https://${host}/`
       }
     }
 
@@ -63,14 +64,15 @@
 
 <Sprite />
 
-<Header headerData={response} />
+<!-- <Header headerData={response} /> -->
+<NewHeader headerData={response} />
   <slot />
 <Footer footerData={response.socialIconsData} />
 
 <style>
 
-  :global(body) {
-    font-family: 'Work Sans'
+  :global(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Work Sans';
   }
 
 </style>

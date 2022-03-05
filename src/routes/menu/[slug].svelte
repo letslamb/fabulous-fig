@@ -1,10 +1,12 @@
 <script context="module">
 
-  export async function load({ fetch, params, stuff }) {
+  export async function load({ fetch, url, stuff }) {
 
-    const { slug } = params
+    // const { slug } = url.pathname
 
-    const menuData = fetch(`/api/menu/${slug}/`, {
+    console.log(`url.pathname on /menu/[slug].js: ${url.pathname}`)
+
+    const menuData = fetch(`/api${url.pathname}`, {
       method: 'GET',
       maxage: 3600
     })
@@ -63,6 +65,7 @@
   main {
     width: 100%;
     color: var(--color-dark);
+    min-height: 100%;
   }
 
   main :global(.box) {
