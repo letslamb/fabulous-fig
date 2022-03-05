@@ -26,7 +26,7 @@ export async function get() {
             headers: {
               'content-type': 'application/json'
             },
-            body: JSON.stringify({ tag: `${entry.summary.toLowerCase().trim()}` })
+            body: JSON.stringify({ tag: `${entry.summary.trim()}` })
           })
 
           entry.menu = await menu.then(data => data.json())
