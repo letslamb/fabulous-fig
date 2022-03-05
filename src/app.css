@@ -161,9 +161,13 @@ section {
   display: block;
 }
 
-/* a:active {
-  filter: invert(75%);
-} */
+a:active {
+  top: 5px;
+}
+
+a:focus {
+  outline: 5px solid SkyBlue;
+}
 
 /* BEGIN CODE BLOCK FOR PINNING FOOTER TO BOTTOM OF PAGE */
 
