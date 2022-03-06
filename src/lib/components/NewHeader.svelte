@@ -61,7 +61,7 @@
           <span>></span>
           <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
           <span>></span>
-          <span>{urlSplit[urlSplit.length - 2]}</span>
+          <span>{urlSplit[urlSplit.length - 2].replaceAll('-', ' ').toUpperCase()}</span>
         {:else}
           <a sveltekit:prefetch href="/">HOME</a>
         {/if}
