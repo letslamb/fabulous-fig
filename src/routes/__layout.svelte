@@ -30,6 +30,10 @@
 
     const path = url.pathname
 
+    const splitPath = path.split('/')
+
+    const slugHack = splitPath[splitPath.length - 2].replaceAll('-', ' ').toUpperCase()
+
     const stuff = {
       seo: {
         siteName: response.seo.title,
@@ -42,7 +46,8 @@
         locale: 'en_US',
         canonical: `https://${host}${path}`,
         siteUrl: `https://${host}/`
-      }
+      },
+      slugHack
     }
 
     return {

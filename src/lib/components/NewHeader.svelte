@@ -12,10 +12,6 @@
   const { navLinks, socialIconsData } = headerData
   const { phoneNumber, email, message } = headerData.headerVisibleText
 
-  $: urlSplit = $page.url.pathname.split('/')
-
-  $: console.log(`slug hack: ${JSON.stringify(urlSplit[urlSplit.length - 2], null, 2)}`)
-
 </script>
 
 
@@ -61,7 +57,7 @@
           <span>></span>
           <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
           <span>></span>
-          <span>{urlSplit[urlSplit.length - 2].replaceAll('-', ' ').toUpperCase()}</span>
+          <span>{$page.stuff.slugHack}</span>
         {:else}
           <a sveltekit:prefetch href="/">HOME</a>
         {/if}
