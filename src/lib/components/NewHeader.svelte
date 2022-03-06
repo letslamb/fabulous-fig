@@ -12,7 +12,7 @@
   const { navLinks, socialIconsData } = headerData
   const { phoneNumber, email, message } = headerData.headerVisibleText
 
-  $: console.log(`page.params.slug: ${$page.params.slug}`)
+  $: console.log(`page store: ${JSON.stringify($page, null, 2)}`)
 
 </script>
 
