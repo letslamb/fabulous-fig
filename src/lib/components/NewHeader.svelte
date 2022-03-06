@@ -6,11 +6,22 @@
   import Stack from '$lib/components/layout/Stack.svelte'
   import Social from '$lib/components/Social.svelte'
   import { page } from '$app/stores'
+  import { browser } from '$app/env'
 
   export let headerData
 
   const { navLinks, socialIconsData } = headerData
   const { phoneNumber, email, message } = headerData.headerVisibleText
+
+  // $: splitPath = null
+  // $: slugHack = null
+
+  // $: if (browser && $page.url.pathname.startsWith('/menu/') && !($page.url.pathname.endsWith('/menu/'))) {
+
+  //   splitPath = $page.url.pathname.split('/')
+
+  //   slugHack = splitPath[splitPath.length - 2].replaceAll('-', ' ').toUpperCase()
+  // }
 
 </script>
 
@@ -57,7 +68,7 @@
           <span>></span>
           <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
           <span>></span>
-          <span>{$page.stuff.slugHack}</span>
+          <span>{$page.params.slug.replaceAll('-', ' ').toUpperCase()}</span>
         {:else}
           <a sveltekit:prefetch href="/">HOME</a>
         {/if}

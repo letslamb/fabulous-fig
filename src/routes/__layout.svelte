@@ -29,16 +29,7 @@
     const host = url.host
 
     const path = url.pathname
-
-    let splitPath, slugHack
-
-    if (path.startsWith('/menu/' && !(path.endsWith('/menu/')))) {
-
-      splitPath = path.split('/')
-
-      slugHack = splitPath[splitPath.length - 2].replaceAll('-', ' ').toUpperCase()
-    }
-
+    
     const stuff = {
       seo: {
         siteName: response.seo.title,
@@ -51,8 +42,7 @@
         locale: 'en_US',
         canonical: `https://${host}${path}`,
         siteUrl: `https://${host}/`
-      },
-      slugHack
+      }
     }
 
     return {
