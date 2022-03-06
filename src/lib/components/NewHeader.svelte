@@ -12,7 +12,9 @@
   const { navLinks, socialIconsData } = headerData
   const { phoneNumber, email, message } = headerData.headerVisibleText
 
-  $: console.log(`page store: ${JSON.stringify($page, null, 2)}`)
+  $: urlSplit = $page.url.pathname.split('/')
+
+  $: console.log(`slug hack: ${JSON.stringify(urlSplit[urlSplit.length - 2], null, 2)}`)
 
 </script>
 
@@ -59,7 +61,7 @@
           <span>></span>
           <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
           <span>></span>
-          <span>{$page.params.slug ? $page.params.slug.replaceAll('-', ' ').toUpperCase() : 'Menu'}</span>
+          <span>{urlSplit[urlSplit.length - 2]}</span>
         {:else}
           <a sveltekit:prefetch href="/">HOME</a>
         {/if}
