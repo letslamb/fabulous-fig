@@ -1,6 +1,6 @@
 <script context="module">
 
-  export async function load({ fetch, url, stuff, params }) {
+  export async function load({ fetch, stuff, params }) {
 
     console.log(`params: ${JSON.stringify(params, null, 2)}`)
 

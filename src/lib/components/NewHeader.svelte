@@ -13,18 +13,6 @@
   const { navLinks, socialIconsData } = headerData
   const { phoneNumber, email, message } = headerData.headerVisibleText
 
-  // $: splitPath = null
-  // $: slugHack = null
-
-  // $: if (browser && $page.url.pathname.startsWith('/menu/') && !($page.url.pathname.endsWith('/menu/'))) {
-
-  //   splitPath = $page.url.pathname.split('/')
-
-  //   slugHack = splitPath[splitPath.length - 2].replaceAll('-', ' ').toUpperCase()
-  // }
-
-  $: console.log(`$page: ${JSON.stringify($page, null, 2)}`)
-
 </script>
 
 
