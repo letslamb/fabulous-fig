@@ -70,7 +70,7 @@
           <span>></span>
           <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
           <span>></span>
-          <span>{$page.stuff.slug ? $page.stuff.slug.replaceAll('-', ' ').toUpperCase() : 'MENU'}</span>
+          <span>{browser ? $page.stuff.slug.replaceAll('-', ' ').toUpperCase() : 'MENU'}</span>
         {:else}
           <a sveltekit:prefetch href="/">HOME</a>
         {/if}
