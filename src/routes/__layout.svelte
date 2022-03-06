@@ -7,7 +7,9 @@
   import Footer from '$lib/components/Footer.svelte'
   import Sprite from '$lib/components/utils/Sprite.svelte'
 
-  export async function load({url, fetch}) {
+  export async function load({url, params, fetch }) {
+
+    console.log(`params in __layout.svelte load function: ${JSON.stringify(params, null, 2)}`)
 
     const layoutData = fetch('/api/layout/getGlobalData/', {
       method: 'GET',
