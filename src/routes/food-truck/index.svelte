@@ -82,7 +82,7 @@
           <Stack>
             <HeadingTag wrapperClass="calendar-heading" message={pageTitle} />
             {#if pageDescription}
-            <p>{pageDescription}</p>
+              <p>{pageDescription}</p>
             {/if}
             {#if calendar && calendar[0]}
               <CalendarDisplay {calendar}/>

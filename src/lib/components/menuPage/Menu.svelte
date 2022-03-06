@@ -3,7 +3,6 @@
   import Icon from '$lib/components/layout/Icon.svelte'
   import Cluster from '$lib/components/layout/Cluster.svelte'
   import Center from '$lib/components/layout/Center.svelte'
-
   import Box from '$lib/components/layout/Box.svelte'
   import Section from '$lib/components/utils/Section.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'

@@ -12,9 +12,10 @@
   const { navLinks, socialIconsData } = headerData
   const { phoneNumber, email, message } = headerData.headerVisibleText
 
+  $: console.log(`page.params.slug: ${$page.params.slug}`)
+
 </script>
 
-<svelte:options immutable={true} />
 
 <header>
   <Center>
@@ -32,7 +33,7 @@
         <div>
           {@html email}
         </div>
-        <!-- <div>{message}</div> -->
+        <div>{message}</div>
       </Stack>
     </Switcher>
     <nav>
@@ -59,6 +60,8 @@
           <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
           <span>></span>
           <span>{$page.params.slug.replaceAll('-', ' ').toUpperCase()}</span>
+        {:else}
+          <a sveltekit:prefetch href="/">HOME</a>
         {/if}
       </Cluster>
     </nav>
