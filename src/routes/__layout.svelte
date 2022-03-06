@@ -7,7 +7,7 @@
   import Footer from '$lib/components/Footer.svelte'
   import Sprite from '$lib/components/utils/Sprite.svelte'
 
-  export async function load({url, fetch}) {
+  export async function load({url, fetch }) {
 
     const layoutData = fetch('/api/layout/getGlobalData/', {
       method: 'GET',
@@ -29,7 +29,7 @@
     const host = url.host
 
     const path = url.pathname
-
+    
     const stuff = {
       seo: {
         siteName: response.seo.title,

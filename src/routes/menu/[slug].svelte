@@ -1,8 +1,10 @@
 <script context="module">
 
-  export async function load({ fetch, url, stuff }) {
+  export async function load({ fetch, stuff, params }) {
 
-    const menuData = fetch(`/api${url.pathname}`, {
+    console.log(`params: ${JSON.stringify(params, null, 2)}`)
+
+    const menuData = fetch(`/api/menu/${params.slug}/`, {
       method: 'GET',
       maxage: 3600
     })
@@ -16,11 +18,14 @@
       }
     }
 
+    stuff.slug = params.slug
+
     return {
       props: {
         data: response,
         globalSEO: stuff.seo,
-      }
+      },
+      stuff
     }
   }
 

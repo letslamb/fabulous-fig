@@ -6,13 +6,12 @@
   import Stack from '$lib/components/layout/Stack.svelte'
   import Social from '$lib/components/Social.svelte'
   import { page } from '$app/stores'
+  import { browser } from '$app/env'
 
   export let headerData
 
   const { navLinks, socialIconsData } = headerData
   const { phoneNumber, email, message } = headerData.headerVisibleText
-
-  $: console.log(`page.params.slug: ${$page.params.slug}`)
 
 </script>
 
@@ -59,7 +58,7 @@
           <span>></span>
           <a sveltekit:prefetch href="/food-truck/">FOOD TRUCK</a>
           <span>></span>
-          <span>{$page.params.slug.replaceAll('-', ' ').toUpperCase()}</span>
+          <span>{browser ? $page.stuff.slug.replaceAll('-', ' ').toUpperCase() : 'MENU'}</span>
         {:else}
           <a sveltekit:prefetch href="/">HOME</a>
         {/if}
