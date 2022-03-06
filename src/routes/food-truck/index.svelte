@@ -87,7 +87,7 @@
             {#if calendar && calendar[0]}
               <CalendarDisplay {calendar}/>
             {:else}
-              <p>{noCalendarMessage.message}</p>
+              <p>{noCalendarMessage}</p>
             {/if}
           </Stack>
         </Article>
