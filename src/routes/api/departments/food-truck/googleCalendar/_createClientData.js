@@ -1,5 +1,6 @@
 
 export function createClientData(googleCalendarItems) {
+
   // Extract the needed info from the response to be sent to the client
   let clientCalendarEntryData = googleCalendarItems.map((calendarEntry) => {
 
@@ -91,6 +92,15 @@ export function createClientData(googleCalendarItems) {
 
     return data
 
+  })
+
+
+
+  clientCalendarEntryData.sort(function(a, b) {
+    const date1 = new Date(a.date)
+    const date2 = new Date(b.date)
+
+    return date1 - date2
   })
 
   return clientCalendarEntryData
