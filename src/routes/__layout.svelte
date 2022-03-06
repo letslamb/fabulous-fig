@@ -30,9 +30,14 @@
 
     const path = url.pathname
 
-    const splitPath = path.split('/')
+    let splitPath, slugHack
 
-    const slugHack = splitPath[splitPath.length - 2].replaceAll('-', ' ').toUpperCase()
+    if (path.startsWith('/menu/' && !(path.endsWith('/menu/')))) {
+
+      splitPath = path.split('/')
+
+      slugHack = splitPath[splitPath.length - 2].replaceAll('-', ' ').toUpperCase()
+    }
 
     const stuff = {
       seo: {
