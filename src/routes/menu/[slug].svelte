@@ -18,11 +18,14 @@
       }
     }
 
+    stuff.slug = params.slug
+
     return {
       props: {
         data: response,
         globalSEO: stuff.seo,
-      }
+      },
+      stuff
     }
   }
 
