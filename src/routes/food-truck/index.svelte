@@ -81,10 +81,10 @@
         <Article>
           <Stack>
             <HeadingTag wrapperClass="calendar-heading" message={pageTitle} />
-            {#if pageDescription}
-              <p>{pageDescription}</p>
-            {/if}
             {#if calendar && calendar[0]}
+              {#if pageDescription}
+                <p>{pageDescription}</p>
+              {/if}
               <CalendarDisplay {calendar}/>
             {:else}
               <p>{noCalendarMessage}</p>

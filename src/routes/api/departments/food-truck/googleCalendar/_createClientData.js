@@ -1,8 +1,16 @@
+// import dayjs from 'dayjs'
+// import utc from 'dayjs/plugin/utc'
+// import timezone from 'dayjs/plugin/timezone'
+
+// dayjs.extend(utc)
+// dayjs.extend(timezone)
 
 export function createClientData(googleCalendarItems) {
 
   // Extract the needed info from the response to be sent to the client
   let clientCalendarEntryData = googleCalendarItems.map((calendarEntry) => {
+
+    console.log(`event received from Google Calendar: ${JSON.stringify(calendarEntry, null, 2)}`)
 
     // For converting days of week from Google API response's abbreviations to their full names
     let dayOfWeekMap = {
@@ -25,13 +33,26 @@ export function createClientData(googleCalendarItems) {
     // Process the event date, start & end times into the human-friendly formats we want
     if (calendarEntry.start.dateTime) {
 
+      // console.log(`date received from Google Calendar: ${calendarEntry.start.dateTime}`)
+
       let parsedStartDate = new Date(
         Date.parse(calendarEntry.start.dateTime)
       )
 
+      // dayjs.tz.setDefault(calendarEntry.start.dateTime)
+
+      // console.log(`parsedStartDate: new Date(Date.parse(calendarEntry.start.dateTime)): ${parsedStartDate}`)
+      // console.log(`dayjs parsed date: ${dayjs(calendarEntry.start.dateTime)}`)
+      // console.log(`dayjs parsed in timezone: ${dayjs(calendarEntry.start.dateTime).tz(calendarEntry.start.timeZone)}`)
+
+
+
       let dayAbbreviation = parsedStartDate
         .toDateString()
         .split(' ')[0]
+
+      // console.log(`dayAbbreviation: ${dayAbbreviation}`)
+
 
       dayOfWeek = dayOfWeekMap[dayAbbreviation]
 
@@ -42,17 +63,26 @@ export function createClientData(googleCalendarItems) {
         .slice(1)
         .join(' ')
 
+      // console.log(`parsedStartDate: ${parsedStartDate}`)
+
+
       startTime = parsedStartDate
-        .toLocaleString()
+        .toLocaleString('en-US', { timeZone: calendarEntry.start.timeZone })
         .split(', ')[1]
         .replace(':00', '')
+
+      // console.log(`startTime: ${startTime}`)
+
 
       endTime = new Date(
         Date.parse(calendarEntry.end.dateTime)
       )
-        .toLocaleString()
+        .toLocaleString('en-US', { timeZone: calendarEntry.end.timeZone })
         .split(', ')[1]
         .replace(':00', '')
+
+      // console.log(`endTime: ${endTime}`)
+      
 
       // Handle all-day events, which need to be parsed a bit differently
     } else if (calendarEntry.end.date) {
