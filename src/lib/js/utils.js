@@ -48,7 +48,7 @@ export async function queryGoogleCalendarApi() {
   })
 
   let calendar = google.calendar('v3')
-  let resp = await calendar.events.list({
+  let resp = calendar.events.list({
     auth: jwtClient,
     calendarId: GOOGLE_CALENDAR_ID,
     timeMin: (new Date()).toISOString()
