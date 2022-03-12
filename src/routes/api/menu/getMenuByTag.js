@@ -48,7 +48,8 @@ export async function post(event) {
   return {
     status: 200,
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'Cache-Control': 's-max-age=3600, stale-while-revalidate=3600'
     },
     body: response
   }
