@@ -85,6 +85,10 @@ export async function get(event) {
 
   return {
     status: 200,
+    headers: {
+      'Cache-Control': 's-max-age=3600, stale-while-revalidate=3600',
+
+    },
     body: response
   }
 }

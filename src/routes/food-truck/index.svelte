@@ -6,7 +6,7 @@
       maxage: 3600
     })
   
-    const homePageData = fetch('/api/departments/food-truck/home/getHomePageData/', {
+    const homePageData = fetch('/api/departments/food-truck/home/getFoodTruckPageData/', {
       method: 'GET',
       maxage: 3600
     })
