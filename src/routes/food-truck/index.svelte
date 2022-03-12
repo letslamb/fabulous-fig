@@ -11,12 +11,12 @@
       maxage: 3600
     })
 
-    const bothResponses = await Promise.allSettled([
+    const bothResponses = Promise.allSettled([
       calendarData.then(response => response.json()), 
       homePageData.then(response => response.json())
     ])
 
-    const [cal, home] = bothResponses
+    const [cal, home] = await bothResponses
 
     if (home.value.customErrorMessage) {
       return {
