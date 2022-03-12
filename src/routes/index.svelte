@@ -41,12 +41,18 @@
   import Stack from '$lib/components/layout/Stack.svelte'
   import Article from '$lib/components/utils/Article.svelte'
   import HeadingTag from '$lib/components/utils/HeadingTag.svelte'
+  import { prefetch } from '$app/navigation'
+  import { onMount } from 'svelte'
 
 
   export let pageSEO
   export let globalSEO
 
   export let data
+
+  onMount(() => {
+    prefetch('/food-truck/')
+  })
 
 </script>
 
