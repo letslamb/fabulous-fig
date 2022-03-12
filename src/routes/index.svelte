@@ -67,8 +67,8 @@
                 <p>{data.homePageInstructions}</p>
               </Center>
               <Cluster wrapperElement="ul">
-                <a href="/restaurant-medford/">Medford</a>
-                <a href="/food-truck/">Food Truck</a>
+                <a sveltekit:prefetch href="/restaurant-medford/">Medford</a>
+                <a sveltekit:prefetch href="/food-truck/">Food Truck</a>
               </Cluster>
             </Stack>
             <div class="hero-image-wrapper">
