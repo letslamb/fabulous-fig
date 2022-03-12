@@ -3,12 +3,12 @@
   export async function load({ fetch, stuff }) {
     const calendarData = fetch('/api/departments/food-truck/googleCalendar/getCalendarEvents/', {
       method: 'GET',
-      maxage: 3600
+      // maxage: 3600
     })
   
     const homePageData = fetch('/api/departments/food-truck/home/getFoodTruckPageData/', {
       method: 'GET',
-      maxage: 3600
+      // maxage: 3600
     })
 
     const bothResponses = Promise.allSettled([
@@ -27,6 +27,7 @@
 
     return {
       status: 200,
+      maxage: 3600,
       headers: {
         'content-type': 'application/json'
       },
