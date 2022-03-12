@@ -3,11 +3,13 @@
   export async function load({ fetch, stuff }) {
     const calendarData = fetch('/api/departments/food-truck/googleCalendar/getCalendarEvents/', {
       method: 'GET',
+      credentials: 'omit'
       // maxage: 3600
     })
   
     const homePageData = fetch('/api/departments/food-truck/home/getFoodTruckPageData/', {
       method: 'GET',
+      credentials: 'omit'
       // maxage: 3600
     })
 
