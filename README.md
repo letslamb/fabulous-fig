@@ -3,7 +3,7 @@
 
 Made with Sveltekit & Prismic CMS
 
-###Features
+### Features
 - The Food Truck page integrates with the business owner's Google Calendar account
   - she can add upcoming events to the website via the normal workflow she was already using to keep track of them - no need to touch the CMS
   - auto-generated Google Maps links will show up on the event if it has an address
